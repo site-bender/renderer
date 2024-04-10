@@ -1,0 +1,14 @@
+html,
+body {
+	background-color: whitesmoke;
+	color: darkslategray;
+	font-family: Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans",
+		source-sans-pro, sans-serif;
+	font-weight: 300;
+	margin: 0;
+	padding: 0;
+}
+
+body > * {
+	margin-inline: 5vw;
+}

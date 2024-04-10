@@ -1,0 +1,20 @@
+.email-field {
+	align-items: flex-start;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	justify-content: space-between;
+}
+
+.email-field .label {
+	font-size: 1rem;
+	padding-inline: 0.5rem 0;
+}
+
+.email-field .email-input {
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	min-width: 32ch;
+	padding-block: 0.5rem;
+	padding-inline: 0.5rem;
+}
