@@ -27,7 +27,7 @@ export default function render(config: Elem) {
 		}
 	}
 
-	children.forEach(child =>
+	children.forEach((child: string | Elem) =>
 		typeof child === "string"
 			? elem.appendChild(document.createTextNode(child))
 			: elem.appendChild(render(child as Elem)),

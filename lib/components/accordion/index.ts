@@ -1,6 +1,6 @@
 import { u } from "@sitebender/fp"
 
-export default function accordion(config: Accordion) {
+export default function accordion(config: Accordion): Elem {
 	const {
 		children = [],
 		id = u.generateShortId(),

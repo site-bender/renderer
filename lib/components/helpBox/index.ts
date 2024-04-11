@@ -1,6 +1,6 @@
 import { u } from "@sitebender/fp"
 
-export default function helpBox(config: HelpBox) {
+export default function helpBox(config: HelpBox): Elem {
 	const {
 		forIds,
 		form,

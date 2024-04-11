@@ -1,6 +1,6 @@
 import { u } from "@sitebender/fp"
 
-export default function emailField(config: EmailField) {
+export default function emailField(config: EmailField): Elem {
 	const {
 		defaultValue,
 		children = [],

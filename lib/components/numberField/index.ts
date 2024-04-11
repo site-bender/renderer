@@ -1,6 +1,6 @@
 import { u } from "@sitebender/fp"
 
-export default function numberField(config: NumberField) {
+export default function numberField(config: NumberField): Elem {
 	const {
 		defaultValue,
 		children = [],

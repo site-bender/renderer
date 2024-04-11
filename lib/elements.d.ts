@@ -1,3 +1,63 @@
+type Autocapitalize =
+	| "characters"
+	| "none"
+	| "off"
+	| "on"
+	| "sentences"
+	| "words"
+
+type Autocomplete = "off" | "on" | string
+
+type ColorScheme = "normal" | "light" | "dark" | "only light" | string
+
+type CrossOrigin = "anonymous" | "use-credentials" | ""
+
+type Fetchpriority = "auto" | "high" | "low"
+
+type Formenctype = "application/x-www-form-urlencoded" | "multipart/form-data"
+
+type Formmethod = "dialog" | "get" | "post"
+
+type Formtarget = "_blank" | "_parent" | "_self" | "_top"
+
+type HttpEquiv =
+	| "content-security-policy"
+	| "content-type"
+	| "default-style"
+	| "x-ua-compatible"
+	| "refresh"
+
+type MetaName =
+	| "author"
+	| "creator"
+	| "description"
+	| "generator"
+	| "keywords"
+	| "publisher"
+	| "referrer"
+	| "robots"
+	| "theme-color"
+	| "color-scheme"
+	| "viewport"
+
+type ModAttributes = {
+	cite?: string
+	datetime?: string
+	role?: AriaRole
+}
+
+type RobotsContent =
+	| "all"
+	| "follow"
+	| "index"
+	| "noarchive"
+	| "nocache"
+	| "nofollow"
+	| "noimageindex"
+	| "noindex"
+	| "none"
+	| "nosnippet"
+
 interface AnchorElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		download?: string
@@ -98,15 +158,7 @@ interface AreaElement extends SBElement {
 				download?: string
 				href?: string
 				ping?: string
-				referrerpolicy?:
-					| "no-referrer"
-					| "no-referrer-when-downgrade"
-					| "origin"
-					| "origin-when-cross-origin"
-					| "same-origin"
-					| "strict-origin"
-					| "strict-origin-when-cross-origin"
-					| "unsafe-url"
+				referrerpolicy?: ReferrerPolicy
 				rel?:
 					| "alternate"
 					| "author"
@@ -165,7 +217,7 @@ interface AudioElement extends SBElement {
 					| "nofullscreen"
 					| "noremoteplayback"
 					| undefined
-				crossorigin?: "anonymous" | "use-credentials"
+				crossorigin?: CrossOrigin
 				disableremoteplayback?: boolean
 				loop?: boolean
 				muted?: boolean
@@ -236,10 +288,10 @@ interface ButtonElement extends SBElement {
 		disabled?: boolean
 		form?: string
 		formaction?: string
-		formenctype?: "application/x-www-form-urlencoded" | "multipart/form-data"
-		formmethod?: "dialog" | "get" | "post"
+		formenctype?: Formenctype
+		formmethod?: Formmethod
 		formnovalidate?: boolean
-		formtarget?: "_blank" | "_parent" | "_self" | "_top"
+		formtarget?: Formtarget
 		name?: string
 		popovertarget?: string
 		popovertargetaction?: "hide" | "show" | "toggle"
@@ -259,7 +311,7 @@ interface ButtonElement extends SBElement {
 	}
 	children?: Array<
 		| TextNode
-		| Omit<
+		| Exclude<
 				PhrasingContent,
 				| { tagName: "A" }
 				| { tagName: "BUTTON" }
@@ -274,8 +326,11 @@ interface ButtonElement extends SBElement {
 	readonly tagName: "BUTTON"
 }
 
+// SEE https://developer.mozilla.org/en-US/docs/Web/API/Popover_API
 interface ButtonInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
+		popovertarget?: string
+		popovertargetaction?: "hide" | "show" | "toggle"
 		readonly type: "button"
 		value?: "string"
 	}
@@ -307,7 +362,9 @@ interface CaptionElement extends SBElement {
 
 interface CheckboxInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
+		autocapitalize?: Autocapitalize
 		checked?: boolean
+		list?: string
 		readonly type: "checkbox"
 		value?: string
 	}
@@ -331,7 +388,8 @@ interface CodeElement extends SBElement {
 
 interface ColorInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
-		autocomplete?: "off" | "on" | string
+		autocapitalize?: Autocapitalize
+		autocomplete?: Autocomplete
 		list?: string
 		readonly type: "color"
 		value?: string
@@ -369,32 +427,35 @@ interface DatalistElement extends SBElement {
 
 interface DateInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
-		autocomplete?: "off" | "on" | string
+		autocapitalize?: Autocapitalize
+		autocomplete?: Autocomplete
 		list?: string
+		max?: string
+		min?: string
 		readonly?: boolean
+		step?: string
 		readonly type: "date"
-		step?: number | string
+		value?: string
 	}
 }
 
 interface DateTimeLocalInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
-		autocomplete?: "off" | "on" | string
+		autocapitalize?: Autocapitalize
+		autocomplete?: Autocomplete
 		list?: string
-		name: string
+		max?: string
+		min?: string
 		readonly?: boolean
-		required?: boolean
+		step?: string
 		readonly type: "datetime-local"
-		step?: number | string
+		value?: string
 	}
 }
 
 // transparent content
 interface DeleteElement extends SBElement {
-	attributes?: GlobalAttributes & {
-		cite?: string
-		datetime?: string
-	}
+	attributes?: GlobalAttributes & ModAttributes
 	children?: Array<TextNode | FlowContent>
 	readonly tagName: "DEL"
 }
@@ -474,12 +535,12 @@ interface DescriptionTermElement extends SBElement {
 
 interface EmailInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
-		autocomplete?: "off" | "on" | string
+		autocomplete?: Autocomplete
+		dirname?: string
 		list?: string
 		maxlength?: number | string
 		minlength?: number | string
 		multiple?: boolean
-		name: string
 		pattern?: string
 		placeholder?: string
 		readonly?: boolean
@@ -488,7 +549,6 @@ interface EmailInputElement extends InputElement {
 		readonly type: "email"
 		value?: string
 	}
-	readonly tagName: "INPUT"
 }
 
 interface EmbedElement extends SBElement {
@@ -549,7 +609,10 @@ interface FigureElement extends SBElement {
 interface FileInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		accept?: string
+		autocapitalize?: Autocapitalize
+		autocomplete?: Autocomplete
 		capture?: string
+		list?: string
 		multiple?: boolean
 		readonly type: "file"
 		value?: string
@@ -572,8 +635,8 @@ interface FormElement extends SBElement {
 		"accept-charset": string
 		"action": string
 		"autocomplete"?: "off" | "on"
-		"enctype"?: "application/x-www-form-urlencoded" | "multipart/form-data"
-		"method"?: "dialog" | "get" | "post"
+		"enctype"?: Formenctype
+		"method"?: Formmethod
 		"name"?: string
 		"novalidate"?: boolean
 		"rel"?:
@@ -678,12 +741,16 @@ interface HeadingGroupElement extends SBElement {
 }
 
 interface HiddenInputElement extends InputElement {
-	attributes?: InputElement["attributes"] & {
-		autocomplete?: "off" | "on" | string
-		name: string
-		readonly type: "hidden"
-		value: string
-	}
+	attributes?:
+		| (InputElement["attributes"] & {
+				autocapitalize?: Autocapitalize
+				autocomplete?: Autocomplete
+				autofocus?: never
+				dirname?: string
+				readonly type: "hidden"
+				value: string
+		  } & { name: "_charset_"; value: never })
+		| { name: string; value: string }
 }
 
 interface HorizontalRuleElement extends SBElement {
@@ -744,10 +811,10 @@ interface IframeElement extends SBElement {
 interface ImageElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		alt: string
-		crossorigin?: "anonymous" | "use-credentials"
+		crossorigin?: CrossOrigin
 		decoding?: "async" | "auto" | "sync"
 		elementtiming?: string
-		fetchpriority?: "auto" | "high" | "low"
+		fetchpriority?: Fetchpriority
 		height?: number | string
 		ismap?: boolean
 		loading?: "eager" | "lazy"
@@ -783,15 +850,17 @@ interface ImageElement extends SBElement {
 
 interface ImageInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
-		alt?: string
+		alt: string
+		autocapitalize?: Autocapitalize
+		autocomplete?: Autocomplete
 		formaction?: string
-		formenctype?: "application/x-www-form-urlencoded" | "multipart/form-data"
-		formmethod?: "dialog" | "get" | "post"
+		formenctype?: Formenctype
+		formmethod?: Formmethod
 		formnovalidate?: boolean
-		formtarget?: "_blank" | "_parent" | "_self" | "_top"
-		list?: string
+		formtarget?: Formtarget
 		height?: number | string
-		name: string
+		list?: string
+		readonly?: boolean
 		src: string
 		readonly type: "image"
 		width?: number | string
@@ -824,63 +893,139 @@ type InputElementTypes =
 
 interface InputElement extends SBElement {
 	attributes?: GlobalAttributes & {
+		autofocus?: boolean
+		disabled?: boolean
+		form?: string
+		name: string
 		type: InputElementTypes
 	}
 	children?: Array<TextNode>
-	readonly tagName: "FOOTER"
+	readonly tagName: "INPUT"
 }
 
 interface InsertElement extends SBElement {
-	attributes?: HTMLModElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & ModAttributes
+	children?: Array<TextNode | FlowContent>
 	readonly tagName: "INS"
 }
 
 interface KeyboardElement extends SBElement {
-	attributes?: GlobalAttributes
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "KBD"
 }
 
 interface LabelElement extends SBElement {
-	attributes?: HTMLLabelElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		for: string
+	}
+	children?: Array<TextNode | Exclude<PhrasingContent, { tagName: "LABEL" }>>
 	readonly tagName: "LABEL"
 }
 
 interface LegendElement extends SBElement {
 	attributes?: HTMLLegendElement
-	children?: Array<TextNode>
+	children?: Array<TextNode | PhrasingContent | HeadingElements>
 	readonly tagName: "LEGEND"
 }
 
 interface ListItemElement extends SBElement {
-	attributes?: HTMLLItalicsElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: Pick<
+			AriaRole,
+			| "menuitem"
+			| "menuitemcheckbox"
+			| "menuitemradio"
+			| "option"
+			| "none"
+			| "presentation"
+			| "radio"
+			| "separator"
+			| "tab"
+			| "treeitem"
+		>
+		value?: number | string
+	}
+	children?: Array<TextNode | FlowContent>
 	readonly tagName: "LI"
 }
 
 interface LinkElement extends SBElement {
-	attributes?: HTMLLinkElement
+	attributes?:
+		| (GlobalAttributes & {
+				crossorigin?: CrossOrigin
+				fetchpriority?: Fetchpriority
+				href: string
+				hreflang?: string
+				integrity?: string
+				media?: string
+				referrerpolicy?: Omit<
+					ReferrerPolicy,
+					"same-origin" | "strict-origin" | "strict-origin-when-cross-origin"
+				>
+				sizes?: string
+				title?: string
+		  } & {
+				as: "image"
+				imagesizes?: string
+				imagesrcset?: string
+				rel: "preload"
+				type?: string
+		  })
+		| {
+				as: string
+				rel: "modulepreload" | "preload"
+				type?: string
+		  }
+		| {
+				as: never
+				rel?:
+					| "alternate"
+					| "author"
+					| "canonical"
+					| "dns-prefetch"
+					| "help"
+					| "icon"
+					| "license"
+					| "manifest"
+					| "me"
+					| "next"
+					| "pingback"
+					| "preconnect"
+					| "prefetch"
+					| "prerender"
+					| "prev"
+					| "privacy-policy"
+					| "search"
+					| "stylesheet"
+					| "terms-of-service"
+		  }
 	children?: Array<TextNode>
 	readonly tagName: "LINK"
 }
 
 interface MainElement extends SBElement {
 	attributes?: GlobalAttributes
-	children?: Array<TextNode>
+	children?: Array<TextNode | FlowContent>
 	readonly tagName: "MAIN"
 }
 
+// transparent content
 interface MapElement extends SBElement {
-	attributes?: HTMLMapElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		name: string
+	}
+	children?: Array<TextNode | FlowContent>
 	readonly tagName: "MAP"
 }
 
 interface MarkElement extends SBElement {
-	attributes?: GlobalAttributes
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "MARK"
 }
 
@@ -891,26 +1036,71 @@ interface MarkElement extends SBElement {
 // }
 
 interface MenuElement extends SBElement {
-	attributes?: HTMLMenuElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: Pick<
+			AriaRole,
+			| "directory"
+			| "group"
+			| "listbox"
+			| "menu"
+			| "menubar"
+			| "none"
+			| "presentation"
+			| "radiogroup"
+			| "tablist"
+			| "toolbar"
+			| "tree"
+		>
+	}
+	children?: Array<ListItemElement | ScriptElement | TemplateElement>
 	readonly tagName: "MENU"
 }
 
 interface MetaElement extends SBElement {
-	attributes?: HTMLMetaElement
-	children?: Array<TextNode>
+	attributes?:
+		| (GlobalAttributes & {
+				charset: "utf-8"
+		  })
+		| {
+				"http-equiv"?: HttpEquiv
+				"content": string
+		  }
+		| {
+				name: Pick<MetaName, "color-scheme">
+				content: ColorScheme
+		  }
+		| {
+				name: Pick<MetaName, "referrer">
+				content: ReferrerPolicy
+		  }
+		| {
+				name: Pick<MetaName, "robots">
+				content: RobotsContent
+		  }
+		| {
+				name: Omit<MetaName, "color-scheme" | "referrer" | "robots">
+				content: string
+		  }
 	readonly tagName: "META"
 }
 
 interface MeterElement extends SBElement {
-	attributes?: HTMLMeterElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		form?: string
+		high?: number | string
+		low?: number | string
+		max?: number | string
+		min?: number | string
+		optimum: number | string
+	}
+	children?: Array<TextNode | Exclude<PhrasingContent, { tagName: "METER" }>>
 	readonly tagName: "METER"
 }
 
 interface MonthInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
-		autocomplete?: "off" | "on" | string
+		autocapitalize?: Autocapitalize
+		autocomplete?: Autocomplete
 		list?: string
 		max?: number | string
 		min?: number | string
@@ -924,24 +1114,29 @@ interface MonthInputElement extends InputElement {
 
 interface NavigationElement extends SBElement {
 	attributes?: GlobalAttributes
-	children?: Array<TextNode>
+	children?: Array<TextNode | FlowContent>
 	readonly tagName: "NAV"
 }
 
 interface NoscriptElement extends SBElement {
 	attributes?: GlobalAttributes
-	children?: Array<TextNode>
+	children?: Array<
+		| TextNode
+		| LinkElement
+		| StyleElement
+		| MetaElement
+		| Exclude<FlowContent, { tagName: "NOSCRIPT" }>
+	>
 	readonly tagName: "NOSCRIPT"
 }
 
 interface NumberInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
-		autocomplete?: "off" | "on" | string
+		autocapitalize?: Autocapitalize
+		autocomplete?: Autocomplete
 		list?: string
 		max: number | string
 		min: number | string
-		multiple?: boolean
-		name: string
 		placeholder?: string
 		readonly?: boolean
 		required?: boolean
@@ -951,26 +1146,62 @@ interface NumberInputElement extends InputElement {
 	}
 }
 
+// transparent content
+// TODO: do we need this?
 interface ObjectElement extends SBElement {
-	attributes?: HTMLObjectElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		data: string
+		form?: string
+		height?: number | string
+		name?: string
+		role?: Pick<AriaRole, "application" | "document" | "img">
+		type: string
+		width?: number | string
+	}
+	children?: Array<FlowContent>
 	readonly tagName: "OBJECT"
 }
 
 interface OrderedListElement extends SBElement {
-	attributes?: HTMLOListElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		reversed?: boolean
+		role?: Pick<
+			AriaRole,
+			| "directory"
+			| "group"
+			| "listbox"
+			| "menu"
+			| "menubar"
+			| "none"
+			| "presentation"
+			| "radiogroup"
+			| "tablist"
+			| "toolbar"
+			| "tree"
+		>
+		start?: number | string
+		type?: "a" | "A" | "i" | "I" | "1" | 1
+	}
+	children?: Array<ListItemElement | ScriptElement | TemplateElement>
 	readonly tagName: "OL"
 }
 
 interface OptionGroupElement extends SBElement {
-	attributes?: HTMLOptGroupElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		disabled?: boolean
+		label: string
+	}
+	children?: Array<OptionElement>
 	readonly tagName: "OPTGROUP"
 }
 
 interface OptionElement extends SBElement {
-	attributes?: HTMLOptionElement
+	attributes?: GlobalAttributes & {
+		disabled?: boolean
+		label?: string
+		selected?: boolean | string
+		value?: number | string
+	}
 	children?: Array<TextNode>
 	readonly tagName: "OPTION"
 }
@@ -986,24 +1217,26 @@ interface OutputElement extends SBElement {
 		for?: string
 		form?: string
 		name: string
+		role?: AriaRole
 	}
-	children?: Array<TextNode>
+	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "OUTPUT"
 }
 
 interface ParagraphElement extends SBElement {
-	attributes?: HTMLParagraphElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "P"
 }
 
 interface PasswordInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
-		autocomplete?: "off" | "on" | string
+		autocomplete?: Autocomplete
 		maxlength?: number | string
 		minlength?: number | string
 		multiple?: boolean
-		name: string
 		pattern?: string
 		placeholder?: string
 		readonly?: boolean
@@ -1015,102 +1248,222 @@ interface PasswordInputElement extends InputElement {
 }
 
 interface PictureElement extends SBElement {
-	attributes?: HTMLPictureElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes
+	children?: [Array<SourceElement>, ImageElement]
 	readonly tagName: "PICTURE"
 }
 
 interface PreformattedTextElement extends SBElement {
-	attributes?: HTMLPreElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes
+	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "PRE"
 }
 
 interface ProgressElement extends SBElement {
-	attributes?: HTMLProgressElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		max?: number | string
+		value?: number | string
+	}
+	children?: Array<TextNode | Exclued<PhrasingContent, { tagName: "PROGRESS" }>>
 	readonly tagName: "PROGRESS"
 }
 
 interface QuoteElement extends SBElement {
-	attributes?: HTMLQuoteElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		cite?: string
+		role?: AriaRole
+	}
+	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "Q"
 }
 
 interface RadioInputElement extends InputElement {
-	type: "radio"
+	attributes?: InputElement["attributes"] & {
+		autocapitalize?: Autocapitalize
+		checked?: boolean
+		required?: boolean
+		readonly type: "radio"
+		value: string
+	}
+}
+
+interface RangeInputElement extends InputElement {
+	attributes?: InputElement["attributes"] & {
+		autocapitalize?: Autocapitalize
+		autocomplete?: Autocomplete
+		list?: string
+		max?: number | string
+		min?: number | string
+		step?: number | string
+		readonly type: "range"
+		value?: string
+	}
+}
+
+interface ResetInputElement extends InputElement {
+	attributes?: InputElement["attributes"] & {
+		autocapitalize?: Autocapitalize
+		readonly type: "reset"
+		value?: string
+	}
 }
 
 interface RubyFallbackParenthesisElement extends SBElement {
-	attributes?: GlobalAttributes
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
 	children?: Array<TextNode>
 	readonly tagName: "RP"
 }
 
 interface RubyTextElement extends SBElement {
-	attributes?: GlobalAttributes
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "RT"
 }
 
 interface RubyElement extends SBElement {
-	attributes?: GlobalAttributes
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "RUBY"
 }
 
 interface SampleElement extends SBElement {
-	attributes?: GlobalAttributes
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "SAMP"
 }
 
 interface ScriptElement extends SBElement {
-	attributes?: HTMLScriptElement
+	attributes?: GlobalAttributes & {
+		async?: boolean
+		crossorigin?: CrossOrigin
+		defer?: boolean
+		fetchpriority?: Fetchpriority
+		integrity?: string
+		nomodule?: boolean
+		nonce?: string
+		referrerpolicy?: ReferrerPolicy
+		src: string
+		type?: "importmap" | "module" | string
+	}
 	children?: Array<TextNode>
 	readonly tagName: "SCRIPT"
 }
 
 interface SearchElement extends SBElement {
-	attributes?: GlobalAttributes
+	attributes?: GlobalAttributes & {
+		role?: Pick<
+			AriaRole,
+			"form" | "group" | "none" | "presentation" | "region" | "search"
+		>
+	}
+	children?: Array<TextNode | FlowContent>
+	readonly tagName: "SEARCH"
+}
+
+interface SearchInputElement extends InputElement {
+	attributes?: InputElement["attributes"] & {
+		autocapitalize?: Autocapitalize
+		autocomplete?: Autocomplete
+		dirname?: string
+		list?: string
+		maxlength?: number | string
+		minlength?: number | string
+		pattern?: string
+		placeholder?: string
+		size?: number | string
+		readonly type: "search"
+		value?: string
+	}
 	children?: Array<TextNode>
 	readonly tagName: "SEARCH"
 }
 
 interface SectionElement extends SBElement {
-	attributes?: GlobalAttributes
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: Pick<
+			AriaRole,
+			| "alert"
+			| "alertdialog"
+			| "application"
+			| "banner"
+			| "complementary"
+			| "contentinfo"
+			| "dialog"
+			| "document"
+			| "feed"
+			| "log"
+			| "main"
+			| "marquee"
+			| "navigation"
+			| "none"
+			| "note"
+			| "presentation"
+			| "search"
+			| "status"
+			| "tabpanel"
+		>
+	}
+	children?: Array<TextNode | FlowContent>
 	readonly tagName: "SECTION"
 }
 
 interface SelectElement extends SBElement {
-	attributes?: HTMLSelectElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		autocomplete?: Autocomplete
+		autofocus?: boolean
+		disabled?: boolean
+		form?: string
+		multiple?: boolean
+		required?: boolean
+		role?: Pick<AriaRole, "menu">
+		size?: number | string
+	}
+	children?: Array<OptionElement | OptionGroupElement | HorizontalRuleElement>
 	readonly tagName: "SELECT"
 }
 
+// transparent content
 interface SlotElement extends SBElement {
-	attributes?: GlobalAttributes
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		name?: string
+	}
+	children?: Array<TextNode | FlowContent>
 	readonly tagName: "SLOT"
 }
 
 interface SmallElement extends SBElement {
-	attributes?: GlobalAttributes
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "SMALL"
 }
 
 interface SourceElement extends SBElement {
-	attributes?: HTMLSourceElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		height?: number | string
+		media?: string
+		sizes?: string
+		src?: string
+		srcset?: string
+		type?: string
+	}
 	readonly tagName: "SOURCE"
 }
 
 interface SpanElement extends SBElement {
-	attributes?: HTMLSpanElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "SPAN"
 }
 
@@ -1121,8 +1474,10 @@ interface SpanElement extends SBElement {
 // }
 
 interface StrongEmphasisElement extends SBElement {
-	attributes?: GlobalAttributes
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "STRONG"
 }
 
@@ -1132,131 +1487,338 @@ interface StyleElement extends SBElement {
 	readonly tagName: "STYLE"
 }
 
+interface SubmitInputElement extends InputElement {
+	attributes?: InputElement["attributes"] & {
+		autocapitalize?: Autocapitalize
+		formaction?: string
+		formenctype?: Formenctype
+		formmethod?: Formmethod
+		formnovalidate?: boolean
+		formtarget?: Formtarget
+		readonly type: "submit"
+		value?: string
+	}
+}
+
 interface SubscriptElement extends SBElement {
-	attributes?: GlobalAttributes
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "SUB"
 }
 
 interface SummaryElement extends SBElement {
 	attributes?: GlobalAttributes
-	children?: Array<TextNode>
+	children?:
+		| [HeadingElements, Array<TextNode | PhrasingContent>]
+		| Array<TextNode | PhrasingContent>
 	readonly tagName: "SUMMARY"
 }
 
 interface SuperscriptElement extends SBElement {
-	attributes?: GlobalAttributes
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "SUP"
 }
 
+// TODO: complex children
 interface TableElement extends SBElement {
-	attributes?: HTMLTableElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	children?: Array<
+		| TextNode
+		| CaptionElement
+		| ColumnGroupElement
+		| TableHeadElement
+		| TableBodyElement
+		| TableRowElement
+		| TableFooterElement
+	>
 	readonly tagName: "TABLE"
 }
 
 interface TableBodyElement extends SBElement {
-	attributes?: HTMLTableSectionElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	children?: Array<TableRowElement>
 	readonly tagName: "TBODY"
 }
 
 interface TableDataCellElement extends SBElement {
-	attributes?: HTMLTableCellElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	children?: Array<TextNode | FlowContent>
 	readonly tagName: "TD"
 }
 
-interface TemplateElement extends SBElement {
-	attributes?: HTMLTemplateElement
-	children?: Array<TextNode>
-	readonly tagName: "TEMPLATE"
-}
-
-interface TextareaElement extends SBElement {
-	attributes?: HTMLTextAreaElement
-	children?: Array<TextNode>
-	readonly tagName: "TEXTAREA"
-}
-
 interface TableFooterElement extends SBElement {
-	attributes?: HTMLTableSectionElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	children?: Array<TableRowElement>
 	readonly tagName: "TFOOT"
 }
 
+// TODO: complicated children
 interface TableHeaderCellElement extends SBElement {
-	attributes?: HTMLTableCellElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		abbr?: string
+		colspan?: number | string
+		headers?: string
+		role?: AriaRole
+		rowspan?: number | string
+		scope?: "col" | "colgroup" | "row" | "rowgroup"
+	}
+	children?: Array<TextNode | FlowContent>
 	readonly tagName: "TH"
 }
 
 interface TableHeadElement extends SBElement {
-	attributes?: HTMLTableSectionElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	children?: Array<TableRowElement>
 	readonly tagName: "THEAD"
 }
 
-interface TimeElement extends SBElement {
-	attributes?: HTMLTimeElement
+interface TableRowElement extends SBElement {
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	children?: Array<TableDataCellElement | TableHeaderCellElement>
+	readonly tagName: "TR"
+}
+
+interface TemplateElement extends SBElement {
+	attributes?: GlobalAttributes & {
+		shadowrootmode?: "closed" | "open"
+	}
 	children?: Array<TextNode>
+	readonly tagName: "TEMPLATE"
+}
+
+interface TelInputElement extends InputElement {
+	attributes?: InputElement["attributes"] & {
+		autocapitalize?: Autocapitalize
+		autocomplete?: Autocomplete
+		dirname?: string
+		list?: string
+		maxlength?: number | string
+		minlength?: number | string
+		pattern?: string
+		placeholder?: string
+		readonly?: boolean
+		required?: boolean
+		size?: number | string
+		readonly type: "tel"
+		value?: string
+	}
+}
+
+interface TextareaElement extends SBElement {
+	attributes?: GlobalAttributes & {
+		autocapitalize?: Autocapitalize
+		autocomplete?: Autocomplete
+		autofocus?: boolean
+		cols?: number | string
+		dirname?: string
+		disabled?: boolean
+		form?: string
+		maxlength?: number | string
+		minlength?: number | string
+		placeholder?: string
+		readonly?: boolean
+		required?: boolean
+		rows?: number | string
+		spellcheck?: "default" | "false" | "true"
+		wrap: "off" | "hard" | "soft"
+	}
+	children?: Array<TextNode>
+	readonly tagName: "TEXTAREA"
+}
+
+interface TextInputElement extends InputElement {
+	attributes?: InputElement["attributes"] & {
+		autocapitalize?: Autocapitalize
+		autocomplete?: Autocomplete
+		dirname?: string
+		list?: string
+		maxlength?: number | string
+		minlength?: number | string
+		pattern?: string
+		placeholder?: string
+		readonly?: boolean
+		required?: boolean
+		size?: number | string
+		readonly type: "text"
+		value?: string
+	}
+}
+
+interface TimeElement extends SBElement {
+	attributes?: GlobalAttributes & {
+		datetime: string
+		role?: AriaRole
+	}
+	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "TIME"
 }
 
+interface TimeInputElement extends InputElement {
+	attributes?: InputElement["attributes"] & {
+		autocapitalize?: Autocapitalize
+		autocomplete?: Autocomplete
+		list?: string
+		max?: string
+		min?: string
+		readonly?: boolean
+		required?: boolean
+		step?: string
+		readonly type: "time"
+		value?: string
+	}
+}
+
 interface TitleElement extends SBElement {
-	attributes?: HTMLTitleElement
+	attributes?: GlobalAttributes
 	children?: Array<TextNode>
 	readonly tagName: "TITLE"
 }
 
-interface TableRowElement extends SBElement {
-	attributes?: HTMLTableRowElement
-	children?: Array<TextNode>
-	readonly tagName: "TR"
-}
-
 interface TrackElement extends SBElement {
-	attributes?: HTMLTrackElement
+	attributes?:
+		| (GlobalAttributes & {
+				default?: boolean
+				label: string
+				src: string
+		  } & {
+				kind?: "subtitles"
+				srclang: string
+		  })
+		| {
+				kind?: "captions" | "chapters" | "descriptions" | "metadata"
+				srclang?: string
+		  }
 	children?: Array<TextNode>
 	readonly tagName: "TRACK"
 }
 
-interface UnderlineElement extends SBElement {
-	attributes?: GlobalAttributes
-	children?: Array<TextNode>
-	readonly tagName: "U"
-}
+// interface UnderlineElement extends SBElement {
+// 	attributes?: GlobalAttributes
+// 	children?: Array<TextNode>
+// 	readonly tagName: "U"
+// }
 
 interface UnorderedListElement extends SBElement {
-	attributes?: HTMLUListElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: Pick<
+			AriaRole,
+			| "directory"
+			| "group"
+			| "listbox"
+			| "menu"
+			| "menubar"
+			| "none"
+			| "presentation"
+			| "radiogroup"
+			| "tablist"
+			| "toolbar"
+			| "tree"
+		>
+	}
+	children?: Array<ListItemElement | ScriptElement | TemplateElement>
 	readonly tagName: "UL"
 }
 
+interface UrlInputElement extends InputElement {
+	attributes?: InputElement["attributes"] & {
+		autocomplete?: Autocomplete
+		dirname?: string
+		list?: string
+		maxlength?: number | string
+		minlength?: number | string
+		pattern?: string
+		placeholder?: string
+		readonly?: boolean
+		required?: boolean
+		size?: number | string
+		readonly type: "url"
+		value?: string
+	}
+}
+
 interface VariableElement extends SBElement {
-	attributes?: GlobalAttributes
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "VAR"
 }
 
-interface UnknownElement extends SBElement {
-	attributes?: HTMLUnknownElement
-	children?: Array<TextNode>
-	readonly tagName: string
-}
+// interface UnknownElement extends SBElement {
+// 	attributes?: HTMLUnknownElement
+// 	children?: Array<TextNode>
+// 	readonly tagName: string
+// }
 
+// TODO: complex children
 interface VideoElement extends SBElement {
-	attributes?: HTMLVideoElement
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		autoplay?: boolean
+		controls?: boolean
+		controlslist?: string
+		crossorigin?: CrossOrigin
+		disablepictureinpicture?: boolean
+		disableremoteplayback?: boolean
+		height?: number | string
+		loop?: boolean
+		muted?: boolean
+		playsinline?: boolean
+		poster?: string
+		preload?: "auto" | "metadata" | "none" | ""
+		role?: Pick<AriaRole, "application">
+		src: string
+		width?: number | string
+	}
+	children?: Array<TrackElement | SourceElement>
 	readonly tagName: "VIDEO"
 }
 
+interface WeekInputElement extends InputElement {
+	attributes?: InputElement["attributes"] & {
+		autocapitalize?: Autocapitalize
+		autocomplete?: Autocomplete
+		list?: string
+		max?: string
+		min?: string
+		readonly?: boolean
+		required?: boolean
+		step?: string
+		readonly type: "week"
+		value?: string
+	}
+}
+
 interface WordBreakOpportunityElement extends SBElement {
-	attributes?: GlobalAttributes
-	children?: Array<TextNode>
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
 	readonly tagName: "WBR"
 }
+
+type HeadingElements =
+	| Heading1Element
+	| Heading2Element
+	| Heading3Element
+	| Heading4Element
+	| Heading5Element
+	| Heading6Element
 
 type MetadataContent =
 	| BaseElement
