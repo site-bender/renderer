@@ -1,6 +1,6 @@
 {
 	"name": "@sitebender/renderer",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Renderer module for rendering DOM from JSON.",
 	"license": "MIT",
 	"author": "Charles F. Munat <coder@craft-code.dev>",
@@ -11,8 +11,7 @@
 		"src"
 	],
 	"scripts": {
-		"build": "tsc && vite build",
-		"build:docs": "tsc && vite build",
+		"build": "tsc && astro build",
 		"bump": "pnpm version patch --force",
 		"bump:major": "pnpm version major --force",
 		"bump:minor": "pnpm version minor --force",
