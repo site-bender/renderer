@@ -7,7 +7,7 @@ pnpm-debug.log*
 
 .DS_Store
 
-dist/*
+dist/
 .cache/*
 .history/*
 .vscode/*

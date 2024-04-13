@@ -1,4 +1,4 @@
-type AriaRole =
+export type AriaRole =
 	| "alert"
 	| "alertdialog"
 	| "application"
@@ -75,7 +75,7 @@ type AriaRole =
 	| "treegrid"
 	| "treeitem"
 
-type Autocapitalize =
+export type Autocapitalize =
 	| "none"
 	| "off"
 	| "sentences"
@@ -83,7 +83,7 @@ type Autocapitalize =
 	| "words"
 	| "characters"
 
-type TagName =
+export type TagName =
 	| "A"
 	| "ABBR"
 	| "ADDRESS"
@@ -197,7 +197,7 @@ type TagName =
 	| "VIDEO"
 	| "WBR"
 
-type ReferrerPolicy =
+export type ReferrerPolicy =
 	| "no-referrer"
 	| "no-referrer-when-downgrade"
 	| "origin"

@@ -1,4 +1,20 @@
-type Autocapitalize =
+import type { AriaRole } from "./unions"
+import type {
+	DragAndDropEvent,
+	FocusEvent,
+	GlobalAttributes,
+	HTMLEvent,
+	KeyboardEvent,
+	MouseEvent,
+	PointerEvent,
+	PopoverEvent,
+	SBElement,
+	TextNode,
+	TouchEvent,
+	TransitionEvent,
+} from "./shared"
+
+export type Autocapitalize =
 	| "characters"
 	| "none"
 	| "off"
@@ -6,28 +22,30 @@ type Autocapitalize =
 	| "sentences"
 	| "words"
 
-type Autocomplete = "off" | "on" | string
+export type Autocomplete = "off" | "on" | string
 
-type ColorScheme = "normal" | "light" | "dark" | "only light" | string
+export type ColorScheme = "normal" | "light" | "dark" | "only light" | string
 
-type CrossOrigin = "anonymous" | "use-credentials" | ""
+export type CrossOrigin = "anonymous" | "use-credentials" | ""
 
-type Fetchpriority = "auto" | "high" | "low"
+export type Fetchpriority = "auto" | "high" | "low"
 
-type Formenctype = "application/x-www-form-urlencoded" | "multipart/form-data"
+export type Formenctype =
+	| "application/x-www-form-urlencoded"
+	| "multipart/form-data"
 
-type Formmethod = "dialog" | "get" | "post"
+export type Formmethod = "dialog" | "get" | "post"
 
-type Formtarget = "_blank" | "_parent" | "_self" | "_top"
+export type Formtarget = "_blank" | "_parent" | "_self" | "_top"
 
-type HttpEquiv =
+export type HttpEquiv =
 	| "content-security-policy"
 	| "content-type"
 	| "default-style"
 	| "x-ua-compatible"
 	| "refresh"
 
-type MetaName =
+export type MetaName =
 	| "author"
 	| "creator"
 	| "description"
@@ -40,13 +58,13 @@ type MetaName =
 	| "color-scheme"
 	| "viewport"
 
-type ModAttributes = {
+export type ModAttributes = {
 	cite?: string
 	datetime?: string
 	role?: AriaRole
 }
 
-type RobotsContent =
+export type RobotsContent =
 	| "all"
 	| "follow"
 	| "index"
@@ -58,7 +76,7 @@ type RobotsContent =
 	| "none"
 	| "nosnippet"
 
-interface AnchorElement extends SBElement {
+export interface AnchorElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		download?: string
 		href: string
@@ -98,23 +116,21 @@ interface AnchorElement extends SBElement {
 	}
 	children?: Array<TextNode | FlowContentNoInteractive>
 	publishes?: {
-		[
-			key:
-				| DragAndDropEvent
-				| FocusEvent
-				| HTMLEvent
-				| KeyboardEvent
-				| MouseEvent
-				| PointerEvent
-				| PopoverEvent
-				| TouchEvent
-				| TransitionEvent
-		]: unknown
+		[key in
+			| DragAndDropEvent
+			| FocusEvent
+			| HTMLEvent
+			| KeyboardEvent
+			| MouseEvent
+			| PointerEvent
+			| PopoverEvent
+			| TouchEvent
+			| TransitionEvent]: unknown
 	}
 	readonly tagName: "A"
 }
 
-interface AbbreviationElement extends SBElement {
+export interface AbbreviationElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 		title: string
@@ -123,7 +139,7 @@ interface AbbreviationElement extends SBElement {
 	readonly tagName: "ABBR"
 }
 
-interface AddressElement extends SBElement {
+export interface AddressElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -150,7 +166,7 @@ interface AddressElement extends SBElement {
 	readonly tagName: "ADDRESS"
 }
 
-interface AreaElement extends SBElement {
+export interface AreaElement extends SBElement {
 	attributes?:
 		| (GlobalAttributes & {
 				alt: string
@@ -184,7 +200,7 @@ interface AreaElement extends SBElement {
 	readonly tagName: "AREA"
 }
 
-interface ArticleElement extends SBElement {
+export interface ArticleElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?:
 			| "application"
@@ -199,7 +215,7 @@ interface ArticleElement extends SBElement {
 	readonly tagName: "ARTICLE"
 }
 
-interface AsideElement extends SBElement {
+export interface AsideElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: "feed" | "none" | "note" | "presentation" | "region" | "search"
 	}
@@ -207,7 +223,7 @@ interface AsideElement extends SBElement {
 	readonly tagName: "ASIDE"
 }
 
-interface AudioElement extends SBElement {
+export interface AudioElement extends SBElement {
 	attributes?:
 		| (GlobalAttributes & {
 				autoplay?: boolean
@@ -222,7 +238,7 @@ interface AudioElement extends SBElement {
 				loop?: boolean
 				muted?: boolean
 				preload?: "" | "auto" | "metadata" | "none"
-				role?: Pick<AriaRole, "application">
+				role?: "application"
 				src: string
 		  })
 		| undefined
@@ -230,13 +246,13 @@ interface AudioElement extends SBElement {
 	readonly tagName: "AUDIO"
 }
 
-// interface BoldElement extends SBElement {
+// export interface BoldElement extends SBElement {
 // 	attributes?: GlobalAttributes
 // 	children?: Array<TextNode>
 // 	readonly tagName: "B"
 // }
 
-interface BaseElement extends SBElement {
+export interface BaseElement extends SBElement {
 	attributes?:
 		| (GlobalAttributes & {
 				href: string
@@ -246,7 +262,7 @@ interface BaseElement extends SBElement {
 	readonly tagName: "BASE"
 }
 
-interface BidirectionalIsolateElement extends SBElement {
+export interface BidirectionalIsolateElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -254,7 +270,7 @@ interface BidirectionalIsolateElement extends SBElement {
 	readonly tagName: "BDI"
 }
 
-interface BidirectionalTextOverrideElement extends SBElement {
+export interface BidirectionalTextOverrideElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -262,7 +278,7 @@ interface BidirectionalTextOverrideElement extends SBElement {
 	readonly tagName: "BDO"
 }
 
-interface BlockquoteElement extends SBElement {
+export interface BlockquoteElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		cite?: string
 		role?: AriaRole
@@ -271,18 +287,18 @@ interface BlockquoteElement extends SBElement {
 	readonly tagName: "BLOCKQUOTE"
 }
 
-interface BodyElement extends SBElement {
+export interface BodyElement extends SBElement {
 	attributes?: GlobalAttributes
 	children?: Array<TextNode | FlowContent>
 	readonly tagName: "BODY"
 }
 
-interface BreakElement extends SBElement {
+export interface BreakElement extends SBElement {
 	attributes?: GlobalAttributes
 	readonly tagName: "BR"
 }
 
-interface ButtonElement extends SBElement {
+export interface ButtonElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		autofocus?: boolean
 		disabled?: boolean
@@ -327,7 +343,7 @@ interface ButtonElement extends SBElement {
 }
 
 // SEE https://developer.mozilla.org/en-US/docs/Web/API/Popover_API
-interface ButtonInputElement extends InputElement {
+export interface ButtonInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		popovertarget?: string
 		popovertargetaction?: "hide" | "show" | "toggle"
@@ -337,7 +353,7 @@ interface ButtonInputElement extends InputElement {
 }
 
 // Needs transparent element children
-interface CanvasElement extends SBElement {
+export interface CanvasElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		height?: number | string
 		role?: AriaRole
@@ -354,13 +370,13 @@ interface CanvasElement extends SBElement {
 	readonly tagName: "CANVAS"
 }
 
-interface CaptionElement extends SBElement {
+export interface CaptionElement extends SBElement {
 	attributes?: GlobalAttributes
 	children?: Array<TextNode | FlowContent>
 	readonly tagName: "CAPTION"
 }
 
-interface CheckboxInputElement extends InputElement {
+export interface CheckboxInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		autocapitalize?: Autocapitalize
 		checked?: boolean
@@ -370,7 +386,7 @@ interface CheckboxInputElement extends InputElement {
 	}
 }
 
-interface CiteElement extends SBElement {
+export interface CiteElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -378,7 +394,7 @@ interface CiteElement extends SBElement {
 	readonly tagName: "CITE"
 }
 
-interface CodeElement extends SBElement {
+export interface CodeElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -386,7 +402,7 @@ interface CodeElement extends SBElement {
 	readonly tagName: "CODE"
 }
 
-interface ColorInputElement extends InputElement {
+export interface ColorInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		autocapitalize?: Autocapitalize
 		autocomplete?: Autocomplete
@@ -396,21 +412,21 @@ interface ColorInputElement extends InputElement {
 	}
 }
 
-interface ColumnElement extends SBElement {
+export interface ColumnElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		span?: number | string
 	}
 	readonly tagName: "COL"
 }
 
-interface ColumnGroupElement extends SBElement {
+export interface ColumnGroupElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		span?: number | string
 	}
 	readonly tagName: "COLGROUP"
 }
 
-interface DataElement extends SBElement {
+export interface DataElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 		value: string
@@ -419,13 +435,13 @@ interface DataElement extends SBElement {
 	readonly tagName: "DATA"
 }
 
-interface DatalistElement extends SBElement {
+export interface DatalistElement extends SBElement {
 	attributes?: GlobalAttributes
 	children?: Array<TextNode | PhrasingContent | OptionElement>
 	readonly tagName: "DATALIST"
 }
 
-interface DateInputElement extends InputElement {
+export interface DateInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		autocapitalize?: Autocapitalize
 		autocomplete?: Autocomplete
@@ -439,7 +455,7 @@ interface DateInputElement extends InputElement {
 	}
 }
 
-interface DateTimeLocalInputElement extends InputElement {
+export interface DateTimeLocalInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		autocapitalize?: Autocapitalize
 		autocomplete?: Autocomplete
@@ -454,13 +470,13 @@ interface DateTimeLocalInputElement extends InputElement {
 }
 
 // transparent content
-interface DeleteElement extends SBElement {
+export interface DeleteElement extends SBElement {
 	attributes?: GlobalAttributes & ModAttributes
 	children?: Array<TextNode | FlowContent>
 	readonly tagName: "DEL"
 }
 
-interface DetailsElement extends SBElement {
+export interface DetailsElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		name?: string
 		open?: boolean
@@ -469,7 +485,7 @@ interface DetailsElement extends SBElement {
 	readonly tagName: "DETAILS"
 }
 
-interface DefinitionElement extends SBElement {
+export interface DefinitionElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -477,16 +493,16 @@ interface DefinitionElement extends SBElement {
 	readonly tagName: "DFN"
 }
 
-interface DialogElement extends SBElement {
+export interface DialogElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		open?: boolean
-		role?: Pick<AriaRole, "alertdialog">
+		role?: "alertdialog"
 	}
 	children?: Array<TextNode | FlowContent>
 	readonly tagName: "DIALOG"
 }
 
-interface DivisionElement extends SBElement {
+export interface DivisionElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -494,15 +510,15 @@ interface DivisionElement extends SBElement {
 	readonly tagName: "DIV"
 }
 
-interface DescriptionDetailsElement extends SBElement {
+export interface DescriptionDetailsElement extends SBElement {
 	attributes?: GlobalAttributes
 	children?: Array<TextNode | FlowContent>
 	readonly tagName: "DD"
 }
 
-interface DescriptionListElement extends SBElement {
+export interface DescriptionListElement extends SBElement {
 	attributes?: GlobalAttributes & {
-		role?: Pick<AriaRole, "group" | "list" | "none" | "presentation">
+		role?: "group" | "list" | "none" | "presentation"
 	}
 	children?: Array<
 		| DescriptionDetailsElement
@@ -514,9 +530,9 @@ interface DescriptionListElement extends SBElement {
 }
 
 // exclude header descendants
-interface DescriptionTermElement extends SBElement {
+export interface DescriptionTermElement extends SBElement {
 	attributes?: GlobalAttributes & {
-		role?: Pick<AriaRole, "listitem">
+		role?: "listitem"
 	}
 	children?: Array<
 		| TextNode
@@ -533,7 +549,7 @@ interface DescriptionTermElement extends SBElement {
 	readonly tagName: "DT"
 }
 
-interface EmailInputElement extends InputElement {
+export interface EmailInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		autocomplete?: Autocomplete
 		dirname?: string
@@ -551,13 +567,10 @@ interface EmailInputElement extends InputElement {
 	}
 }
 
-interface EmbedElement extends SBElement {
+export interface EmbedElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		height?: number | string
-		role?: Omit<
-			AriaRole,
-			"application" | "document" | "img" | "none" | "presentation"
-		>
+		role?: "application" | "document" | "img" | "none" | "presentation"
 		src?: string
 		type?: string
 		width?: number | string
@@ -565,7 +578,7 @@ interface EmbedElement extends SBElement {
 	readonly tagName: "EMBED"
 }
 
-interface EmphasisElement extends SBElement {
+export interface EmphasisElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -573,40 +586,40 @@ interface EmphasisElement extends SBElement {
 	readonly tagName: "EM"
 }
 
-interface FieldsetElement extends SBElement {
+export interface FieldsetElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		disabled?: boolean
 		form?: string
 		name?: string
-		role?: Pick<AriaRole, "group" | "radiogroup" | "presentation" | "none">
+		role?: "group" | "radiogroup" | "presentation" | "none"
 	}
 	children?: Array<TextNode | LegendElement | FlowContent>
 	readonly tagName: "FIELDSET"
 }
 
-interface FigcaptionElement extends SBElement {
+export interface FigcaptionElement extends SBElement {
 	attributes?: GlobalAttributes & {
-		role?: Pick<AriaRole, "group" | "none" | "presentation">
+		role?: "group" | "none" | "presentation"
 	}
 	children?: Array<TextNode | FlowContent>
 	readonly tagName: "FIGCAPTION"
 }
 
-// interface FormControlsCollection extends SBElement {
+// export interface FormControlsCollection extends SBElement {
 // 	attributes?: HTMLFormControlsCollection
 // 	children?: Array<TextNode>
 // 	readonly tagName: "FORM"
 // }
 
-interface FigureElement extends SBElement {
+export interface FigureElement extends SBElement {
 	attributes?: GlobalAttributes & {
-		role?: Pick<AriaRole, "group" | "none" | "presentation">
+		role?: "group" | "none" | "presentation"
 	}
 	children?: Array<TextNode | FigcaptionElement | FlowContent>
 	readonly tagName: "FIGURE"
 }
 
-interface FileInputElement extends InputElement {
+export interface FileInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		accept?: string
 		autocapitalize?: Autocapitalize
@@ -619,9 +632,9 @@ interface FileInputElement extends InputElement {
 	}
 }
 
-interface FooterElement extends SBElement {
+export interface FooterElement extends SBElement {
 	attributes?: GlobalAttributes & {
-		role?: Pick<AriaRole, "contentinfo" | "group" | "presentation" | "none">
+		role?: "contentinfo" | "group" | "presentation" | "none"
 	}
 	children?: Array<
 		| TextNode
@@ -630,7 +643,7 @@ interface FooterElement extends SBElement {
 	readonly tagName: "FOOTER"
 }
 
-interface FormElement extends SBElement {
+export interface FormElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		"accept-charset": string
 		"action": string
@@ -650,71 +663,71 @@ interface FormElement extends SBElement {
 			| "opener"
 			| "prev"
 			| "search"
-		"role"?: Pick<AriaRole, "form" | "search" | "none" | "presentation">
+		"role"?: "form" | "search" | "none" | "presentation"
 		"target"?: "_blank" | "_parent" | "_self" | "_top" | "_unfencedTop"
 	}
 	children?: Array<TextNode | Exclude<FlowContent, { tagName: "FORM" }>>
 	readonly tagName: "FORM"
 }
 
-interface Heading1Element extends SBElement {
+export interface Heading1Element extends SBElement {
 	attributes?: GlobalAttributes & {
-		role?: Pick<AriaRole, "heading" | "tab" | "presentation" | "none">
+		role?: "heading" | "tab" | "presentation" | "none"
 	}
 	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "H1"
 }
 
-interface Heading2Element extends SBElement {
+export interface Heading2Element extends SBElement {
 	attributes?: GlobalAttributes & {
-		role?: Pick<AriaRole, "heading" | "tab" | "presentation" | "none">
+		role?: "heading" | "tab" | "presentation" | "none"
 	}
 	children?: Array<TextNode | PhrasingContent>
 	children?: Array<TextNode>
 	readonly tagName: "H2"
 }
 
-interface Heading3Element extends SBElement {
+export interface Heading3Element extends SBElement {
 	attributes?: GlobalAttributes & {
-		role?: Pick<AriaRole, "heading" | "tab" | "presentation" | "none">
+		role?: "heading" | "tab" | "presentation" | "none"
 	}
 	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "H3"
 }
 
-interface Heading4Element extends SBElement {
+export interface Heading4Element extends SBElement {
 	attributes?: GlobalAttributes & {
-		role?: Pick<AriaRole, "heading" | "tab" | "presentation" | "none">
+		role?: "heading" | "tab" | "presentation" | "none"
 	}
 	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "H4"
 }
 
-interface Heading5Element extends SBElement {
+export interface Heading5Element extends SBElement {
 	attributes?: GlobalAttributes & {
-		role?: Pick<AriaRole, "heading" | "tab" | "presentation" | "none">
+		role?: "heading" | "tab" | "presentation" | "none"
 	}
 	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "H5"
 }
 
-interface Heading6Element extends SBElement {
+export interface Heading6Element extends SBElement {
 	attributes?: GlobalAttributes & {
-		role?: Pick<AriaRole, "heading" | "tab" | "presentation" | "none">
+		role?: "heading" | "tab" | "presentation" | "none"
 	}
 	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "H6"
 }
 
-interface HeadElement extends SBElement {
+export interface HeadElement extends SBElement {
 	attributes?: GlobalAttributes
 	children?: Array<TextNode | MetadataContent>
 	readonly tagName: "HEAD"
 }
 
-interface HeaderElement extends SBElement {
+export interface HeaderElement extends SBElement {
 	attributes?: GlobalAttributes & {
-		role?: Pick<AriaRole, "banner" | "group" | "presentation" | "none">
+		role?: "banner" | "group" | "presentation" | "none"
 	}
 	children?: Array<
 		| TextNode
@@ -723,7 +736,7 @@ interface HeaderElement extends SBElement {
 	readonly tagName: "HEADER"
 }
 
-interface HeadingGroupElement extends SBElement {
+export interface HeadingGroupElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -740,27 +753,25 @@ interface HeadingGroupElement extends SBElement {
 	readonly tagName: "HGROUP"
 }
 
-interface HiddenInputElement extends InputElement {
-	attributes?:
-		| (InputElement["attributes"] & {
-				autocapitalize?: Autocapitalize
-				autocomplete?: Autocomplete
-				autofocus?: never
-				dirname?: string
-				readonly type: "hidden"
-				value: string
-		  } & { name: "_charset_"; value: never })
-		| { name: string; value: string }
+export interface HiddenInputElement extends InputElement {
+	attributes?: InputElement["attributes"] & {
+		autocapitalize?: Autocapitalize
+		autocomplete?: Autocomplete
+		autofocus?: never
+		dirname?: string
+		readonly type: "hidden"
+		value: string
+	} & ({ name: "_charset_"; value: never } | { name: string; value: string })
 }
 
-interface HorizontalRuleElement extends SBElement {
+export interface HorizontalRuleElement extends SBElement {
 	attributes?: GlobalAttributes & {
-		role?: Pick<AriaRole, "separator" | "presentation" | "none">
+		role?: "separator" | "presentation" | "none"
 	}
 	readonly tagName: "HR"
 }
 
-interface HtmlElement extends SBElement {
+export interface HtmlElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		xmlns?: string
 	}
@@ -768,23 +779,20 @@ interface HtmlElement extends SBElement {
 	readonly tagName: "HTML"
 }
 
-// interface ItalicsElement extends SBElement {
+// export interface ItalicsElement extends SBElement {
 // 	attributes?: GlobalAttributes
 // 	children?: Array<TextNode>
 // 	readonly tagName: "I"
 // }
 
-interface IframeElement extends SBElement {
+export interface IframeElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		allow?: string
 		height?: number | string
 		loading?: "eager" | "lazy"
 		name?: string
 		referrerpolicy?: ReferrerPolicy
-		role?: Pick<
-			AriaRole,
-			"application" | "document" | "img" | "none" | "presentation"
-		>
+		role?: "application" | "document" | "img" | "none" | "presentation"
 		sandbox?:
 			| "allow-downloads"
 			| "allow-downloads-without-user-activation"
@@ -808,7 +816,7 @@ interface IframeElement extends SBElement {
 	readonly tagName: "IFRAME"
 }
 
-interface ImageElement extends SBElement {
+export interface ImageElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		alt: string
 		crossorigin?: CrossOrigin
@@ -819,8 +827,7 @@ interface ImageElement extends SBElement {
 		ismap?: boolean
 		loading?: "eager" | "lazy"
 		referrerpolicy?: ReferrerPolicy
-		role?: Pick<
-			AriaRole,
+		role?:
 			| "button"
 			| "checkbox"
 			| "link"
@@ -837,7 +844,6 @@ interface ImageElement extends SBElement {
 			| "switch"
 			| "tab"
 			| "treeitem"
-		>
 		sizes?: string
 		src: string
 		srcset?: string
@@ -848,7 +854,7 @@ interface ImageElement extends SBElement {
 	readonly tagName: "IMG"
 }
 
-interface ImageInputElement extends InputElement {
+export interface ImageInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		alt: string
 		autocapitalize?: Autocapitalize
@@ -867,7 +873,7 @@ interface ImageInputElement extends InputElement {
 	}
 }
 
-type InputElementTypes =
+export type InputElementTypes =
 	| "button"
 	| "checkbox"
 	| "color"
@@ -891,7 +897,7 @@ type InputElementTypes =
 	| "url"
 	| "week"
 
-interface InputElement extends SBElement {
+export interface InputElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		autofocus?: boolean
 		disabled?: boolean
@@ -903,13 +909,13 @@ interface InputElement extends SBElement {
 	readonly tagName: "INPUT"
 }
 
-interface InsertElement extends SBElement {
+export interface InsertElement extends SBElement {
 	attributes?: GlobalAttributes & ModAttributes
 	children?: Array<TextNode | FlowContent>
 	readonly tagName: "INS"
 }
 
-interface KeyboardElement extends SBElement {
+export interface KeyboardElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -917,7 +923,7 @@ interface KeyboardElement extends SBElement {
 	readonly tagName: "KBD"
 }
 
-interface LabelElement extends SBElement {
+export interface LabelElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		for: string
 	}
@@ -925,16 +931,15 @@ interface LabelElement extends SBElement {
 	readonly tagName: "LABEL"
 }
 
-interface LegendElement extends SBElement {
+export interface LegendElement extends SBElement {
 	attributes?: HTMLLegendElement
 	children?: Array<TextNode | PhrasingContent | HeadingElements>
 	readonly tagName: "LEGEND"
 }
 
-interface ListItemElement extends SBElement {
+export interface ListItemElement extends SBElement {
 	attributes?: GlobalAttributes & {
-		role?: Pick<
-			AriaRole,
+		role?:
 			| "menuitem"
 			| "menuitemcheckbox"
 			| "menuitemradio"
@@ -945,14 +950,13 @@ interface ListItemElement extends SBElement {
 			| "separator"
 			| "tab"
 			| "treeitem"
-		>
 		value?: number | string
 	}
 	children?: Array<TextNode | FlowContent>
 	readonly tagName: "LI"
 }
 
-interface LinkElement extends SBElement {
+export interface LinkElement extends SBElement {
 	attributes?:
 		| (GlobalAttributes & {
 				crossorigin?: CrossOrigin
@@ -1006,14 +1010,14 @@ interface LinkElement extends SBElement {
 	readonly tagName: "LINK"
 }
 
-interface MainElement extends SBElement {
+export interface MainElement extends SBElement {
 	attributes?: GlobalAttributes
 	children?: Array<TextNode | FlowContent>
 	readonly tagName: "MAIN"
 }
 
 // transparent content
-interface MapElement extends SBElement {
+export interface MapElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		name: string
 	}
@@ -1021,7 +1025,7 @@ interface MapElement extends SBElement {
 	readonly tagName: "MAP"
 }
 
-interface MarkElement extends SBElement {
+export interface MarkElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -1029,16 +1033,15 @@ interface MarkElement extends SBElement {
 	readonly tagName: "MARK"
 }
 
-// interface MediaElement extends SBElement {
+// export interface MediaElement extends SBElement {
 // 	attributes?: HTMLMediaElement
 // 	children?: Array<TextNode>
 // 	readonly tagName: "MEDIA"
 // }
 
-interface MenuElement extends SBElement {
+export interface MenuElement extends SBElement {
 	attributes?: GlobalAttributes & {
-		role?: Pick<
-			AriaRole,
+		role?:
 			| "directory"
 			| "group"
 			| "listbox"
@@ -1050,13 +1053,12 @@ interface MenuElement extends SBElement {
 			| "tablist"
 			| "toolbar"
 			| "tree"
-		>
 	}
 	children?: Array<ListItemElement | ScriptElement | TemplateElement>
 	readonly tagName: "MENU"
 }
 
-interface MetaElement extends SBElement {
+export interface MetaElement extends SBElement {
 	attributes?:
 		| (GlobalAttributes & {
 				charset: "utf-8"
@@ -1066,15 +1068,15 @@ interface MetaElement extends SBElement {
 				"content": string
 		  }
 		| {
-				name: Pick<MetaName, "color-scheme">
+				name: "color-scheme"
 				content: ColorScheme
 		  }
 		| {
-				name: Pick<MetaName, "referrer">
+				name: "referrer"
 				content: ReferrerPolicy
 		  }
 		| {
-				name: Pick<MetaName, "robots">
+				name: "robots"
 				content: RobotsContent
 		  }
 		| {
@@ -1084,7 +1086,7 @@ interface MetaElement extends SBElement {
 	readonly tagName: "META"
 }
 
-interface MeterElement extends SBElement {
+export interface MeterElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		form?: string
 		high?: number | string
@@ -1097,7 +1099,7 @@ interface MeterElement extends SBElement {
 	readonly tagName: "METER"
 }
 
-interface MonthInputElement extends InputElement {
+export interface MonthInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		autocapitalize?: Autocapitalize
 		autocomplete?: Autocomplete
@@ -1112,13 +1114,13 @@ interface MonthInputElement extends InputElement {
 	}
 }
 
-interface NavigationElement extends SBElement {
+export interface NavigationElement extends SBElement {
 	attributes?: GlobalAttributes
 	children?: Array<TextNode | FlowContent>
 	readonly tagName: "NAV"
 }
 
-interface NoscriptElement extends SBElement {
+export interface NoscriptElement extends SBElement {
 	attributes?: GlobalAttributes
 	children?: Array<
 		| TextNode
@@ -1130,7 +1132,7 @@ interface NoscriptElement extends SBElement {
 	readonly tagName: "NOSCRIPT"
 }
 
-interface NumberInputElement extends InputElement {
+export interface NumberInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		autocapitalize?: Autocapitalize
 		autocomplete?: Autocomplete
@@ -1148,13 +1150,13 @@ interface NumberInputElement extends InputElement {
 
 // transparent content
 // TODO: do we need this?
-interface ObjectElement extends SBElement {
+export interface ObjectElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		data: string
 		form?: string
 		height?: number | string
 		name?: string
-		role?: Pick<AriaRole, "application" | "document" | "img">
+		role?: "application" | "document" | "img"
 		type: string
 		width?: number | string
 	}
@@ -1162,11 +1164,10 @@ interface ObjectElement extends SBElement {
 	readonly tagName: "OBJECT"
 }
 
-interface OrderedListElement extends SBElement {
+export interface OrderedListElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		reversed?: boolean
-		role?: Pick<
-			AriaRole,
+		role?:
 			| "directory"
 			| "group"
 			| "listbox"
@@ -1178,7 +1179,6 @@ interface OrderedListElement extends SBElement {
 			| "tablist"
 			| "toolbar"
 			| "tree"
-		>
 		start?: number | string
 		type?: "a" | "A" | "i" | "I" | "1" | 1
 	}
@@ -1186,7 +1186,7 @@ interface OrderedListElement extends SBElement {
 	readonly tagName: "OL"
 }
 
-interface OptionGroupElement extends SBElement {
+export interface OptionGroupElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		disabled?: boolean
 		label: string
@@ -1195,7 +1195,7 @@ interface OptionGroupElement extends SBElement {
 	readonly tagName: "OPTGROUP"
 }
 
-interface OptionElement extends SBElement {
+export interface OptionElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		disabled?: boolean
 		label?: string
@@ -1206,13 +1206,13 @@ interface OptionElement extends SBElement {
 	readonly tagName: "OPTION"
 }
 
-// interface OptionsCollection extends SBElement {
+// export interface OptionsCollection extends SBElement {
 // 	attributes?: HTMLOptionsCollection
 // 	children?: Array<TextNode>
 // 	readonly tagName: ""
 // }
 
-interface OutputElement extends SBElement {
+export interface OutputElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		for?: string
 		form?: string
@@ -1223,7 +1223,7 @@ interface OutputElement extends SBElement {
 	readonly tagName: "OUTPUT"
 }
 
-interface ParagraphElement extends SBElement {
+export interface ParagraphElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -1231,7 +1231,7 @@ interface ParagraphElement extends SBElement {
 	readonly tagName: "P"
 }
 
-interface PasswordInputElement extends InputElement {
+export interface PasswordInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		autocomplete?: Autocomplete
 		maxlength?: number | string
@@ -1247,28 +1247,28 @@ interface PasswordInputElement extends InputElement {
 	}
 }
 
-interface PictureElement extends SBElement {
+export interface PictureElement extends SBElement {
 	attributes?: GlobalAttributes
 	children?: [Array<SourceElement>, ImageElement]
 	readonly tagName: "PICTURE"
 }
 
-interface PreformattedTextElement extends SBElement {
+export interface PreformattedTextElement extends SBElement {
 	attributes?: GlobalAttributes
 	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "PRE"
 }
 
-interface ProgressElement extends SBElement {
+export interface ProgressElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		max?: number | string
 		value?: number | string
 	}
-	children?: Array<TextNode | Exclued<PhrasingContent, { tagName: "PROGRESS" }>>
+	children?: Array<TextNode | Exclude<PhrasingContent, { tagName: "PROGRESS" }>>
 	readonly tagName: "PROGRESS"
 }
 
-interface QuoteElement extends SBElement {
+export interface QuoteElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		cite?: string
 		role?: AriaRole
@@ -1277,7 +1277,7 @@ interface QuoteElement extends SBElement {
 	readonly tagName: "Q"
 }
 
-interface RadioInputElement extends InputElement {
+export interface RadioInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		autocapitalize?: Autocapitalize
 		checked?: boolean
@@ -1287,7 +1287,7 @@ interface RadioInputElement extends InputElement {
 	}
 }
 
-interface RangeInputElement extends InputElement {
+export interface RangeInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		autocapitalize?: Autocapitalize
 		autocomplete?: Autocomplete
@@ -1300,7 +1300,7 @@ interface RangeInputElement extends InputElement {
 	}
 }
 
-interface ResetInputElement extends InputElement {
+export interface ResetInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		autocapitalize?: Autocapitalize
 		readonly type: "reset"
@@ -1308,7 +1308,7 @@ interface ResetInputElement extends InputElement {
 	}
 }
 
-interface RubyFallbackParenthesisElement extends SBElement {
+export interface RubyFallbackParenthesisElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -1316,7 +1316,7 @@ interface RubyFallbackParenthesisElement extends SBElement {
 	readonly tagName: "RP"
 }
 
-interface RubyTextElement extends SBElement {
+export interface RubyTextElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -1324,7 +1324,7 @@ interface RubyTextElement extends SBElement {
 	readonly tagName: "RT"
 }
 
-interface RubyElement extends SBElement {
+export interface RubyElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -1332,7 +1332,7 @@ interface RubyElement extends SBElement {
 	readonly tagName: "RUBY"
 }
 
-interface SampleElement extends SBElement {
+export interface SampleElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -1340,7 +1340,7 @@ interface SampleElement extends SBElement {
 	readonly tagName: "SAMP"
 }
 
-interface ScriptElement extends SBElement {
+export interface ScriptElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		async?: boolean
 		crossorigin?: CrossOrigin
@@ -1357,18 +1357,15 @@ interface ScriptElement extends SBElement {
 	readonly tagName: "SCRIPT"
 }
 
-interface SearchElement extends SBElement {
+export interface SearchElement extends SBElement {
 	attributes?: GlobalAttributes & {
-		role?: Pick<
-			AriaRole,
-			"form" | "group" | "none" | "presentation" | "region" | "search"
-		>
+		role?: "form" | "group" | "none" | "presentation" | "region" | "search"
 	}
 	children?: Array<TextNode | FlowContent>
 	readonly tagName: "SEARCH"
 }
 
-interface SearchInputElement extends InputElement {
+export interface SearchInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		autocapitalize?: Autocapitalize
 		autocomplete?: Autocomplete
@@ -1383,13 +1380,12 @@ interface SearchInputElement extends InputElement {
 		value?: string
 	}
 	children?: Array<TextNode>
-	readonly tagName: "SEARCH"
+	readonly tagName: "INPUT"
 }
 
-interface SectionElement extends SBElement {
+export interface SectionElement extends SBElement {
 	attributes?: GlobalAttributes & {
-		role?: Pick<
-			AriaRole,
+		role?:
 			| "alert"
 			| "alertdialog"
 			| "application"
@@ -1409,13 +1405,12 @@ interface SectionElement extends SBElement {
 			| "search"
 			| "status"
 			| "tabpanel"
-		>
 	}
 	children?: Array<TextNode | FlowContent>
 	readonly tagName: "SECTION"
 }
 
-interface SelectElement extends SBElement {
+export interface SelectElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		autocomplete?: Autocomplete
 		autofocus?: boolean
@@ -1423,7 +1418,7 @@ interface SelectElement extends SBElement {
 		form?: string
 		multiple?: boolean
 		required?: boolean
-		role?: Pick<AriaRole, "menu">
+		role?: "menu"
 		size?: number | string
 	}
 	children?: Array<OptionElement | OptionGroupElement | HorizontalRuleElement>
@@ -1431,7 +1426,7 @@ interface SelectElement extends SBElement {
 }
 
 // transparent content
-interface SlotElement extends SBElement {
+export interface SlotElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		name?: string
 	}
@@ -1439,7 +1434,7 @@ interface SlotElement extends SBElement {
 	readonly tagName: "SLOT"
 }
 
-interface SmallElement extends SBElement {
+export interface SmallElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -1447,7 +1442,7 @@ interface SmallElement extends SBElement {
 	readonly tagName: "SMALL"
 }
 
-interface SourceElement extends SBElement {
+export interface SourceElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		height?: number | string
 		media?: string
@@ -1459,7 +1454,7 @@ interface SourceElement extends SBElement {
 	readonly tagName: "SOURCE"
 }
 
-interface SpanElement extends SBElement {
+export interface SpanElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -1467,13 +1462,13 @@ interface SpanElement extends SBElement {
 	readonly tagName: "SPAN"
 }
 
-// interface StrikethroughElement extends SBElement {
+// export interface StrikethroughElement extends SBElement {
 // 	attributes?: GlobalAttributes
 // 	children?: Array<TextNode>
 // 	readonly tagName: "S"
 // }
 
-interface StrongEmphasisElement extends SBElement {
+export interface StrongEmphasisElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -1481,13 +1476,13 @@ interface StrongEmphasisElement extends SBElement {
 	readonly tagName: "STRONG"
 }
 
-interface StyleElement extends SBElement {
+export interface StyleElement extends SBElement {
 	attributes?: HTMLStyleElement
 	children?: Array<TextNode>
 	readonly tagName: "STYLE"
 }
 
-interface SubmitInputElement extends InputElement {
+export interface SubmitInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		autocapitalize?: Autocapitalize
 		formaction?: string
@@ -1500,7 +1495,7 @@ interface SubmitInputElement extends InputElement {
 	}
 }
 
-interface SubscriptElement extends SBElement {
+export interface SubscriptElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -1508,7 +1503,7 @@ interface SubscriptElement extends SBElement {
 	readonly tagName: "SUB"
 }
 
-interface SummaryElement extends SBElement {
+export interface SummaryElement extends SBElement {
 	attributes?: GlobalAttributes
 	children?:
 		| [HeadingElements, Array<TextNode | PhrasingContent>]
@@ -1516,7 +1511,7 @@ interface SummaryElement extends SBElement {
 	readonly tagName: "SUMMARY"
 }
 
-interface SuperscriptElement extends SBElement {
+export interface SuperscriptElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -1525,7 +1520,7 @@ interface SuperscriptElement extends SBElement {
 }
 
 // TODO: complex children
-interface TableElement extends SBElement {
+export interface TableElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -1541,7 +1536,7 @@ interface TableElement extends SBElement {
 	readonly tagName: "TABLE"
 }
 
-interface TableBodyElement extends SBElement {
+export interface TableBodyElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -1549,7 +1544,7 @@ interface TableBodyElement extends SBElement {
 	readonly tagName: "TBODY"
 }
 
-interface TableDataCellElement extends SBElement {
+export interface TableDataCellElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -1557,7 +1552,7 @@ interface TableDataCellElement extends SBElement {
 	readonly tagName: "TD"
 }
 
-interface TableFooterElement extends SBElement {
+export interface TableFooterElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -1566,7 +1561,7 @@ interface TableFooterElement extends SBElement {
 }
 
 // TODO: complicated children
-interface TableHeaderCellElement extends SBElement {
+export interface TableHeaderCellElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		abbr?: string
 		colspan?: number | string
@@ -1579,7 +1574,7 @@ interface TableHeaderCellElement extends SBElement {
 	readonly tagName: "TH"
 }
 
-interface TableHeadElement extends SBElement {
+export interface TableHeadElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -1587,7 +1582,7 @@ interface TableHeadElement extends SBElement {
 	readonly tagName: "THEAD"
 }
 
-interface TableRowElement extends SBElement {
+export interface TableRowElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -1595,7 +1590,7 @@ interface TableRowElement extends SBElement {
 	readonly tagName: "TR"
 }
 
-interface TemplateElement extends SBElement {
+export interface TemplateElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		shadowrootmode?: "closed" | "open"
 	}
@@ -1603,7 +1598,7 @@ interface TemplateElement extends SBElement {
 	readonly tagName: "TEMPLATE"
 }
 
-interface TelInputElement extends InputElement {
+export interface TelInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		autocapitalize?: Autocapitalize
 		autocomplete?: Autocomplete
@@ -1621,7 +1616,7 @@ interface TelInputElement extends InputElement {
 	}
 }
 
-interface TextareaElement extends SBElement {
+export interface TextareaElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		autocapitalize?: Autocapitalize
 		autocomplete?: Autocomplete
@@ -1643,7 +1638,7 @@ interface TextareaElement extends SBElement {
 	readonly tagName: "TEXTAREA"
 }
 
-interface TextInputElement extends InputElement {
+export interface TextInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		autocapitalize?: Autocapitalize
 		autocomplete?: Autocomplete
@@ -1661,7 +1656,7 @@ interface TextInputElement extends InputElement {
 	}
 }
 
-interface TimeElement extends SBElement {
+export interface TimeElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		datetime: string
 		role?: AriaRole
@@ -1670,7 +1665,7 @@ interface TimeElement extends SBElement {
 	readonly tagName: "TIME"
 }
 
-interface TimeInputElement extends InputElement {
+export interface TimeInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		autocapitalize?: Autocapitalize
 		autocomplete?: Autocomplete
@@ -1685,13 +1680,13 @@ interface TimeInputElement extends InputElement {
 	}
 }
 
-interface TitleElement extends SBElement {
+export interface TitleElement extends SBElement {
 	attributes?: GlobalAttributes
 	children?: Array<TextNode>
 	readonly tagName: "TITLE"
 }
 
-interface TrackElement extends SBElement {
+export interface TrackElement extends SBElement {
 	attributes?:
 		| (GlobalAttributes & {
 				default?: boolean
@@ -1709,16 +1704,15 @@ interface TrackElement extends SBElement {
 	readonly tagName: "TRACK"
 }
 
-// interface UnderlineElement extends SBElement {
+// export interface UnderlineElement extends SBElement {
 // 	attributes?: GlobalAttributes
 // 	children?: Array<TextNode>
 // 	readonly tagName: "U"
 // }
 
-interface UnorderedListElement extends SBElement {
+export interface UnorderedListElement extends SBElement {
 	attributes?: GlobalAttributes & {
-		role?: Pick<
-			AriaRole,
+		role?:
 			| "directory"
 			| "group"
 			| "listbox"
@@ -1730,13 +1724,12 @@ interface UnorderedListElement extends SBElement {
 			| "tablist"
 			| "toolbar"
 			| "tree"
-		>
 	}
 	children?: Array<ListItemElement | ScriptElement | TemplateElement>
 	readonly tagName: "UL"
 }
 
-interface UrlInputElement extends InputElement {
+export interface UrlInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		autocomplete?: Autocomplete
 		dirname?: string
@@ -1753,7 +1746,7 @@ interface UrlInputElement extends InputElement {
 	}
 }
 
-interface VariableElement extends SBElement {
+export interface VariableElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -1761,14 +1754,14 @@ interface VariableElement extends SBElement {
 	readonly tagName: "VAR"
 }
 
-// interface UnknownElement extends SBElement {
+// export interface UnknownElement extends SBElement {
 // 	attributes?: HTMLUnknownElement
 // 	children?: Array<TextNode>
 // 	readonly tagName: string
 // }
 
 // TODO: complex children
-interface VideoElement extends SBElement {
+export interface VideoElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		autoplay?: boolean
 		controls?: boolean
@@ -1782,7 +1775,7 @@ interface VideoElement extends SBElement {
 		playsinline?: boolean
 		poster?: string
 		preload?: "auto" | "metadata" | "none" | ""
-		role?: Pick<AriaRole, "application">
+		role?: "application"
 		src: string
 		width?: number | string
 	}
@@ -1790,7 +1783,7 @@ interface VideoElement extends SBElement {
 	readonly tagName: "VIDEO"
 }
 
-interface WeekInputElement extends InputElement {
+export interface WeekInputElement extends InputElement {
 	attributes?: InputElement["attributes"] & {
 		autocapitalize?: Autocapitalize
 		autocomplete?: Autocomplete
@@ -1805,7 +1798,7 @@ interface WeekInputElement extends InputElement {
 	}
 }
 
-interface WordBreakOpportunityElement extends SBElement {
+export interface WordBreakOpportunityElement extends SBElement {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
@@ -1896,25 +1889,24 @@ type FlowContentNoInteractive =
 	| TableElement
 	| TemplateElement
 	| TimeElement
-	| UnderlineElement
 	| UnorderedListElement
 	| VariableElement
 	| VideoElement
 	| WordBreakOpportunityElement
 
-type FlowIfMapDescendant = AreaElement
+export type FlowIfMapDescendant = AreaElement
 
-type FlowWhenItemprop = LinkElement | MetaElement
+export type FlowWhenItemprop = LinkElement | MetaElement
 
-type FlowContent = FlowContentNoInteractive | InteractiveContent
+export type FlowContent = FlowContentNoInteractive | InteractiveContent
 
-type SectioningContent =
+export type SectioningContent =
 	| ArticleElement
 	| AsideElement
 	| NavigationElement
 	| SectionElement
 
-type HeadingContent =
+export type HeadingContent =
 	| Heading1Element
 	| Heading2Element
 	| Heading3Element
@@ -1923,7 +1915,7 @@ type HeadingContent =
 	| Heading6Element
 	| HeadingGroupElement
 
-type PhrasingContent =
+export type PhrasingContent =
 	| AbbreviationElement
 	| AudioElement
 	| BidirectionalIsolateElement
@@ -1964,24 +1956,21 @@ type PhrasingContent =
 	| TemplateElement
 	| TextareaElement
 	| TimeElement
-	| UnderlineElement
 	| VariableElement
 	| VideoElement
 	| WordBreakOpportunityElement
 
-type EmbeddedContent =
+export type EmbeddedContent =
 	| AudioElement
 	| CanvasElement
 	| EmbedElement
 	| IframeElement
 	| ImageElement
-	// | MathElement
 	| ObjectElement
 	| PictureElement
-	// | SVGElement
 	| VideoElement
 
-type InteractiveContent =
+export type InteractiveContent =
 	| ButtonElement
 	| DetailsElement
 	| EmbedElement
@@ -1990,15 +1979,15 @@ type InteractiveContent =
 	| SelectElement
 	| TextareaElement
 
-type InteractiveWhenHref = AnchorElement
+export type InteractiveWhenHref = AnchorElement
 
-type InteractiveWhenControls = AudioElement | VideoElement
+export type InteractiveWhenControls = AudioElement | VideoElement
 
-type InteractiveWhenUsemap = ImageElement | ObjectElement
+export type InteractiveWhenUsemap = ImageElement | ObjectElement
 
-type InteractiveWhenType = InputElement
+export type InteractiveWhenType = InputElement
 
-type FormContent =
+export type FormContent =
 	| ButtonElement
 	| FieldsetElement
 	| InputElement
@@ -2010,7 +1999,7 @@ type FormContent =
 	| SelectElement
 	| TextareaElement
 
-type FormListedContent =
+export type FormListedContent =
 	| ButtonElement
 	| FieldsetElement
 	| InputElement
@@ -2019,7 +2008,7 @@ type FormListedContent =
 	| SelectElement
 	| TextareaElement
 
-type FormLabelableContent =
+export type FormLabelableContent =
 	| ButtonElement
 	| InputElement
 	| MeterElement
@@ -2028,17 +2017,21 @@ type FormLabelableContent =
 	| SelectElement
 	| TextareaElement
 
-type FormSubmittableContent =
+export type FormSubmittableContent =
 	| ButtonElement
 	| InputElement
 	| ObjectElement
 	| SelectElement
 	| TextareaElement
 
-type FormResettableContent =
+export type FormResettableContent =
 	| InputElement
 	| OutputElement
 	| SelectElement
 	| TextareaElement
 
-type Elem = FlowContent | PhrasingContent | HeadingContent | SectioningContent
+export type Elem =
+	| FlowContent
+	| PhrasingContent
+	| HeadingContent
+	| SectioningContent

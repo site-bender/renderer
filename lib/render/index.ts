@@ -1,3 +1,5 @@
+import type { Elem } from "../types/elements"
+
 type Validatable = HTMLInputElement & {
 	validate: () => void
 }
@@ -27,7 +29,7 @@ export default function render(config: Elem) {
 		}
 	}
 
-	children.forEach((child: string | Elem) =>
+	children.forEach(child =>
 		typeof child === "string"
 			? elem.appendChild(document.createTextNode(child))
 			: elem.appendChild(render(child as Elem)),

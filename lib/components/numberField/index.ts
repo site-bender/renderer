@@ -1,3 +1,6 @@
+import type { NumberField } from "../../types/components"
+import type { Elem } from "../../types/elements"
+
 import { u } from "@sitebender/fp"
 
 export default function numberField(config: NumberField): Elem {

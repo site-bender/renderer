@@ -1,3 +1,6 @@
+import type { EmailField } from "../../types/components"
+import type { Elem } from "../../types/elements"
+
 import { u } from "@sitebender/fp"
 
 export default function emailField(config: EmailField): Elem {

@@ -1,4 +1,8 @@
-interface ComponentBase {
+import type { TextNode } from "./shared"
+import type { Elem } from "./elements"
+import type { Operation } from "@sitebender/operations"
+
+export interface ComponentBase {
 	readonly component: string
 	children?: Array<Elem>
 	id?: string
@@ -6,13 +10,13 @@ interface ComponentBase {
 	stylesheets?: Array<string>
 }
 
-interface Accordion extends ComponentBase {
+export interface Accordion extends ComponentBase {
 	readonly component: "accordion"
 	open?: boolean
 	summary?: Array<TextNode | Elem>
 }
 
-interface EmailField extends ComponentBase {
+export interface EmailField extends ComponentBase {
 	readonly component: "email-field"
 	defaultValue?: string
 	label: string
@@ -20,7 +24,7 @@ interface EmailField extends ComponentBase {
 	validation?: Validation
 }
 
-interface NumberField extends ComponentBase {
+export interface NumberField extends ComponentBase {
 	readonly component: "number-field"
 	defaultValue?: string | number
 	label: string
@@ -28,7 +32,7 @@ interface NumberField extends ComponentBase {
 	validation?: Validation
 }
 
-interface HelpBox extends ComponentBase {
+export interface HelpBox extends ComponentBase {
 	readonly component: "help-box"
 	forIds?: string
 	form?: string
@@ -36,9 +40,9 @@ interface HelpBox extends ComponentBase {
 	value: string
 }
 
-type Component = Accordion | EmailField | HelpBox
+export type Component = Accordion | EmailField | HelpBox
 
-interface Validation {
+export interface Validation {
 	operation: Operation
 	validateOn: Array<string>
 }

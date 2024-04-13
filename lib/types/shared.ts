@@ -1,48 +1,53 @@
-interface SBElement {
+import type { Operation } from "@sitebender/operations/lib/types"
+import type { Autocapitalize } from "./unions"
+import type { Elem } from "./elements"
+
+export interface SBElement {
 	children?: Array<TextNode | Elem>
 	dataset?: {
 		[key: string]: string | number
 	}
 	display?: Operation
 	publishes?: {
-		[key: HTMLEvent]: {}
+		[key in HTMLEvent]: {}
 	}
-	scripts: Array<string>
-	stylesheets: Array<string>
+	scripts?: Array<string>
+	stylesheets?: Array<string>
 	subscribesTo?: {
 		[key: string]: {}
 	}
+	readonly tagName: string
 	validation?: Operation
 }
 
-type ElementEvent =
+export type ElementEvent =
 	| "contentvisibilityautostatechange"
 	| "scroll"
 	| "scrollend"
 	| "securitypolicyviolation"
 	| "wheel"
 
-type AnimationEvent =
+export type AnimationEvent =
 	| "animationcancel"
 	| "animationend"
 	| "animationiteration"
 	| "animationstart"
 
-type CanvasEvent =
+export type CanvasEvent =
 	| "webglcontextcreationerror"
 	| "webglcontextlost"
 	| "webglcontextrestored"
 
-type ClipboardEvent = "copy" | "cut" | "paste"
+export type ClipboardEvent = "copy" | "cut" | "paste"
 
-type CompositionEvent =
+export type CompositionEvent =
 	| "compositionend"
 	| "compositionstart"
 	| "compositionupdate"
 
-type DialogEvent = "close"
+export type DialogEvent = "close"
 
-type DragAndDropEvent =
+export type DragAndDropEvent =
 	| "drag"
 	| "dragend"
 	| "dragenter"
@@ -51,17 +56,17 @@ type DragAndDropEvent =
 	| "dragstart"
 	| "drop"
 
-type FocusEvent = "blur" | "focus" | "focusin" | "focusout"
+export type FocusEvent = "blur" | "focus" | "focusin" | "focusout"
 
-type FormEvent = "formdata" | "reset" | "submit"
+export type FormEvent = "formdata" | "reset" | "submit"
 
-type FullscreenEvent = "fullscreenchange" | "fullscreenerror"
+export type FullscreenEvent = "fullscreenchange" | "fullscreenerror"
 
-type HTMLEvent = "cancel" | "change" | "error" | "load"
+export type HTMLEvent = "cancel" | "change" | "error" | "load"
 
-type KeyboardEvent = "keydown" | "keyup"
+export type KeyboardEvent = "keydown" | "keyup"
 
-type MediaEvent =
+export type MediaEvent =
 	| "abort"
 	| "canplay"
 	| "canplaythrough"
@@ -86,7 +91,7 @@ type MediaEvent =
 	| "volumechange"
 	| "waiting"
 
-type MouseEvent =
+export type MouseEvent =
 	| "auxclick"
 	| "click"
 	| "contextmenu"
@@ -99,7 +104,7 @@ type MouseEvent =
 	| "mouseover"
 	| "mouseup"
 
-type PointerEvent =
+export type PointerEvent =
 	| "gotpointercapture"
 	| "lostpointercapture"
 	| "pointercancel"
@@ -111,17 +116,17 @@ type PointerEvent =
 	| "pointerover"
 	| "pointerup"
 
-type PopoverEvent = "beforetoggle" | "toggle"
+export type PopoverEvent = "beforetoggle" | "toggle"
 
-type TouchEvent = "touchcancel" | "touchend" | "touchmove" | "touchstart"
+export type TouchEvent = "touchcancel" | "touchend" | "touchmove" | "touchstart"
 
-type TransitionEvent =
+export type TransitionEvent =
 	| "transitioncancel"
 	| "transitionend"
 	| "transitionrun"
 	| "transitionstart"
 
-type WindowEvent =
+export type WindowEvent =
 	| "onafterprint"
 	| "onbeforeprint"
 	| "onbeforeunload"
@@ -141,7 +146,7 @@ type WindowEvent =
 	| "onunhandledrejection"
 	| "onunload"
 
-type GlobalAttributes = {
+export type GlobalAttributes = {
 	accesskey?: string
 	autocapitalize?: Autocapitalize
 	class?: string
@@ -183,4 +188,4 @@ type GlobalAttributes = {
 	translate?: "" | "no" | "yes"
 }
 
-type TextNode = string
+export type TextNode = string
