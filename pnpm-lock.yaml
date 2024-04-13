@@ -6,8 +6,8 @@ settings:
 
 devDependencies:
   '@sitebender/fp':
-    specifier: ^0.0.12
-    version: 0.0.12
+    specifier: ^0.0.13
+    version: 0.0.13
   '@sitebender/operations':
     specifier: ^0.0.26
     version: 0.0.26
@@ -565,8 +565,8 @@ packages:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
     dev: true
 
-  /@sitebender/fp@0.0.12:
-    resolution: {integrity: sha512-ljl0M/Mvf6NCExVQ36MFQVFz62fQWMqeqQCx0Mw3lICaRgRXh7D7nYTTyyUMI//dY5emi7895bLvIeGxbbVL/Q==}
+  /@sitebender/fp@0.0.13:
+    resolution: {integrity: sha512-wEu4gpt47paMFjmAJ+gXEjSKl29ZPdMDZDAnJj9AuKww77ctUfwsoa3JIkvHnfUGIKc7HqvMRGZjsqepBJA0eA==}
     dev: true
 
   /@sitebender/operations@0.0.26:
