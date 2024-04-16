@@ -1,6 +1,6 @@
 import type { TextNode } from "./shared"
 import type { Elem } from "./elements"
-import type { Operation } from "@sitebender/operations"
+import type { Operation } from "@sitebender/operations/lib/types"
 
 export interface ComponentBase {
 	readonly component: string
@@ -10,10 +10,15 @@ export interface ComponentBase {
 	stylesheets?: Array<string>
 }
 
-export interface Accordion extends ComponentBase {
-	readonly component: "accordion"
+export interface AccordionItem extends ComponentBase {
+	readonly component: "accordionItem"
 	open?: boolean
 	summary?: Array<TextNode | Elem>
+}
+
+export interface Accordion extends ComponentBase {
+	readonly component: "accordion"
+	title?: Array<TextNode | Elem>
 }
 
 export interface EmailField extends ComponentBase {

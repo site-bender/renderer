@@ -1,44 +1,22 @@
-import type { Accordion } from "../../types/components"
-import type { Elem } from "../../types/elements"
-
 import { u } from "@sitebender/fp"
 
-export default function accordion(config: Accordion): Elem {
+export default function accordion(config) {
 	const {
 		children = [],
 		id = u.generateShortId(),
-		open,
 		scripts,
 		stylesheets,
-		summary,
+		title,
 	} = config
 
 	return {
 		attributes: {
-			class: "accordion",
+			class: "accordionGroup",
 			id,
-			...(open ? { open } : {}),
 		},
-		children: [
-			{
-				attributes: {
-					class: "summary",
-					id: `${id}-summary`,
-				},
-				children: summary,
-				tagName: "SUMMARY",
-			},
-			{
-				attributes: {
-					class: "content",
-					id: `${id}-content`,
-				},
-				children: children as Array<Elem>,
-				tagName: "DIV",
-			},
-		],
+		children: [...(title ? title : []), ...children],
 		scripts,
 		stylesheets,
-		tagName: "DETAILS",
+		tagName: title ? "SECTION" : "DIV",
 	}
 }

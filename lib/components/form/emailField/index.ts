@@ -1,5 +1,5 @@
-import type { EmailField } from "../../types/components"
-import type { Elem } from "../../types/elements"
+import type { EmailField } from "../../../types/components"
+import type { Elem } from "../../../types/elements"
 
 import { u } from "@sitebender/fp"
 

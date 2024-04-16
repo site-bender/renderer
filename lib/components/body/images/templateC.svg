@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">
+	<style>
+		svg {
+			border: 1px solid lightgray;
+		}
+		text {
+			font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+			font-weight: 200;
+			font-size: 32px;
+			text-anchor: middle;
+			alignment-baseline: middle;
+		}
+	</style>
+	<rect x="0" y="0" width="640" height="60" fill="seagreen" />
+	<text x="320" y="30" fill="white">header</text>
+	<rect x="0" y="60" width="640" height="60" fill="rebeccapurple" />
+	<text x="320" y="90" fill="white">navigation</text>
+	<rect x="0" y="120" width="640" height="240" fill="white" />
+	<text x="320" y="210" fill="black">content</text>
+	<rect x="0" y="300" width="640" height="60" fill="steelblue" />
+	<text x="320" y="330" fill="white">footer</text>
+</svg>

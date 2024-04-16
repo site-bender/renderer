@@ -1,5 +1,5 @@
-import type { NumberField } from "../../types/components"
-import type { Elem } from "../../types/elements"
+import type { NumberField } from "../../../types/components"
+import type { Elem } from "../../../types/elements"
 
 import { u } from "@sitebender/fp"
 
