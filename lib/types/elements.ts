@@ -1,18 +1,21 @@
 import type { AriaRole } from "./unions"
 import type {
 	DragAndDropEvent,
+	ElementBase,
 	FocusEvent,
 	GlobalAttributes,
 	HTMLEvent,
+	InputElementTypes,
 	KeyboardEvent,
 	MouseEvent,
 	PointerEvent,
 	PopoverEvent,
-	SBElement,
 	TextNode,
 	TouchEvent,
 	TransitionEvent,
 } from "./shared"
+import type { MathMLElement } from "./math"
+import type { SvgMLElement } from "./svg"
 
 export type Autocapitalize =
 	| "characters"
@@ -64,6 +67,10 @@ export type ModAttributes = {
 	role?: AriaRole
 }
 
+export type RenderOptions = {
+	level: number
+}
+
 export type RobotsContent =
 	| "all"
 	| "follow"
@@ -76,7 +83,111 @@ export type RobotsContent =
 	| "none"
 	| "nosnippet"
 
-export interface AnchorElement extends SBElement {
+export interface AbbreviationElement
+	extends ElementBase<TextNode | PhrasingContent> {
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+		title: string
+	}
+	readonly tagName: "ABBR"
+}
+
+export interface AddressElement
+	extends ElementBase<
+		| TextNode
+		| AbbreviationElement
+		| AnchorElement
+		| ArticleElement
+		| AsideElement
+		| AudioElement
+		| BidirectionalIsolateElement
+		| BidirectionalTextOverrideElement
+		| BlockquoteElement
+		| BreakElement
+		| BringAttentionElement
+		| ButtonElement
+		| CanvasElement
+		| CiteElement
+		| CodeElement
+		| DataElement
+		| DatalistElement
+		| DefinitionElement
+		| DeletionElement
+		| DescriptionListElement
+		| DetailsElement
+		| DialogElement
+		| DivisionElement
+		| EmbedElement
+		| EmphasisElement
+		| FieldsetElement
+		| FigureElement
+		| FlowIfMapDescendant
+		| FlowIfItempropAttribute
+		| FooterElement
+		| FormElement
+		| HeaderElement
+		| Heading1Element
+		| Heading2Element
+		| Heading3Element
+		| Heading4Element
+		| Heading5Element
+		| Heading6Element
+		| HeadingElement
+		| HeadingGroupElement
+		| HorizontalRuleElement
+		| IdiomaticTextElement
+		| IframeElement
+		| ImageElement
+		| InputElement
+		| InsertionElement
+		| KeyboardElement
+		| LabelElement
+		| MainElement
+		| MarkElement
+		| MathElement
+		| MenuElement
+		| MeterElement
+		| NavigationElement
+		| NoscriptElement
+		| ObjectElement
+		| OrderedListElement
+		| OutputElement
+		| ParagraphElement
+		| PictureElement
+		| PreformattedTextElement
+		| ProgressElement
+		| QuoteElement
+		| RubyElement
+		| SampleElement
+		| ScriptElement
+		| SearchElement
+		| SectionElement
+		| SelectElement
+		| SlotElement
+		| SmallElement
+		| SpanElement
+		| StrikethroughElement
+		| StrongEmphasisElement
+		| SubscriptElement
+		| SuperscriptElement
+		| SvgElement
+		| TableElement
+		| TemplateElement
+		| TextareaElement
+		| TimeElement
+		| UnarticulatedAnnotationElement
+		| UnorderedListElement
+		| VariableElement
+		| VideoElement
+		| WordBreakOpportunityElement
+	> {
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	readonly tagName: "ADDRESS"
+}
+
+export interface AnchorElement extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes & {
 		download?: string
 		href: string
@@ -114,7 +225,6 @@ export interface AnchorElement extends SBElement {
 		target?: "_blank" | "_parent" | "_self" | "_top" | "_unfencedTop"
 		type?: string
 	}
-	children?: Array<TextNode | FlowContentNoInteractive>
 	publishes?: {
 		[key in
 			| DragAndDropEvent
@@ -130,43 +240,7 @@ export interface AnchorElement extends SBElement {
 	readonly tagName: "A"
 }
 
-export interface AbbreviationElement extends SBElement {
-	attributes?: GlobalAttributes & {
-		role?: AriaRole
-		title: string
-	}
-	children?: Array<TextNode | PhrasingContent>
-	readonly tagName: "ABBR"
-}
-
-export interface AddressElement extends SBElement {
-	attributes?: GlobalAttributes & {
-		role?: AriaRole
-	}
-	children?: Array<
-		| TextNode
-		| Exclude<
-				FlowContent,
-				| { tagName: "ADDRESS" }
-				| { tagName: "ARTICLE" }
-				| { tagName: "ASIDE" }
-				| { tagName: "FOOTER" }
-				| { tagName: "HEADER" }
-				| { tagName: "H1" }
-				| { tagName: "H2" }
-				| { tagName: "H3" }
-				| { tagName: "H4" }
-				| { tagName: "H5" }
-				| { tagName: "H6" }
-				| { tagName: "HGROUP" }
-				| { tagName: "NAV" }
-				| { tagName: "SECTION" }
-		  >
-	>
-	readonly tagName: "ADDRESS"
-}
-
-export interface AreaElement extends SBElement {
+export interface AreaElement extends ElementBase<never> {
 	attributes?:
 		| (GlobalAttributes & {
 				alt: string
@@ -200,7 +274,7 @@ export interface AreaElement extends SBElement {
 	readonly tagName: "AREA"
 }
 
-export interface ArticleElement extends SBElement {
+export interface ArticleElement extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes & {
 		role?:
 			| "application"
@@ -211,19 +285,18 @@ export interface ArticleElement extends SBElement {
 			| "presentation"
 			| "region"
 	}
-	children?: Array<TextNode | FlowContent>
 	readonly tagName: "ARTICLE"
 }
 
-export interface AsideElement extends SBElement {
+export interface AsideElement extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes & {
 		role?: "feed" | "none" | "note" | "presentation" | "region" | "search"
 	}
-	children?: Array<TextNode | FlowContent>
 	readonly tagName: "ASIDE"
 }
 
-export interface AudioElement extends SBElement {
+export interface AudioElement
+	extends ElementBase<TrackElement | SourceElement | FlowContentAll> {
 	attributes?:
 		| (GlobalAttributes & {
 				autoplay?: boolean
@@ -242,17 +315,10 @@ export interface AudioElement extends SBElement {
 				src: string
 		  })
 		| undefined
-	children?: Array<TrackElement | SourceElement | FlowContent>
 	readonly tagName: "AUDIO"
 }
 
-// export interface BoldElement extends SBElement {
-// 	attributes?: GlobalAttributes
-// 	children?: Array<TextNode>
-// 	readonly tagName: "B"
-// }
-
-export interface BaseElement extends SBElement {
+export interface BaseElement extends ElementBase<never> {
 	attributes?:
 		| (GlobalAttributes & {
 				href: string
@@ -262,43 +328,102 @@ export interface BaseElement extends SBElement {
 	readonly tagName: "BASE"
 }
 
-export interface BidirectionalIsolateElement extends SBElement {
+export interface BidirectionalIsolateElement
+	extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "BDI"
 }
 
-export interface BidirectionalTextOverrideElement extends SBElement {
+export interface BidirectionalTextOverrideElement
+	extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "BDO"
 }
 
-export interface BlockquoteElement extends SBElement {
+export interface BlockquoteElement
+	extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes & {
 		cite?: string
 		role?: AriaRole
 	}
-	children?: Array<TextNode | FlowContent>
 	readonly tagName: "BLOCKQUOTE"
 }
 
-export interface BodyElement extends SBElement {
+export interface BodyElement extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes
-	children?: Array<TextNode | FlowContent>
+	children?: Array<TextNode | FlowContentAll>
 	readonly tagName: "BODY"
 }
 
-export interface BreakElement extends SBElement {
+export interface BreakElement extends ElementBase<never> {
 	attributes?: GlobalAttributes
 	readonly tagName: "BR"
 }
 
-export interface ButtonElement extends SBElement {
+export interface BringAttentionElement
+	extends ElementBase<TextNode | PhrasingContent> {
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	readonly tagName: "B"
+}
+
+export interface ButtonElement
+	extends ElementBase<
+		| TextNode
+		| AbbreviationElement
+		| AudioElement
+		| BidirectionalIsolateElement
+		| BidirectionalTextOverrideElement
+		| BreakElement
+		| BringAttentionElement
+		| CanvasElement
+		| CiteElement
+		| CodeElement
+		| DataElement
+		| DatalistElement
+		| DefinitionElement
+		| EmbedElement
+		| EmphasisElement
+		| IdiomaticTextElement
+		| IframeElement
+		| ImageElement
+		| InputElement
+		| KeyboardElement
+		| LabelElement
+		| MarkElement
+		| MathElement
+		| MeterElement
+		| NoscriptElement
+		| ObjectElement
+		| OutputElement
+		| PictureElement
+		| ProgressElement
+		| QuoteElement
+		| RubyElement
+		| SampleElement
+		| ScriptElement
+		| SelectElement
+		| SlotElement
+		| SmallElement
+		| SpanElement
+		| StrikethroughElement
+		| StrongEmphasisElement
+		| SubscriptElement
+		| SuperscriptElement
+		| SvgElement
+		| TemplateElement
+		| TextareaElement
+		| TimeElement
+		| UnarticulatedAnnotationElement
+		| VariableElement
+		| VideoElement
+		| WordBreakOpportunityElement
+	> {
 	attributes?: GlobalAttributes & {
 		autofocus?: boolean
 		disabled?: boolean
@@ -325,20 +450,6 @@ export interface ButtonElement extends SBElement {
 		type?: "button" | "reset" | "submit"
 		value?: string
 	}
-	children?: Array<
-		| TextNode
-		| Exclude<
-				PhrasingContent,
-				| { tagName: "A" }
-				| { tagName: "BUTTON" }
-				| { tagName: "DETAILS" }
-				| { tagName: "EMBED" }
-				| { tagName: "IFRAME" }
-				| { tagName: "LABEL" }
-				| { tagName: "SELECT" }
-				| { tagName: "TEXTAREA" }
-		  >
-	>
 	readonly tagName: "BUTTON"
 }
 
@@ -353,26 +464,25 @@ export interface ButtonInputElement extends InputElement {
 }
 
 // Needs transparent element children
-export interface CanvasElement extends SBElement {
-	attributes?: GlobalAttributes & {
-		height?: number | string
-		role?: AriaRole
-		width?: number | string
-	}
-	children?: Array<
+export interface CanvasElement
+	extends ElementBase<
 		| AnchorElement
 		| TextNode
 		| ButtonElement
 		| ButtonInputElement
 		| CheckboxInputElement
 		| RadioInputElement
-	>
+	> {
+	attributes?: GlobalAttributes & {
+		height?: number | string
+		role?: AriaRole
+		width?: number | string
+	}
 	readonly tagName: "CANVAS"
 }
 
-export interface CaptionElement extends SBElement {
+export interface CaptionElement extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes
-	children?: Array<TextNode | FlowContent>
 	readonly tagName: "CAPTION"
 }
 
@@ -386,19 +496,17 @@ export interface CheckboxInputElement extends InputElement {
 	}
 }
 
-export interface CiteElement extends SBElement {
+export interface CiteElement extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "CITE"
 }
 
-export interface CodeElement extends SBElement {
+export interface CodeElement extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "CODE"
 }
 
@@ -412,32 +520,31 @@ export interface ColorInputElement extends InputElement {
 	}
 }
 
-export interface ColumnElement extends SBElement {
+export interface ColumnElement extends ElementBase<never> {
 	attributes?: GlobalAttributes & {
 		span?: number | string
 	}
 	readonly tagName: "COL"
 }
 
-export interface ColumnGroupElement extends SBElement {
+export interface ColumnGroupElement extends ElementBase<never> {
 	attributes?: GlobalAttributes & {
 		span?: number | string
 	}
 	readonly tagName: "COLGROUP"
 }
 
-export interface DataElement extends SBElement {
+export interface DataElement extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 		value: string
 	}
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "DATA"
 }
 
-export interface DatalistElement extends SBElement {
+export interface DatalistElement
+	extends ElementBase<TextNode | PhrasingContent | OptionElement> {
 	attributes?: GlobalAttributes
-	children?: Array<TextNode | PhrasingContent | OptionElement>
 	readonly tagName: "DATALIST"
 }
 
@@ -470,74 +577,120 @@ export interface DateTimeLocalInputElement extends InputElement {
 }
 
 // transparent content
-export interface DeleteElement extends SBElement {
+export interface DeletionElement
+	extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes & ModAttributes
-	children?: Array<TextNode | FlowContent>
 	readonly tagName: "DEL"
 }
 
-export interface DetailsElement extends SBElement {
+export interface DetailsElement
+	extends ElementBase<TextNode | FlowContentAll | SummaryElement> {
 	attributes?: GlobalAttributes & {
 		name?: string
 		open?: boolean
 	}
-	children?: Array<TextNode | SummaryElement | FlowContent>
 	readonly tagName: "DETAILS"
 }
 
-export interface DefinitionElement extends SBElement {
+export interface DefinitionElement
+	extends ElementBase<
+		| TextNode
+		| AbbreviationElement
+		| AudioElement
+		| BidirectionalIsolateElement
+		| BidirectionalTextOverrideElement
+		| BreakElement
+		| BringAttentionElement
+		| ButtonElement
+		| CanvasElement
+		| CiteElement
+		| CodeElement
+		| DataElement
+		| DatalistElement
+		| EmbedElement
+		| EmphasisElement
+		| IdiomaticTextElement
+		| IframeElement
+		| ImageElement
+		| InputElement
+		| KeyboardElement
+		| LabelElement
+		| MarkElement
+		| MathElement
+		| MeterElement
+		| NoscriptElement
+		| ObjectElement
+		| OutputElement
+		| PictureElement
+		| ProgressElement
+		| QuoteElement
+		| RubyElement
+		| SampleElement
+		| ScriptElement
+		| SelectElement
+		| SlotElement
+		| SmallElement
+		| SpanElement
+		| StrikethroughElement
+		| StrongEmphasisElement
+		| SubscriptElement
+		| SuperscriptElement
+		| SvgElement
+		| TemplateElement
+		| TextareaElement
+		| TimeElement
+		| UnarticulatedAnnotationElement
+		| VariableElement
+		| VideoElement
+		| WordBreakOpportunityElement
+	> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TextNode | Exclude<PhrasingContent, { tagName: "DFN" }>>
 	readonly tagName: "DFN"
 }
 
-export interface DialogElement extends SBElement {
+export interface DialogElement extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes & {
 		open?: boolean
 		role?: "alertdialog"
 	}
-	children?: Array<TextNode | FlowContent>
 	readonly tagName: "DIALOG"
 }
 
-export interface DivisionElement extends SBElement {
+export interface DivisionElement
+	extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TextNode | FlowContent>
 	readonly tagName: "DIV"
 }
 
-export interface DescriptionDetailsElement extends SBElement {
+export interface DescriptionDetailsElement
+	extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes
-	children?: Array<TextNode | FlowContent>
 	readonly tagName: "DD"
 }
 
-export interface DescriptionListElement extends SBElement {
-	attributes?: GlobalAttributes & {
-		role?: "group" | "list" | "none" | "presentation"
-	}
-	children?: Array<
+export interface DescriptionListElement
+	extends ElementBase<
 		| DescriptionDetailsElement
 		| DescriptionTermElement
 		| ScriptElement
 		| TemplateElement
-	>
+	> {
+	attributes?: GlobalAttributes & {
+		role?: "group" | "list" | "none" | "presentation"
+	}
 	readonly tagName: "DL"
 }
 
-// exclude header descendants
-export interface DescriptionTermElement extends SBElement {
-	attributes?: GlobalAttributes & {
-		role?: "listitem"
-	}
-	children?: Array<
+// TODO: exclude header descendants
+export interface DescriptionTermElement
+	extends ElementBase<
 		| TextNode
 		| Exclude<
-				FlowContent,
+				FlowContentAll,
 				| { tagName: "FOOTER" }
 				| { tagName: "HEADER" }
 				| { tagName: "ARTICLE" }
@@ -545,7 +698,10 @@ export interface DescriptionTermElement extends SBElement {
 				| { tagName: "NAV" }
 				| { tagName: "SECTION" }
 		  >
-	>
+	> {
+	attributes?: GlobalAttributes & {
+		role?: "listitem"
+	}
 	readonly tagName: "DT"
 }
 
@@ -567,7 +723,7 @@ export interface EmailInputElement extends InputElement {
 	}
 }
 
-export interface EmbedElement extends SBElement {
+export interface EmbedElement extends ElementBase<never> {
 	attributes?: GlobalAttributes & {
 		height?: number | string
 		role?: "application" | "document" | "img" | "none" | "presentation"
@@ -578,44 +734,37 @@ export interface EmbedElement extends SBElement {
 	readonly tagName: "EMBED"
 }
 
-export interface EmphasisElement extends SBElement {
+export interface EmphasisElement
+	extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "EM"
 }
 
-export interface FieldsetElement extends SBElement {
+export interface FieldsetElement
+	extends ElementBase<TextNode | LegendElement | FlowContentAll> {
 	attributes?: GlobalAttributes & {
 		disabled?: boolean
 		form?: string
 		name?: string
 		role?: "group" | "radiogroup" | "presentation" | "none"
 	}
-	children?: Array<TextNode | LegendElement | FlowContent>
 	readonly tagName: "FIELDSET"
 }
 
-export interface FigcaptionElement extends SBElement {
+export interface FigcaptionElement
+	extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes & {
 		role?: "group" | "none" | "presentation"
 	}
-	children?: Array<TextNode | FlowContent>
 	readonly tagName: "FIGCAPTION"
 }
-
-// export interface FormControlsCollection extends SBElement {
-// 	attributes?: HTMLFormControlsCollection
-// 	children?: Array<TextNode>
-// 	readonly tagName: "FORM"
-// }
-
-export interface FigureElement extends SBElement {
+export interface FigureElement
+	extends ElementBase<TextNode | FigcaptionElement | FlowContentAll> {
 	attributes?: GlobalAttributes & {
 		role?: "group" | "none" | "presentation"
 	}
-	children?: Array<TextNode | FigcaptionElement | FlowContent>
 	readonly tagName: "FIGURE"
 }
 
@@ -632,18 +781,189 @@ export interface FileInputElement extends InputElement {
 	}
 }
 
-export interface FooterElement extends SBElement {
+export interface FooterElement
+	extends ElementBase<
+		| TextNode
+		| AddressElement
+		| AbbreviationElement
+		| AnchorElement
+		| ArticleElement
+		| AsideElement
+		| AudioElement
+		| BidirectionalIsolateElement
+		| BidirectionalTextOverrideElement
+		| BlockquoteElement
+		| BreakElement
+		| BringAttentionElement
+		| ButtonElement
+		| CanvasElement
+		| CiteElement
+		| CodeElement
+		| DataElement
+		| DatalistElement
+		| DefinitionElement
+		| DeletionElement
+		| DescriptionListElement
+		| DetailsElement
+		| DialogElement
+		| DivisionElement
+		| EmbedElement
+		| EmphasisElement
+		| FieldsetElement
+		| FigureElement
+		| FlowIfMapDescendant
+		| FlowIfItempropAttribute
+		| FormElement
+		| Heading1Element
+		| Heading2Element
+		| Heading3Element
+		| Heading4Element
+		| Heading5Element
+		| Heading6Element
+		| HeadingElement
+		| HeadingGroupElement
+		| HorizontalRuleElement
+		| IdiomaticTextElement
+		| IframeElement
+		| ImageElement
+		| InputElement
+		| InsertionElement
+		| KeyboardElement
+		| LabelElement
+		| MainElement
+		| MarkElement
+		| MathElement
+		| MenuElement
+		| MeterElement
+		| NavigationElement
+		| NoscriptElement
+		| ObjectElement
+		| OrderedListElement
+		| OutputElement
+		| ParagraphElement
+		| PictureElement
+		| PreformattedTextElement
+		| ProgressElement
+		| QuoteElement
+		| RubyElement
+		| SampleElement
+		| ScriptElement
+		| SearchElement
+		| SectionElement
+		| SelectElement
+		| SlotElement
+		| SmallElement
+		| SpanElement
+		| StrikethroughElement
+		| StrongEmphasisElement
+		| SubscriptElement
+		| SuperscriptElement
+		| SvgElement
+		| TableElement
+		| TemplateElement
+		| TextareaElement
+		| TimeElement
+		| UnarticulatedAnnotationElement
+		| UnorderedListElement
+		| VariableElement
+		| VideoElement
+		| WordBreakOpportunityElement
+	> {
 	attributes?: GlobalAttributes & {
 		role?: "contentinfo" | "group" | "presentation" | "none"
 	}
-	children?: Array<
-		| TextNode
-		| Exclude<FlowContent, { tagName: "HEADER" } | { tagName: "FOOTER" }>
-	>
 	readonly tagName: "FOOTER"
 }
 
-export interface FormElement extends SBElement {
+export interface FormElement
+	extends ElementBase<
+		| TextNode
+		| AbbreviationElement
+		| AddressElement
+		| AnchorElement
+		| ArticleElement
+		| AsideElement
+		| AudioElement
+		| BidirectionalIsolateElement
+		| BidirectionalTextOverrideElement
+		| BlockquoteElement
+		| BreakElement
+		| BringAttentionElement
+		| ButtonElement
+		| CanvasElement
+		| CiteElement
+		| CodeElement
+		| DataElement
+		| DatalistElement
+		| DefinitionElement
+		| DeletionElement
+		| DescriptionListElement
+		| DetailsElement
+		| DialogElement
+		| DivisionElement
+		| EmbedElement
+		| EmphasisElement
+		| FieldsetElement
+		| FigureElement
+		| FlowIfMapDescendant
+		| FlowIfItempropAttribute
+		| FooterElement
+		| HeaderElement
+		| Heading1Element
+		| Heading2Element
+		| Heading3Element
+		| Heading4Element
+		| Heading5Element
+		| Heading6Element
+		| HeadingElement
+		| HeadingGroupElement
+		| HorizontalRuleElement
+		| IdiomaticTextElement
+		| IframeElement
+		| ImageElement
+		| InputElement
+		| InsertionElement
+		| KeyboardElement
+		| LabelElement
+		| MainElement
+		| MarkElement
+		| MathElement
+		| MenuElement
+		| MeterElement
+		| NavigationElement
+		| NoscriptElement
+		| ObjectElement
+		| OrderedListElement
+		| OutputElement
+		| ParagraphElement
+		| PictureElement
+		| PreformattedTextElement
+		| ProgressElement
+		| QuoteElement
+		| RubyElement
+		| SampleElement
+		| ScriptElement
+		| SearchElement
+		| SectionElement
+		| SelectElement
+		| SlotElement
+		| SmallElement
+		| SpanElement
+		| StrikethroughElement
+		| StrongEmphasisElement
+		| SubscriptElement
+		| SuperscriptElement
+		| SvgElement
+		| TableElement
+		| TemplateElement
+		| TextareaElement
+		| TimeElement
+		| UnarticulatedAnnotationElement
+		| UnorderedListElement
+		| VariableElement
+		| VideoElement
+		| WordBreakOpportunityElement
+	> {
 	attributes?: GlobalAttributes & {
 		"accept-charset": string
 		"action": string
@@ -666,81 +986,166 @@ export interface FormElement extends SBElement {
 		"role"?: "form" | "search" | "none" | "presentation"
 		"target"?: "_blank" | "_parent" | "_self" | "_top" | "_unfencedTop"
 	}
-	children?: Array<TextNode | Exclude<FlowContent, { tagName: "FORM" }>>
 	readonly tagName: "FORM"
 }
 
-export interface Heading1Element extends SBElement {
-	attributes?: GlobalAttributes & {
-		role?: "heading" | "tab" | "presentation" | "none"
-	}
-	children?: Array<TextNode | PhrasingContent>
-	readonly tagName: "H1"
-}
-
-export interface Heading2Element extends SBElement {
-	attributes?: GlobalAttributes & {
-		role?: "heading" | "tab" | "presentation" | "none"
-	}
-	children?: Array<TextNode | PhrasingContent>
-	children?: Array<TextNode>
-	readonly tagName: "H2"
-}
-
-export interface Heading3Element extends SBElement {
-	attributes?: GlobalAttributes & {
-		role?: "heading" | "tab" | "presentation" | "none"
-	}
-	children?: Array<TextNode | PhrasingContent>
-	readonly tagName: "H3"
-}
-
-export interface Heading4Element extends SBElement {
-	attributes?: GlobalAttributes & {
-		role?: "heading" | "tab" | "presentation" | "none"
-	}
-	children?: Array<TextNode | PhrasingContent>
-	readonly tagName: "H4"
-}
-
-export interface Heading5Element extends SBElement {
-	attributes?: GlobalAttributes & {
-		role?: "heading" | "tab" | "presentation" | "none"
-	}
-	children?: Array<TextNode | PhrasingContent>
-	readonly tagName: "H5"
-}
-
-export interface Heading6Element extends SBElement {
-	attributes?: GlobalAttributes & {
-		role?: "heading" | "tab" | "presentation" | "none"
-	}
-	children?: Array<TextNode | PhrasingContent>
-	readonly tagName: "H6"
-}
-
-export interface HeadElement extends SBElement {
+export interface HeadElement extends ElementBase<TextNode | MetadataContent> {
 	attributes?: GlobalAttributes
-	children?: Array<TextNode | MetadataContent>
 	readonly tagName: "HEAD"
 }
 
-export interface HeaderElement extends SBElement {
+export interface HeaderElement
+	extends ElementBase<
+		| TextNode
+		| AbbreviationElement
+		| AddressElement
+		| AnchorElement
+		| ArticleElement
+		| AsideElement
+		| AudioElement
+		| BidirectionalIsolateElement
+		| BidirectionalTextOverrideElement
+		| BlockquoteElement
+		| BreakElement
+		| BringAttentionElement
+		| ButtonElement
+		| CanvasElement
+		| CiteElement
+		| CodeElement
+		| DataElement
+		| DatalistElement
+		| DefinitionElement
+		| DeletionElement
+		| DescriptionListElement
+		| DetailsElement
+		| DialogElement
+		| DivisionElement
+		| EmbedElement
+		| EmphasisElement
+		| FieldsetElement
+		| FigureElement
+		| FlowIfMapDescendant
+		| FlowIfItempropAttribute
+		| FormElement
+		| Heading1Element
+		| Heading2Element
+		| Heading3Element
+		| Heading4Element
+		| Heading5Element
+		| Heading6Element
+		| HeadingElement
+		| HeadingGroupElement
+		| HorizontalRuleElement
+		| IdiomaticTextElement
+		| IframeElement
+		| ImageElement
+		| InputElement
+		| InsertionElement
+		| KeyboardElement
+		| LabelElement
+		| MainElement
+		| MarkElement
+		| MathElement
+		| MenuElement
+		| MeterElement
+		| NavigationElement
+		| NoscriptElement
+		| ObjectElement
+		| OrderedListElement
+		| OutputElement
+		| ParagraphElement
+		| PictureElement
+		| PreformattedTextElement
+		| ProgressElement
+		| QuoteElement
+		| RubyElement
+		| SampleElement
+		| ScriptElement
+		| SearchElement
+		| SectionElement
+		| SelectElement
+		| SlotElement
+		| SmallElement
+		| SpanElement
+		| StrikethroughElement
+		| StrongEmphasisElement
+		| SubscriptElement
+		| SuperscriptElement
+		| SvgElement
+		| TableElement
+		| TemplateElement
+		| TextareaElement
+		| TimeElement
+		| UnarticulatedAnnotationElement
+		| UnorderedListElement
+		| VariableElement
+		| VideoElement
+		| WordBreakOpportunityElement
+	> {
 	attributes?: GlobalAttributes & {
 		role?: "banner" | "group" | "presentation" | "none"
 	}
-	children?: Array<
-		| TextNode
-		| Exclude<FlowContent, { tagName: "HEADER" } | { tagName: "FOOTER" }>
-	>
 	readonly tagName: "HEADER"
 }
 
-export interface HeadingGroupElement extends SBElement {
+export interface Heading1Element
+	extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
-		role?: AriaRole
+		role?: "heading" | "tab" | "presentation" | "none"
 	}
-	children?: Array<
+	readonly tagName: "H1"
+}
+
+export interface Heading2Element
+	extends ElementBase<TextNode | PhrasingContent> {
+	attributes?: GlobalAttributes & {
+		role?: "heading" | "tab" | "presentation" | "none"
+	}
+	readonly tagName: "H2"
+}
+
+export interface Heading3Element
+	extends ElementBase<TextNode | PhrasingContent> {
+	attributes?: GlobalAttributes & {
+		role?: "heading" | "tab" | "presentation" | "none"
+	}
+	readonly tagName: "H3"
+}
+
+export interface Heading4Element
+	extends ElementBase<TextNode | PhrasingContent> {
+	attributes?: GlobalAttributes & {
+		role?: "heading" | "tab" | "presentation" | "none"
+	}
+	readonly tagName: "H4"
+}
+
+export interface Heading5Element
+	extends ElementBase<TextNode | PhrasingContent> {
+	attributes?: GlobalAttributes & {
+		role?: "heading" | "tab" | "presentation" | "none"
+	}
+	readonly tagName: "H5"
+}
+
+export interface Heading6Element
+	extends ElementBase<TextNode | PhrasingContent> {
+	attributes?: GlobalAttributes & {
+		role?: "heading" | "tab" | "presentation" | "none"
+	}
+	readonly tagName: "H6"
+}
+
+export interface HeadingElement
+	extends ElementBase<TextNode | PhrasingContent> {
+	attributes?: GlobalAttributes & {
+		role?: "heading" | "tab" | "presentation" | "none"
+	}
+	readonly tagName: "HN"
+}
+
+export interface HeadingGroupElement
+	extends ElementBase<
 		| TextNode
 		| ParagraphElement
 		| Heading1Element
@@ -749,7 +1154,10 @@ export interface HeadingGroupElement extends SBElement {
 		| Heading4Element
 		| Heading5Element
 		| Heading6Element
-	>
+	> {
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
 	readonly tagName: "HGROUP"
 }
 
@@ -764,28 +1172,29 @@ export interface HiddenInputElement extends InputElement {
 	} & ({ name: "_charset_"; value: never } | { name: string; value: string })
 }
 
-export interface HorizontalRuleElement extends SBElement {
+export interface HorizontalRuleElement extends ElementBase<never> {
 	attributes?: GlobalAttributes & {
 		role?: "separator" | "presentation" | "none"
 	}
 	readonly tagName: "HR"
 }
 
-export interface HtmlElement extends SBElement {
+export interface HtmlElement extends ElementBase<[HeadElement | BodyElement]> {
 	attributes?: GlobalAttributes & {
 		xmlns?: string
 	}
-	children?: [HeadElement | BodyElement]
 	readonly tagName: "HTML"
 }
 
-// export interface ItalicsElement extends SBElement {
-// 	attributes?: GlobalAttributes
-// 	children?: Array<TextNode>
-// 	readonly tagName: "I"
-// }
+export interface IdiomaticTextElement
+	extends ElementBase<TextNode | PhrasingContent> {
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	readonly tagName: "I"
+}
 
-export interface IframeElement extends SBElement {
+export interface IframeElement extends ElementBase<never> {
 	attributes?: GlobalAttributes & {
 		allow?: string
 		height?: number | string
@@ -816,7 +1225,7 @@ export interface IframeElement extends SBElement {
 	readonly tagName: "IFRAME"
 }
 
-export interface ImageElement extends SBElement {
+export interface ImageElement extends ElementBase<never> {
 	attributes?: GlobalAttributes & {
 		alt: string
 		crossorigin?: CrossOrigin
@@ -850,7 +1259,6 @@ export interface ImageElement extends SBElement {
 		width?: number | string
 		usemap?: string
 	}
-	children?: never
 	readonly tagName: "IMG"
 }
 
@@ -873,31 +1281,7 @@ export interface ImageInputElement extends InputElement {
 	}
 }
 
-export type InputElementTypes =
-	| "button"
-	| "checkbox"
-	| "color"
-	| "date"
-	| "datetime-local"
-	| "email"
-	| "file"
-	| "hidden"
-	| "image"
-	| "month"
-	| "number"
-	| "password"
-	| "radio"
-	| "range"
-	| "reset"
-	| "search"
-	| "submit"
-	| "tel"
-	| "text"
-	| "time"
-	| "url"
-	| "week"
-
-export interface InputElement extends SBElement {
+export interface InputElement extends ElementBase<never> {
 	attributes?: GlobalAttributes & {
 		autofocus?: boolean
 		disabled?: boolean
@@ -905,58 +1289,88 @@ export interface InputElement extends SBElement {
 		name: string
 		type: InputElementTypes
 	}
-	children?: Array<TextNode>
 	readonly tagName: "INPUT"
 }
 
-export interface InsertElement extends SBElement {
+export interface InsertionElement
+	extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes & ModAttributes
-	children?: Array<TextNode | FlowContent>
 	readonly tagName: "INS"
 }
 
-export interface KeyboardElement extends SBElement {
+export interface KeyboardElement
+	extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "KBD"
 }
 
-export interface LabelElement extends SBElement {
+export interface LabelElement
+	extends ElementBase<
+		| TextNode
+		| AbbreviationElement
+		| AudioElement
+		| BidirectionalIsolateElement
+		| BidirectionalTextOverrideElement
+		| BreakElement
+		| BringAttentionElement
+		| ButtonElement
+		| CanvasElement
+		| CiteElement
+		| CodeElement
+		| DataElement
+		| DatalistElement
+		| DefinitionElement
+		| EmbedElement
+		| EmphasisElement
+		| IdiomaticTextElement
+		| IframeElement
+		| ImageElement
+		| InputElement
+		| KeyboardElement
+		| MarkElement
+		| MathElement
+		| MeterElement
+		| NoscriptElement
+		| ObjectElement
+		| OutputElement
+		| PictureElement
+		| ProgressElement
+		| QuoteElement
+		| RubyElement
+		| SampleElement
+		| ScriptElement
+		| SelectElement
+		| SlotElement
+		| SmallElement
+		| SpanElement
+		| StrikethroughElement
+		| StrongEmphasisElement
+		| SubscriptElement
+		| SuperscriptElement
+		| SvgElement
+		| TemplateElement
+		| TextareaElement
+		| TimeElement
+		| UnarticulatedAnnotationElement
+		| VariableElement
+		| VideoElement
+		| WordBreakOpportunityElement
+	> {
 	attributes?: GlobalAttributes & {
 		for: string
 	}
-	children?: Array<TextNode | Exclude<PhrasingContent, { tagName: "LABEL" }>>
 	readonly tagName: "LABEL"
 }
 
-export interface LegendElement extends SBElement {
+export interface LegendElement
+	extends ElementBase<TextNode | PhrasingContent | HeadingElement> {
 	attributes?: HTMLLegendElement
-	children?: Array<TextNode | PhrasingContent | HeadingElements>
 	readonly tagName: "LEGEND"
 }
 
-export interface ListItemElement extends SBElement {
-	attributes?: GlobalAttributes & {
-		role?:
-			| "menuitem"
-			| "menuitemcheckbox"
-			| "menuitemradio"
-			| "option"
-			| "none"
-			| "presentation"
-			| "radio"
-			| "separator"
-			| "tab"
-			| "treeitem"
-		value?: number | string
-	}
-	children?: Array<TextNode | FlowContent>
-	readonly tagName: "LI"
-}
-
-export interface LinkElement extends SBElement {
+export interface LinkElement extends ElementBase<never> {
 	attributes?:
 		| (GlobalAttributes & {
 				crossorigin?: CrossOrigin
@@ -1006,40 +1420,59 @@ export interface LinkElement extends SBElement {
 					| "stylesheet"
 					| "terms-of-service"
 		  }
-	children?: Array<TextNode>
 	readonly tagName: "LINK"
 }
 
-export interface MainElement extends SBElement {
-	attributes?: GlobalAttributes
-	children?: Array<TextNode | FlowContent>
+export interface ListItemElement
+	extends ElementBase<TextNode | FlowContentAll> {
+	attributes?: GlobalAttributes & {
+		role?:
+			| "menuitem"
+			| "menuitemcheckbox"
+			| "menuitemradio"
+			| "option"
+			| "none"
+			| "presentation"
+			| "radio"
+			| "separator"
+			| "tab"
+			| "treeitem"
+		value?: number | string
+	}
+	readonly tagName: "LI"
+}
+
+export interface MainElement extends ElementBase<TextNode | FlowContentAll> {
+	attributes?: GlobalAttributes & {
+		role?: "main"
+	}
 	readonly tagName: "MAIN"
 }
 
 // transparent content
-export interface MapElement extends SBElement {
+export interface MapElement extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes & {
 		name: string
 	}
-	children?: Array<TextNode | FlowContent>
 	readonly tagName: "MAP"
 }
 
-export interface MarkElement extends SBElement {
+export interface MarkElement extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "MARK"
 }
 
-// export interface MediaElement extends SBElement {
-// 	attributes?: HTMLMediaElement
-// 	children?: Array<TextNode>
-// 	readonly tagName: "MEDIA"
-// }
+export interface MathElement extends ElementBase<MathMLElement> {
+	attributes?: GlobalAttributes & {
+		display?: "block" | "inline"
+	}
+	readonly tagName: "MATH"
+}
 
-export interface MenuElement extends SBElement {
+export interface MenuElement
+	extends ElementBase<ListItemElement | ScriptElement | TemplateElement> {
 	attributes?: GlobalAttributes & {
 		role?:
 			| "directory"
@@ -1054,11 +1487,10 @@ export interface MenuElement extends SBElement {
 			| "toolbar"
 			| "tree"
 	}
-	children?: Array<ListItemElement | ScriptElement | TemplateElement>
 	readonly tagName: "MENU"
 }
 
-export interface MetaElement extends SBElement {
+export interface MetaElement extends ElementBase<never> {
 	attributes?:
 		| (GlobalAttributes & {
 				charset: "utf-8"
@@ -1086,7 +1518,58 @@ export interface MetaElement extends SBElement {
 	readonly tagName: "META"
 }
 
-export interface MeterElement extends SBElement {
+export interface MeterElement
+	extends ElementBase<
+		| TextNode
+		| AbbreviationElement
+		| AudioElement
+		| BidirectionalIsolateElement
+		| BidirectionalTextOverrideElement
+		| BreakElement
+		| BringAttentionElement
+		| ButtonElement
+		| CanvasElement
+		| CiteElement
+		| CodeElement
+		| DataElement
+		| DatalistElement
+		| DefinitionElement
+		| EmbedElement
+		| EmphasisElement
+		| IdiomaticTextElement
+		| IframeElement
+		| ImageElement
+		| InputElement
+		| KeyboardElement
+		| LabelElement
+		| MarkElement
+		| MathElement
+		| NoscriptElement
+		| ObjectElement
+		| OutputElement
+		| PictureElement
+		| ProgressElement
+		| QuoteElement
+		| RubyElement
+		| SampleElement
+		| ScriptElement
+		| SelectElement
+		| SlotElement
+		| SmallElement
+		| SpanElement
+		| StrikethroughElement
+		| StrongEmphasisElement
+		| SubscriptElement
+		| SuperscriptElement
+		| SvgElement
+		| TemplateElement
+		| TextareaElement
+		| TimeElement
+		| UnarticulatedAnnotationElement
+		| VariableElement
+		| VideoElement
+		| WordBreakOpportunityElement
+	> {
 	attributes?: GlobalAttributes & {
 		form?: string
 		high?: number | string
@@ -1095,7 +1578,6 @@ export interface MeterElement extends SBElement {
 		min?: number | string
 		optimum: number | string
 	}
-	children?: Array<TextNode | Exclude<PhrasingContent, { tagName: "METER" }>>
 	readonly tagName: "METER"
 }
 
@@ -1114,21 +1596,105 @@ export interface MonthInputElement extends InputElement {
 	}
 }
 
-export interface NavigationElement extends SBElement {
+export interface NavigationElement
+	extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes
-	children?: Array<TextNode | FlowContent>
 	readonly tagName: "NAV"
 }
 
-export interface NoscriptElement extends SBElement {
-	attributes?: GlobalAttributes
-	children?: Array<
+export interface NoscriptElement
+	extends ElementBase<
 		| TextNode
+		| AbbreviationElement
+		| AddressElement
+		| AnchorElement
+		| ArticleElement
+		| AsideElement
+		| AudioElement
+		| BidirectionalIsolateElement
+		| BidirectionalTextOverrideElement
+		| BlockquoteElement
+		| BreakElement
+		| BringAttentionElement
+		| ButtonElement
+		| CanvasElement
+		| CiteElement
+		| CodeElement
+		| DataElement
+		| DatalistElement
+		| DefinitionElement
+		| DeletionElement
+		| DescriptionListElement
+		| DetailsElement
+		| DialogElement
+		| DivisionElement
+		| EmbedElement
+		| EmphasisElement
+		| FieldsetElement
+		| FigureElement
+		| FlowIfMapDescendant
+		| FlowIfItempropAttribute
+		| FooterElement
+		| FormElement
+		| HeaderElement
+		| Heading1Element
+		| Heading2Element
+		| Heading3Element
+		| Heading4Element
+		| Heading5Element
+		| Heading6Element
+		| HeadingElement
+		| HeadingGroupElement
+		| HorizontalRuleElement
+		| IdiomaticTextElement
+		| IframeElement
+		| ImageElement
+		| InputElement
+		| InsertionElement
+		| KeyboardElement
+		| LabelElement
+		| MainElement
+		| MarkElement
+		| MathElement
+		| MenuElement
+		| MeterElement
+		| NavigationElement
+		| ObjectElement
+		| OrderedListElement
+		| OutputElement
+		| ParagraphElement
+		| PictureElement
+		| PreformattedTextElement
+		| ProgressElement
+		| QuoteElement
+		| RubyElement
+		| SampleElement
+		| ScriptElement
+		| SearchElement
+		| SectionElement
+		| SelectElement
+		| SlotElement
+		| SmallElement
+		| SpanElement
+		| StrikethroughElement
+		| StrongEmphasisElement
+		| SubscriptElement
+		| SuperscriptElement
+		| SvgElement
+		| TableElement
+		| TemplateElement
+		| TextareaElement
+		| TimeElement
+		| UnarticulatedAnnotationElement
+		| UnorderedListElement
+		| VariableElement
+		| VideoElement
+		| WordBreakOpportunityElement
 		| LinkElement
 		| StyleElement
 		| MetaElement
-		| Exclude<FlowContent, { tagName: "NOSCRIPT" }>
-	>
+	> {
+	attributes?: GlobalAttributes
 	readonly tagName: "NOSCRIPT"
 }
 
@@ -1150,7 +1716,7 @@ export interface NumberInputElement extends InputElement {
 
 // transparent content
 // TODO: do we need this?
-export interface ObjectElement extends SBElement {
+export interface ObjectElement extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes & {
 		data: string
 		form?: string
@@ -1160,11 +1726,29 @@ export interface ObjectElement extends SBElement {
 		type: string
 		width?: number | string
 	}
-	children?: Array<FlowContent>
 	readonly tagName: "OBJECT"
 }
 
-export interface OrderedListElement extends SBElement {
+export interface OptionElement extends ElementBase<TextNode> {
+	attributes?: GlobalAttributes & {
+		disabled?: boolean
+		label?: string
+		selected?: boolean | string
+		value?: number | string
+	}
+	readonly tagName: "OPTION"
+}
+
+export interface OptionGroupElement extends ElementBase<OptionElement> {
+	attributes?: GlobalAttributes & {
+		disabled?: boolean
+		label: string
+	}
+	readonly tagName: "OPTGROUP"
+}
+
+export interface OrderedListElement
+	extends ElementBase<ListItemElement | ScriptElement | TemplateElement> {
 	attributes?: GlobalAttributes & {
 		reversed?: boolean
 		role?:
@@ -1182,52 +1766,24 @@ export interface OrderedListElement extends SBElement {
 		start?: number | string
 		type?: "a" | "A" | "i" | "I" | "1" | 1
 	}
-	children?: Array<ListItemElement | ScriptElement | TemplateElement>
 	readonly tagName: "OL"
 }
 
-export interface OptionGroupElement extends SBElement {
-	attributes?: GlobalAttributes & {
-		disabled?: boolean
-		label: string
-	}
-	children?: Array<OptionElement>
-	readonly tagName: "OPTGROUP"
-}
-
-export interface OptionElement extends SBElement {
-	attributes?: GlobalAttributes & {
-		disabled?: boolean
-		label?: string
-		selected?: boolean | string
-		value?: number | string
-	}
-	children?: Array<TextNode>
-	readonly tagName: "OPTION"
-}
-
-// export interface OptionsCollection extends SBElement {
-// 	attributes?: HTMLOptionsCollection
-// 	children?: Array<TextNode>
-// 	readonly tagName: ""
-// }
-
-export interface OutputElement extends SBElement {
+export interface OutputElement extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
 		for?: string
 		form?: string
 		name: string
 		role?: AriaRole
 	}
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "OUTPUT"
 }
 
-export interface ParagraphElement extends SBElement {
+export interface ParagraphElement
+	extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "P"
 }
 
@@ -1247,33 +1803,82 @@ export interface PasswordInputElement extends InputElement {
 	}
 }
 
-export interface PictureElement extends SBElement {
+export interface PictureElement
+	extends ElementBase<[Array<SourceElement>, ImageElement]> {
 	attributes?: GlobalAttributes
-	children?: [Array<SourceElement>, ImageElement]
 	readonly tagName: "PICTURE"
 }
 
-export interface PreformattedTextElement extends SBElement {
+export interface PreformattedTextElement
+	extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "PRE"
 }
 
-export interface ProgressElement extends SBElement {
+export interface ProgressElement
+	extends ElementBase<
+		| TextNode
+		| AbbreviationElement
+		| AudioElement
+		| BidirectionalIsolateElement
+		| BidirectionalTextOverrideElement
+		| BreakElement
+		| BringAttentionElement
+		| ButtonElement
+		| CanvasElement
+		| CiteElement
+		| CodeElement
+		| DataElement
+		| DatalistElement
+		| DefinitionElement
+		| EmbedElement
+		| EmphasisElement
+		| IdiomaticTextElement
+		| IframeElement
+		| ImageElement
+		| InputElement
+		| KeyboardElement
+		| LabelElement
+		| MarkElement
+		| MathElement
+		| MeterElement
+		| NoscriptElement
+		| ObjectElement
+		| OutputElement
+		| PictureElement
+		| QuoteElement
+		| RubyElement
+		| SampleElement
+		| ScriptElement
+		| SelectElement
+		| SlotElement
+		| SmallElement
+		| SpanElement
+		| StrikethroughElement
+		| StrongEmphasisElement
+		| SubscriptElement
+		| SuperscriptElement
+		| SvgElement
+		| TemplateElement
+		| TextareaElement
+		| TimeElement
+		| UnarticulatedAnnotationElement
+		| VariableElement
+		| VideoElement
+		| WordBreakOpportunityElement
+	> {
 	attributes?: GlobalAttributes & {
 		max?: number | string
 		value?: number | string
 	}
-	children?: Array<TextNode | Exclude<PhrasingContent, { tagName: "PROGRESS" }>>
 	readonly tagName: "PROGRESS"
 }
 
-export interface QuoteElement extends SBElement {
+export interface QuoteElement extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
 		cite?: string
 		role?: AriaRole
 	}
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "Q"
 }
 
@@ -1308,39 +1913,36 @@ export interface ResetInputElement extends InputElement {
 	}
 }
 
-export interface RubyFallbackParenthesisElement extends SBElement {
+export interface RubyElement extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TextNode>
-	readonly tagName: "RP"
-}
-
-export interface RubyTextElement extends SBElement {
-	attributes?: GlobalAttributes & {
-		role?: AriaRole
-	}
-	children?: Array<TextNode | PhrasingContent>
-	readonly tagName: "RT"
-}
-
-export interface RubyElement extends SBElement {
-	attributes?: GlobalAttributes & {
-		role?: AriaRole
-	}
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "RUBY"
 }
 
-export interface SampleElement extends SBElement {
+export interface RubyFallbackParenthesisElement extends ElementBase<TextNode> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TextNode | PhrasingContent>
+	readonly tagName: "RP"
+}
+
+export interface RubyTextElement
+	extends ElementBase<TextNode | PhrasingContent> {
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	readonly tagName: "RT"
+}
+
+export interface SampleElement extends ElementBase<TextNode | PhrasingContent> {
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
 	readonly tagName: "SAMP"
 }
 
-export interface ScriptElement extends SBElement {
+export interface ScriptElement extends ElementBase<TextNode> {
 	attributes?: GlobalAttributes & {
 		async?: boolean
 		crossorigin?: CrossOrigin
@@ -1353,15 +1955,13 @@ export interface ScriptElement extends SBElement {
 		src: string
 		type?: "importmap" | "module" | string
 	}
-	children?: Array<TextNode>
 	readonly tagName: "SCRIPT"
 }
 
-export interface SearchElement extends SBElement {
+export interface SearchElement extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes & {
 		role?: "form" | "group" | "none" | "presentation" | "region" | "search"
 	}
-	children?: Array<TextNode | FlowContent>
 	readonly tagName: "SEARCH"
 }
 
@@ -1379,11 +1979,10 @@ export interface SearchInputElement extends InputElement {
 		readonly type: "search"
 		value?: string
 	}
-	children?: Array<TextNode>
 	readonly tagName: "INPUT"
 }
 
-export interface SectionElement extends SBElement {
+export interface SectionElement extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes & {
 		role?:
 			| "alert"
@@ -1406,11 +2005,13 @@ export interface SectionElement extends SBElement {
 			| "status"
 			| "tabpanel"
 	}
-	children?: Array<TextNode | FlowContent>
 	readonly tagName: "SECTION"
 }
 
-export interface SelectElement extends SBElement {
+export interface SelectElement
+	extends ElementBase<
+		OptionElement | OptionGroupElement | HorizontalRuleElement
+	> {
 	attributes?: GlobalAttributes & {
 		autocomplete?: Autocomplete
 		autofocus?: boolean
@@ -1421,28 +2022,33 @@ export interface SelectElement extends SBElement {
 		role?: "menu"
 		size?: number | string
 	}
-	children?: Array<OptionElement | OptionGroupElement | HorizontalRuleElement>
 	readonly tagName: "SELECT"
 }
 
 // transparent content
-export interface SlotElement extends SBElement {
+export interface SlotElement extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes & {
 		name?: string
 	}
-	children?: Array<TextNode | FlowContent>
 	readonly tagName: "SLOT"
 }
 
-export interface SmallElement extends SBElement {
+export interface SmallElement extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "SMALL"
 }
 
-export interface SourceElement extends SBElement {
+export interface StrikethroughElement
+	extends ElementBase<TextNode | PhrasingContent> {
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	readonly tagName: "S"
+}
+
+export interface SourceElement extends ElementBase<never> {
 	attributes?: GlobalAttributes & {
 		height?: number | string
 		media?: string
@@ -1454,31 +2060,23 @@ export interface SourceElement extends SBElement {
 	readonly tagName: "SOURCE"
 }
 
-export interface SpanElement extends SBElement {
+export interface SpanElement extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "SPAN"
 }
 
-// export interface StrikethroughElement extends SBElement {
-// 	attributes?: GlobalAttributes
-// 	children?: Array<TextNode>
-// 	readonly tagName: "S"
-// }
-
-export interface StrongEmphasisElement extends SBElement {
+export interface StrongEmphasisElement
+	extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "STRONG"
 }
 
-export interface StyleElement extends SBElement {
+export interface StyleElement extends ElementBase<TextNode> {
 	attributes?: HTMLStyleElement
-	children?: Array<TextNode>
 	readonly tagName: "STYLE"
 }
 
@@ -1495,36 +2093,56 @@ export interface SubmitInputElement extends InputElement {
 	}
 }
 
-export interface SubscriptElement extends SBElement {
+export interface SubscriptElement
+	extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "SUB"
 }
 
-export interface SummaryElement extends SBElement {
+export interface SummaryElement
+	extends ElementBase<
+		[HeadingElement, Array<PhrasingContent>] | Array<PhrasingContent>
+	> {
 	attributes?: GlobalAttributes
-	children?:
-		| [HeadingElements, Array<TextNode | PhrasingContent>]
-		| Array<TextNode | PhrasingContent>
 	readonly tagName: "SUMMARY"
 }
 
-export interface SuperscriptElement extends SBElement {
+export interface SuperscriptElement
+	extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "SUP"
 }
 
-// TODO: complex children
-export interface TableElement extends SBElement {
+// TODO: implement this
+export interface SvgElement extends ElementBase<SvgMLElement> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<
+	readonly tagName: "SAMP"
+}
+
+export interface TableBodyElement extends ElementBase<TableRowElement> {
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	readonly tagName: "TBODY"
+}
+
+export interface TableDataCellElement
+	extends ElementBase<TextNode | FlowContentAll> {
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	readonly tagName: "TD"
+}
+
+// TODO: complex children
+export interface TableElement
+	extends ElementBase<
 		| TextNode
 		| CaptionElement
 		| ColumnGroupElement
@@ -1532,36 +2150,30 @@ export interface TableElement extends SBElement {
 		| TableBodyElement
 		| TableRowElement
 		| TableFooterElement
-	>
+	> {
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
 	readonly tagName: "TABLE"
 }
 
-export interface TableBodyElement extends SBElement {
+export interface TableFooterElement extends ElementBase<TableRowElement> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TableRowElement>
-	readonly tagName: "TBODY"
-}
-
-export interface TableDataCellElement extends SBElement {
-	attributes?: GlobalAttributes & {
-		role?: AriaRole
-	}
-	children?: Array<TextNode | FlowContent>
-	readonly tagName: "TD"
-}
-
-export interface TableFooterElement extends SBElement {
-	attributes?: GlobalAttributes & {
-		role?: AriaRole
-	}
-	children?: Array<TableRowElement>
 	readonly tagName: "TFOOT"
 }
 
+export interface TableHeadElement extends ElementBase<TableRowElement> {
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	readonly tagName: "THEAD"
+}
+
 // TODO: complicated children
-export interface TableHeaderCellElement extends SBElement {
+export interface TableHeaderCellElement
+	extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes & {
 		abbr?: string
 		colspan?: number | string
@@ -1570,31 +2182,21 @@ export interface TableHeaderCellElement extends SBElement {
 		rowspan?: number | string
 		scope?: "col" | "colgroup" | "row" | "rowgroup"
 	}
-	children?: Array<TextNode | FlowContent>
 	readonly tagName: "TH"
 }
 
-export interface TableHeadElement extends SBElement {
+export interface TableRowElement
+	extends ElementBase<TableDataCellElement | TableHeaderCellElement> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TableRowElement>
-	readonly tagName: "THEAD"
-}
-
-export interface TableRowElement extends SBElement {
-	attributes?: GlobalAttributes & {
-		role?: AriaRole
-	}
-	children?: Array<TableDataCellElement | TableHeaderCellElement>
 	readonly tagName: "TR"
 }
 
-export interface TemplateElement extends SBElement {
+export interface TemplateElement extends ElementBase<TextNode | ElementAny> {
 	attributes?: GlobalAttributes & {
 		shadowrootmode?: "closed" | "open"
 	}
-	children?: Array<TextNode>
 	readonly tagName: "TEMPLATE"
 }
 
@@ -1616,7 +2218,7 @@ export interface TelInputElement extends InputElement {
 	}
 }
 
-export interface TextareaElement extends SBElement {
+export interface TextareaElement extends ElementBase<TextNode> {
 	attributes?: GlobalAttributes & {
 		autocapitalize?: Autocapitalize
 		autocomplete?: Autocomplete
@@ -1634,7 +2236,6 @@ export interface TextareaElement extends SBElement {
 		spellcheck?: "default" | "false" | "true"
 		wrap: "off" | "hard" | "soft"
 	}
-	children?: Array<TextNode>
 	readonly tagName: "TEXTAREA"
 }
 
@@ -1656,12 +2257,11 @@ export interface TextInputElement extends InputElement {
 	}
 }
 
-export interface TimeElement extends SBElement {
+export interface TimeElement extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
 		datetime: string
 		role?: AriaRole
 	}
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "TIME"
 }
 
@@ -1680,37 +2280,39 @@ export interface TimeInputElement extends InputElement {
 	}
 }
 
-export interface TitleElement extends SBElement {
+export interface TitleElement extends ElementBase<TextNode> {
 	attributes?: GlobalAttributes
-	children?: Array<TextNode>
 	readonly tagName: "TITLE"
 }
 
-export interface TrackElement extends SBElement {
-	attributes?:
-		| (GlobalAttributes & {
-				default?: boolean
-				label: string
-				src: string
-		  } & {
-				kind?: "subtitles"
-				srclang: string
-		  })
-		| {
-				kind?: "captions" | "chapters" | "descriptions" | "metadata"
-				srclang?: string
-		  }
-	children?: Array<TextNode>
+export interface TrackElement extends ElementBase<never> {
+	attributes?: GlobalAttributes & {
+		default?: boolean
+		label: string
+		src: string
+	} & (
+			| {
+					kind?: "subtitles"
+					srclang: string
+			  }
+			| {
+					kind?: "captions" | "chapters" | "descriptions" | "metadata"
+					srclang?: string
+			  }
+		)
 	readonly tagName: "TRACK"
 }
 
-// export interface UnderlineElement extends SBElement {
-// 	attributes?: GlobalAttributes
-// 	children?: Array<TextNode>
-// 	readonly tagName: "U"
-// }
+export interface UnarticulatedAnnotationElement
+	extends ElementBase<TextNode | PhrasingContent> {
+	attributes?: GlobalAttributes & {
+		role?: AriaRole
+	}
+	readonly tagName: "U"
+}
 
-export interface UnorderedListElement extends SBElement {
+export interface UnorderedListElement
+	extends ElementBase<ListItemElement | ScriptElement | TemplateElement> {
 	attributes?: GlobalAttributes & {
 		role?:
 			| "directory"
@@ -1725,7 +2327,6 @@ export interface UnorderedListElement extends SBElement {
 			| "toolbar"
 			| "tree"
 	}
-	children?: Array<ListItemElement | ScriptElement | TemplateElement>
 	readonly tagName: "UL"
 }
 
@@ -1746,22 +2347,17 @@ export interface UrlInputElement extends InputElement {
 	}
 }
 
-export interface VariableElement extends SBElement {
+export interface VariableElement
+	extends ElementBase<TextNode | PhrasingContent> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
-	children?: Array<TextNode | PhrasingContent>
 	readonly tagName: "VAR"
 }
 
-// export interface UnknownElement extends SBElement {
-// 	attributes?: HTMLUnknownElement
-// 	children?: Array<TextNode>
-// 	readonly tagName: string
-// }
-
 // TODO: complex children
-export interface VideoElement extends SBElement {
+export interface VideoElement
+	extends ElementBase<TrackElement | SourceElement> {
 	attributes?: GlobalAttributes & {
 		autoplay?: boolean
 		controls?: boolean
@@ -1779,7 +2375,6 @@ export interface VideoElement extends SBElement {
 		src: string
 		width?: number | string
 	}
-	children?: Array<TrackElement | SourceElement>
 	readonly tagName: "VIDEO"
 }
 
@@ -1798,33 +2393,31 @@ export interface WeekInputElement extends InputElement {
 	}
 }
 
-export interface WordBreakOpportunityElement extends SBElement {
+export interface WordBreakOpportunityElement extends ElementBase<never> {
 	attributes?: GlobalAttributes & {
 		role?: AriaRole
 	}
 	readonly tagName: "WBR"
 }
 
-type HeadingElements =
-	| Heading1Element
-	| Heading2Element
-	| Heading3Element
-	| Heading4Element
-	| Heading5Element
-	| Heading6Element
+export type BaseElements = BodyElement | HeadElement | HtmlElement
 
-type MetadataContent =
-	| BaseElement
-	| LinkElement
-	| MetaElement
-	| NoscriptElement
-	| ScriptElement
-	| StyleElement
-	| TitleElement
+export type EmbeddedContent =
+	| AudioElement
+	| CanvasElement
+	| EmbedElement
+	| IframeElement
+	| ImageElement
+	| MathElement
+	| ObjectElement
+	| PictureElement
+	| SvgElement
+	| VideoElement
 
-type FlowContentNoInteractive =
+export type FlowContent =
 	| AbbreviationElement
 	| AddressElement
+	| AnchorElement
 	| ArticleElement
 	| AsideElement
 	| AudioElement
@@ -1832,37 +2425,45 @@ type FlowContentNoInteractive =
 	| BidirectionalTextOverrideElement
 	| BlockquoteElement
 	| BreakElement
+	| BringAttentionElement
+	| ButtonElement
 	| CanvasElement
 	| CiteElement
 	| CodeElement
 	| DataElement
 	| DatalistElement
-	| DeleteElement
 	| DefinitionElement
+	| DeletionElement
+	| DescriptionListElement
+	| DetailsElement
 	| DialogElement
 	| DivisionElement
-	| DescriptionListElement
+	| EmbedElement
 	| EmphasisElement
 	| FieldsetElement
 	| FigureElement
 	| FooterElement
 	| FormElement
+	| HeaderElement
 	| Heading1Element
 	| Heading2Element
 	| Heading3Element
 	| Heading4Element
 	| Heading5Element
 	| Heading6Element
-	| HeaderElement
+	| HeadingElement
 	| HeadingGroupElement
 	| HorizontalRuleElement
+	| IdiomaticTextElement
+	| IframeElement
 	| ImageElement
 	| InputElement
-	| InsertElement
+	| InsertionElement
 	| KeyboardElement
+	| LabelElement
 	| MainElement
-	| MapElement
 	| MarkElement
+	| MathElement
 	| MenuElement
 	| MeterElement
 	| NavigationElement
@@ -1877,18 +2478,23 @@ type FlowContentNoInteractive =
 	| QuoteElement
 	| RubyElement
 	| SampleElement
-	| SearchElement
 	| ScriptElement
+	| SearchElement
 	| SectionElement
+	| SelectElement
 	| SlotElement
 	| SmallElement
 	| SpanElement
+	| StrikethroughElement
 	| StrongEmphasisElement
 	| SubscriptElement
 	| SuperscriptElement
+	| SvgElement
 	| TableElement
 	| TemplateElement
+	| TextareaElement
 	| TimeElement
+	| UnarticulatedAnnotationElement
 	| UnorderedListElement
 	| VariableElement
 	| VideoElement
@@ -1896,15 +2502,55 @@ type FlowContentNoInteractive =
 
 export type FlowIfMapDescendant = AreaElement
 
-export type FlowWhenItemprop = LinkElement | MetaElement
+export type FlowIfItempropAttribute = LinkElement | MetaElement
 
-export type FlowContent = FlowContentNoInteractive | InteractiveContent
+export type FlowContentAll =
+	| FlowContent
+	| FlowIfMapDescendant
+	| FlowIfItempropAttribute
 
-export type SectioningContent =
-	| ArticleElement
-	| AsideElement
-	| NavigationElement
-	| SectionElement
+export type FormContent =
+	| ButtonElement
+	| FieldsetElement
+	| InputElement
+	| LabelElement
+	| MeterElement
+	| ObjectElement
+	| OutputElement
+	| ProgressElement
+	| SelectElement
+	| TextareaElement
+
+export type FormContentLabelable =
+	| ButtonElement
+	| InputElement
+	| MeterElement
+	| OutputElement
+	| ProgressElement
+	| SelectElement
+	| TextareaElement
+
+export type FormContentListed =
+	| ButtonElement
+	| FieldsetElement
+	| InputElement
+	| ObjectElement
+	| OutputElement
+	| SelectElement
+	| TextareaElement
+
+export type FormContentResettable =
+	| InputElement
+	| OutputElement
+	| SelectElement
+	| TextareaElement
+
+export type FormContentSubmittable =
+	| ButtonElement
+	| InputElement
+	| ObjectElement
+	| SelectElement
+	| TextareaElement
 
 export type HeadingContent =
 	| Heading1Element
@@ -1913,7 +2559,60 @@ export type HeadingContent =
 	| Heading4Element
 	| Heading5Element
 	| Heading6Element
+	| HeadingElement
 	| HeadingGroupElement
+
+export type InteractiveContent =
+	| ButtonElement
+	| DetailsElement
+	| EmbedElement
+	| IframeElement
+	| LabelElement
+	| SelectElement
+	| TextareaElement
+
+export type InteractiveIfHrefAttribute = AnchorElement
+
+export type InteractiveIfControlsAttribute = AudioElement | VideoElement
+
+export type InteractiveIfUsemapAttribute = ImageElement | ObjectElement
+
+export type InteractiveIfTypeAttributeNotHiddenState = InputElement
+
+export type InteractiveContentAll =
+	| InteractiveContent
+	| InteractiveIfControlsAttribute
+	| InteractiveIfHrefAttribute
+	| InteractiveIfTypeAttributeNotHiddenState
+	| InteractiveIfUsemapAttribute
+
+export type ListContent =
+	| DescriptionDetailsElement
+	| DescriptionListElement
+	| DescriptionTermElement
+	| ListItemElement
+	| OrderedListElement
+	| UnorderedListElement
+
+export type MetadataContent =
+	| BaseElement
+	| LinkElement
+	| MetaElement
+	| NoscriptElement
+	| ScriptElement
+	| StyleElement
+	| TitleElement
+
+export type MiscellaneousContent =
+	| FigcaptionElement
+	| LegendElement
+	| MapElement
+	| OptionElement
+	| OptionGroupElement
+	| RubyFallbackParenthesisElement
+	| RubyTextElement
+	| SourceElement
+	| SummaryElement
 
 export type PhrasingContent =
 	| AbbreviationElement
@@ -1921,6 +2620,7 @@ export type PhrasingContent =
 	| BidirectionalIsolateElement
 	| BidirectionalTextOverrideElement
 	| BreakElement
+	| BringAttentionElement
 	| ButtonElement
 	| CanvasElement
 	| CiteElement
@@ -1928,14 +2628,16 @@ export type PhrasingContent =
 	| DataElement
 	| DatalistElement
 	| DefinitionElement
-	| EmphasisElement
 	| EmbedElement
+	| EmphasisElement
+	| IdiomaticTextElement
 	| IframeElement
 	| ImageElement
 	| InputElement
 	| KeyboardElement
 	| LabelElement
 	| MarkElement
+	| MathElement
 	| MeterElement
 	| NoscriptElement
 	| ObjectElement
@@ -1950,88 +2652,51 @@ export type PhrasingContent =
 	| SlotElement
 	| SmallElement
 	| SpanElement
+	| StrikethroughElement
 	| StrongEmphasisElement
 	| SubscriptElement
 	| SuperscriptElement
+	| SvgElement
 	| TemplateElement
 	| TextareaElement
 	| TimeElement
+	| UnarticulatedAnnotationElement
 	| VariableElement
 	| VideoElement
 	| WordBreakOpportunityElement
 
-export type EmbeddedContent =
-	| AudioElement
-	| CanvasElement
-	| EmbedElement
-	| IframeElement
-	| ImageElement
-	| ObjectElement
-	| PictureElement
-	| VideoElement
+export type ScriptSupportingContent = ScriptElement | TemplateElement
 
-export type InteractiveContent =
-	| ButtonElement
-	| DetailsElement
-	| EmbedElement
-	| IframeElement
-	| LabelElement
-	| SelectElement
-	| TextareaElement
+export type SectioningContent =
+	| ArticleElement
+	| AsideElement
+	| NavigationElement
+	| SectionElement
 
-export type InteractiveWhenHref = AnchorElement
+export type TabularElements =
+	| ColumnElement
+	| ColumnGroupElement
+	| TableBodyElement
+	| TableDataCellElement
+	| TableElement
+	| TableFooterElement
+	| TableHeadElement
+	| TableHeaderCellElement
+	| TableRowElement
 
-export type InteractiveWhenControls = AudioElement | VideoElement
-
-export type InteractiveWhenUsemap = ImageElement | ObjectElement
-
-export type InteractiveWhenType = InputElement
-
-export type FormContent =
-	| ButtonElement
-	| FieldsetElement
-	| InputElement
-	| LabelElement
-	| MeterElement
-	| ObjectElement
-	| OutputElement
-	| ProgressElement
-	| SelectElement
-	| TextareaElement
-
-export type FormListedContent =
-	| ButtonElement
-	| FieldsetElement
-	| InputElement
-	| ObjectElement
-	| OutputElement
-	| SelectElement
-	| TextareaElement
-
-export type FormLabelableContent =
-	| ButtonElement
-	| InputElement
-	| MeterElement
-	| OutputElement
-	| ProgressElement
-	| SelectElement
-	| TextareaElement
-
-export type FormSubmittableContent =
-	| ButtonElement
-	| InputElement
-	| ObjectElement
-	| SelectElement
-	| TextareaElement
-
-export type FormResettableContent =
-	| InputElement
-	| OutputElement
-	| SelectElement
-	| TextareaElement
-
-export type Elem =
-	| FlowContent
-	| PhrasingContent
+export type ElementAny =
+	| BaseElements
+	| CaptionElement
+	| EmbeddedContent
+	| FlowContentAll
+	| FormContent
 	| HeadingContent
+	| InteractiveContentAll
+	| ListContent
+	| MetadataContent
+	| MiscellaneousContent
+	| PhrasingContent
+	| ScriptSupportingContent
 	| SectioningContent
+	| TabularElements
+	| TrackElement

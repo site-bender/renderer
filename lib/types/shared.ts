@@ -1,22 +1,25 @@
 import type { Operation } from "@sitebender/operations/lib/types"
 import type { Autocapitalize } from "./unions"
-import type { Elem } from "./elements"
+import type { ElementAny } from "./elements"
 
-export interface SBElement {
-	children?: Array<TextNode | Elem>
+export interface ElementRoot {
+	readonly tagName: ElementAny["tagName"]
+}
+
+export interface ElementBase<T> extends ElementRoot {
+	children?: Array<T>
 	dataset?: {
 		[key: string]: string | number
 	}
 	display?: Operation
 	publishes?: {
-		[key in HTMLEvent]: {}
+		[key in HTMLEvent]: unknown
 	}
 	scripts?: Array<string>
 	stylesheets?: Array<string>
 	subscribesTo?: {
-		[key: string]: {}
+		[key: string]: unknown
 	}
-	readonly tagName: string
 	validation?: Operation
 }
 
@@ -63,6 +66,30 @@ export type FormEvent = "formdata" | "reset" | "submit"
 export type FullscreenEvent = "fullscreenchange" | "fullscreenerror"
 
 export type HTMLEvent = "cancel" | "change" | "error" | "load"
+
+export type InputElementTypes =
+	| "button"
+	| "checkbox"
+	| "color"
+	| "date"
+	| "datetime-local"
+	| "email"
+	| "file"
+	| "hidden"
+	| "image"
+	| "month"
+	| "number"
+	| "password"
+	| "radio"
+	| "range"
+	| "reset"
+	| "search"
+	| "submit"
+	| "tel"
+	| "text"
+	| "time"
+	| "url"
+	| "week"
 
 export type KeyboardEvent = "keydown" | "keyup"
 
@@ -151,7 +178,6 @@ export type GlobalAttributes = {
 	autocapitalize?: Autocapitalize
 	class?: string
 	contenteditable?: "" | boolean
-	dataset?: Record<string, string>
 	dir?: "auto" | "ltr" | "rtl"
 	draggable?: boolean
 	enterkeyhint?:

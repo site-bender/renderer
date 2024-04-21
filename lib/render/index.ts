@@ -1,39 +1,59 @@
-import type { Elem } from "../types/elements"
+import type { ElementAny, RenderOptions } from "../types/elements"
+import { SECTIONING_ELEMENTS } from "../constants"
 
-type Validatable = HTMLInputElement & {
-	validate: () => void
+type ValidatableElement = (
+	| HTMLInputElement
+	| HTMLSelectElement
+	| HTMLTextAreaElement
+) & {
+	validate: (value: string) => void
 }
 
-export default function render(config: Elem) {
-	const {
-		attributes = {},
-		children = [],
-		dataset = {},
-		tagName,
-		validation,
-	} = config
+export type RenderF = (
+	component: ElementAny,
+) => (options?: RenderOptions) => HTMLElement | ValidatableElement
 
-	const elem = document.createElement(tagName)
+const render: RenderF =
+	component =>
+	(options = {} as RenderOptions) => {
+		const { level = 0 } = options
+		const {
+			attributes = {},
+			children = [],
+			dataset = {},
+			tagName,
+			validation,
+		} = component
 
-	Object.entries(attributes).forEach(([attr, value]) =>
-		elem.setAttribute(attr, value as string),
-	)
+		const elem = document.createElement(
+			tagName === "HN" ? `H${level}` : tagName,
+		)
 
-	Object.entries(dataset).forEach(([attr, value]) =>
-		elem.setAttribute(`data-${attr}`, value as string),
-	)
+		Object.entries(attributes).forEach(([attr, value]) =>
+			elem.setAttribute(attr, value),
+		)
 
-	if (validation) {
-		;(elem as Validatable).validate = function () {
-			console.log("validate", (this as Validatable).value)
+		Object.entries(dataset).forEach(([attr, value]) =>
+			elem.setAttribute(`data-${attr}`, `${value}`),
+		)
+
+		if (validation) {
+			;(elem as ValidatableElement).validate = function () {
+				console.log("validate", this.value)
+			}
 		}
+
+		children.forEach(child =>
+			typeof child === "string"
+				? elem.appendChild(document.createTextNode(child))
+				: elem.appendChild(
+						render(child as ElementAny)({
+							level: SECTIONING_ELEMENTS.includes(tagName) ? level + 1 : level,
+						}),
+					),
+		)
+
+		return elem
 	}
 
-	children.forEach(child =>
-		typeof child === "string"
-			? elem.appendChild(document.createTextNode(child))
-			: elem.appendChild(render(child as Elem)),
-	)
-
-	return elem
-}
+export default render
