@@ -12,7 +12,7 @@ import isMetadataContent from "./lib/guards/isMetadataContent"
 import isPhrasingContent from "./lib/guards/isPhrasingContent"
 import isScriptSupportingContent from "./lib/guards/isScriptSupportingContent"
 import isSectioningContent from "./lib/guards/isSectioningContent"
-import render from "./lib/render"
+import renderTo from "./lib/renderTo"
 
 export {
 	collectLinked,
@@ -29,5 +29,5 @@ export {
 	isPhrasingContent,
 	isScriptSupportingContent,
 	isSectioningContent,
-	render,
+	renderTo,
 }
