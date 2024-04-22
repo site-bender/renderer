@@ -214,4 +214,7 @@ export type GlobalAttributes = {
 	translate?: "" | "no" | "yes"
 }
 
-export type TextNode = string
+export type TextNode = {
+	children: [string]
+	readonly tagName: "TEXTNODE"
+}

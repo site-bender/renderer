@@ -15,21 +15,41 @@ test("returns the element and children", () => {
 				{
 					children: [
 						{
-							children: ["This is the title of the article"],
+							children: [
+								{
+									children: ["This is the title of the article"],
+									tagName: "TEXTNODE",
+								},
+							],
 							tagName: "HN",
 						},
 						{
-							children: ["Hi, y'all. Here is the text of the paragraph."],
+							children: [
+								{
+									children: ["Hi, y'all. Here is the text of the paragraph."],
+									tagName: "TEXTNODE",
+								},
+							],
 							tagName: "P",
 						},
 						{
 							children: [
 								{
-									children: ["This is the subtitle"],
+									children: [
+										{
+											children: ["This is the subtitle"],
+											tagName: "TEXTNODE",
+										},
+									],
 									tagName: "HN",
 								},
 								{
-									children: ["This is the subtext. Shhh."],
+									children: [
+										{
+											children: ["This is the subtext. Shhh."],
+											tagName: "TEXTNODE",
+										},
+									],
 									tagName: "P",
 								},
 							],

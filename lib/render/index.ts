@@ -1,5 +1,6 @@
 import type { ElementAny, RenderOptions } from "../types/elements"
 import { SECTIONING_ELEMENTS } from "../constants"
+import { TextNode } from "../types/shared"
 
 type ValidatableElement = (
 	| HTMLInputElement
@@ -44,8 +45,10 @@ const render: RenderF =
 		}
 
 		children.forEach(child =>
-			typeof child === "string"
-				? elem.appendChild(document.createTextNode(child))
+			(child as TextNode).tagName === "TEXTNODE"
+				? elem.appendChild(
+						document.createTextNode((child as TextNode).children[0]),
+					)
 				: elem.appendChild(
 						render(child as ElementAny)({
 							level: SECTIONING_ELEMENTS.includes(tagName) ? level + 1 : level,
