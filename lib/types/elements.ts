@@ -355,7 +355,6 @@ export interface BlockquoteElement
 
 export interface BodyElement extends ElementBase<TextNode | FlowContentAll> {
 	attributes?: GlobalAttributes
-	children?: Array<TextNode | FlowContentAll>
 	readonly tagName: "BODY"
 }
 
@@ -987,6 +986,13 @@ export interface FormElement
 		"target"?: "_blank" | "_parent" | "_self" | "_top" | "_unfencedTop"
 	}
 	readonly tagName: "FORM"
+}
+
+export interface FragmentElement
+	extends ElementBase<TextNode | FlowContentAll> {
+	attributes?: never
+	dataset?: never
+	readonly tagName: "FRAGMENT"
 }
 
 export interface HeadElement extends ElementBase<TextNode | MetadataContent> {
@@ -2605,6 +2611,7 @@ export type MetadataContent =
 
 export type MiscellaneousContent =
 	| FigcaptionElement
+	| FragmentElement
 	| LegendElement
 	| MapElement
 	| OptionElement

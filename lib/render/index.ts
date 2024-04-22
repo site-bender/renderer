@@ -10,25 +10,37 @@ type ValidatableElement = (
 	validate: (value: string) => void
 }
 
-export type RenderF = (
-	component: ElementAny,
-) => (options?: RenderOptions) => HTMLElement | ValidatableElement
+export type RenderToF = (
+	parent: Node,
+) => (component: ElementAny | TextNode) => (options?: RenderOptions) => void
 
-const render: RenderF =
+const renderTo: RenderToF =
+	parent =>
 	component =>
 	(options = {} as RenderOptions) => {
-		const { level = 0 } = options
+		const { level: lvl = 0 } = options
 		const {
 			attributes = {},
 			children = [],
 			dataset = {},
 			tagName,
 			validation,
-		} = component
+		} = component as ElementAny
 
-		const elem = document.createElement(
-			tagName === "HN" ? `H${level}` : tagName,
-		)
+		const level =
+			SECTIONING_ELEMENTS.includes(tagName) || tagName === "FRAGMENT"
+				? lvl + 1
+				: lvl
+
+		if (tagName === "FRAGMENT") {
+			children.forEach(child =>
+				renderTo(parent)(child as ElementAny | TextNode)({ level }),
+			)
+
+			return
+		}
+
+		const elem = document.createElement(tagName === "HN" ? `H${lvl}` : tagName)
 
 		Object.entries(attributes).forEach(([attr, value]) =>
 			elem.setAttribute(attr, value),
@@ -44,19 +56,25 @@ const render: RenderF =
 			}
 		}
 
-		children.forEach(child =>
-			(child as TextNode).tagName === "TEXTNODE"
-				? elem.appendChild(
-						document.createTextNode((child as TextNode).children[0]),
-					)
-				: elem.appendChild(
-						render(child as ElementAny)({
-							level: SECTIONING_ELEMENTS.includes(tagName) ? level + 1 : level,
-						}),
-					),
-		)
+		children.forEach(child => {
+			if ((child as TextNode).tagName === "TEXTNODE") {
+				elem.appendChild(
+					document.createTextNode((child as TextNode).children[0] || ""),
+				)
 
-		return elem
+				parent.appendChild(elem)
+
+				return
+			}
+
+			renderTo(elem)(child as ElementAny)({ level })
+
+			parent.appendChild(elem)
+
+			return
+		})
+
+		return
 	}
 
-export default render
+export default renderTo

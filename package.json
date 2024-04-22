@@ -1,6 +1,6 @@
 {
 	"name": "@sitebender/renderer",
-	"version": "0.0.8",
+	"version": "0.0.9",
 	"description": "Renderer module for rendering DOM from JSON.",
 	"license": "MIT",
 	"author": "Charles F. Munat <coder@craft-code.dev>",
