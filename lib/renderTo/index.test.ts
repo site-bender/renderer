@@ -211,7 +211,7 @@ test("[renderTo] allows deep nesting and increments headings", () => {
 																validation: {
 																	operand: 7,
 																	operation: "lessThan",
-																	returns: "number",
+																	returns: "boolean",
 																	test: 9,
 																},
 															},

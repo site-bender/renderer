@@ -4,13 +4,15 @@ import type { TextNode } from "../types/shared"
 import compose from "@sitebender/operations/lib/operations/compose"
 
 import { SECTIONING_ELEMENTS } from "../constants"
+import { Option } from "@sitebender/fp/lib/option"
+import { CastableValue, Reify } from "@sitebender/operations/lib/types"
 
 type ValidatableElement = (
 	| HTMLInputElement
 	| HTMLSelectElement
 	| HTMLTextAreaElement
 ) & {
-	validate: (value: string) => void
+	validate: (value: Option<Reify<CastableValue>>) => void
 }
 
 export type RenderToF = (
@@ -46,7 +48,7 @@ const renderTo: RenderToF =
 		const elem = document.createElement(tagName === "HN" ? `H${lvl}` : tagName)
 
 		Object.entries(attributes).forEach(([attr, value]) =>
-			elem.setAttribute(attr, value),
+			elem.setAttribute(attr, String(value)),
 		)
 
 		Object.entries(dataset).forEach(([attr, value]) =>
