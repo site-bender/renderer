@@ -1,10 +1,10 @@
 import { expect, test } from "vitest"
 
-import hasChild from "."
+import hasDescendant from "."
 
-test("returns true when object has child with the tagName", () => {
+test("[hasDescendant] (guards) returns true when object has child with the tagName", () => {
 	expect(
-		hasChild({
+		hasDescendant({
 			children: [
 				{
 					children: [{ tagName: "AREA" }, { tagName: "P" }, { tagName: "A" }],
@@ -19,9 +19,9 @@ test("returns true when object has child with the tagName", () => {
 	).toBe(true)
 })
 
-test("returns true when object has child with one of `tagNames`", () => {
+test("[hasDescendant] (guards) returns true when object has child with one of `tagNames`", () => {
 	expect(
-		hasChild({
+		hasDescendant({
 			children: [
 				{
 					children: [{ tagName: "AREA" }, { tagName: "P" }, { tagName: "A" }],
@@ -36,9 +36,9 @@ test("returns true when object has child with one of `tagNames`", () => {
 	).toBe(true)
 })
 
-test("returns false when object does not have child with one of `tagNames`", () => {
+test("[hasDescendant] (guards) returns false when object does not have child with one of `tagNames`", () => {
 	expect(
-		hasChild({
+		hasDescendant({
 			children: [
 				{
 					children: [{ tagName: "AREA" }, { tagName: "P" }, { tagName: "A" }],

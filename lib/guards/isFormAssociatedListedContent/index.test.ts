@@ -1,22 +1,22 @@
 import { expect, test } from "vitest"
 
-import isFormAssociatedContent from "."
+import isFormAssociatedListedContent from "."
 
-test("returns true for form-associated content elements", () => {
-	expect(isFormAssociatedContent({ tagName: "BUTTON" })()).toBe(true)
-	expect(isFormAssociatedContent({ tagName: "FIELDSET" })()).toBe(true)
-	expect(isFormAssociatedContent({ tagName: "INPUT" })()).toBe(true)
-	expect(isFormAssociatedContent({ tagName: "OBJECT" })()).toBe(true)
-	expect(isFormAssociatedContent({ tagName: "OUTPUT" })()).toBe(true)
-	expect(isFormAssociatedContent({ tagName: "SELECT" })()).toBe(true)
-	expect(isFormAssociatedContent({ tagName: "TEXTAREA" })()).toBe(true)
+test("[isFormAssociatedListedContent] (guards) returns true for form-associated listed content elements", () => {
+	expect(isFormAssociatedListedContent({ tagName: "BUTTON" })()).toBe(true)
+	expect(isFormAssociatedListedContent({ tagName: "FIELDSET" })()).toBe(true)
+	expect(isFormAssociatedListedContent({ tagName: "INPUT" })()).toBe(true)
+	expect(isFormAssociatedListedContent({ tagName: "OBJECT" })()).toBe(true)
+	expect(isFormAssociatedListedContent({ tagName: "OUTPUT" })()).toBe(true)
+	expect(isFormAssociatedListedContent({ tagName: "SELECT" })()).toBe(true)
+	expect(isFormAssociatedListedContent({ tagName: "TEXTAREA" })()).toBe(true)
 })
 
-test("returns false for non-form-associated content elements", () => {
-	expect(isFormAssociatedContent({ tagName: "ABBR" })()).toBe(false)
-	expect(isFormAssociatedContent({ tagName: "DATALIST" })()).toBe(false)
-	expect(isFormAssociatedContent({ tagName: "FIGURE" })()).toBe(false)
-	expect(isFormAssociatedContent({ tagName: "P" })()).toBe(false)
-	expect(isFormAssociatedContent({ tagName: "SECTION" })()).toBe(false)
-	expect(isFormAssociatedContent({ tagName: "TEMPLATE" })()).toBe(false)
+test("[isFormAssociatedListedContent] (guards) returns false for non-form-associated listed content elements", () => {
+	expect(isFormAssociatedListedContent({ tagName: "ABBR" })()).toBe(false)
+	expect(isFormAssociatedListedContent({ tagName: "DATALIST" })()).toBe(false)
+	expect(isFormAssociatedListedContent({ tagName: "FIGURE" })()).toBe(false)
+	expect(isFormAssociatedListedContent({ tagName: "P" })()).toBe(false)
+	expect(isFormAssociatedListedContent({ tagName: "SECTION" })()).toBe(false)
+	expect(isFormAssociatedListedContent({ tagName: "TEMPLATE" })()).toBe(false)
 })

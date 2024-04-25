@@ -1,19 +1,19 @@
 import { expect, test } from "vitest"
 
-import isEmbeddedContent from "."
+import isSectioningContent from "."
 
-test("returns true for embedded content elements", () => {
-	expect(isEmbeddedContent({ tagName: "ARTICLE" })()).toBe(true)
-	expect(isEmbeddedContent({ tagName: "ASIDE" })()).toBe(true)
-	expect(isEmbeddedContent({ tagName: "NAV" })()).toBe(true)
-	expect(isEmbeddedContent({ tagName: "SECTION" })()).toBe(true)
+test("[isSectioningContent] (guards) returns true for sectioning content elements", () => {
+	expect(isSectioningContent({ tagName: "ARTICLE" })()).toBe(true)
+	expect(isSectioningContent({ tagName: "ASIDE" })()).toBe(true)
+	expect(isSectioningContent({ tagName: "NAV" })()).toBe(true)
+	expect(isSectioningContent({ tagName: "SECTION" })()).toBe(true)
 })
 
-test("returns false for non-embedded content elements", () => {
-	expect(isEmbeddedContent({ tagName: "ABBR" })()).toBe(false)
-	expect(isEmbeddedContent({ tagName: "DATALIST" })()).toBe(false)
-	expect(isEmbeddedContent({ tagName: "INPUT" })()).toBe(false)
-	expect(isEmbeddedContent({ tagName: "OUTPUT" })()).toBe(false)
-	expect(isEmbeddedContent({ tagName: "SELECT" })()).toBe(false)
-	expect(isEmbeddedContent({ tagName: "TEMPLATE" })()).toBe(false)
+test("[isSectioningContent] (guards) returns false for non-sectioning content elements", () => {
+	expect(isSectioningContent({ tagName: "ABBR" })()).toBe(false)
+	expect(isSectioningContent({ tagName: "DATALIST" })()).toBe(false)
+	expect(isSectioningContent({ tagName: "INPUT" })()).toBe(false)
+	expect(isSectioningContent({ tagName: "OUTPUT" })()).toBe(false)
+	expect(isSectioningContent({ tagName: "SELECT" })()).toBe(false)
+	expect(isSectioningContent({ tagName: "TEMPLATE" })()).toBe(false)
 })

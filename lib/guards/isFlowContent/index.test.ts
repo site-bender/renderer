@@ -2,7 +2,7 @@ import { expect, test } from "vitest"
 
 import isFlowContent from "."
 
-test("returns true for flow content elements", () => {
+test("[isFlowContent] (guards) returns true for flow content elements", () => {
 	expect(isFlowContent({ tagName: "ABBR" })()).toBe(true)
 	expect(isFlowContent({ tagName: "CANVAS" })()).toBe(true)
 	expect(isFlowContent({ tagName: "EMBED" })()).toBe(true)
@@ -15,14 +15,14 @@ test("returns true for flow content elements", () => {
 	expect(isFlowContent({ tagName: "VIDEO" })()).toBe(true)
 })
 
-test("returns false for non-flow content elements", () => {
+test("[isFlowContent] (guards) returns false for non-flow content elements", () => {
 	expect(isFlowContent({ tagName: "BASE" })()).toBe(false)
 	expect(isFlowContent({ tagName: "LINK" })()).toBe(false)
 	expect(isFlowContent({ tagName: "META" })()).toBe(false)
 	expect(isFlowContent({ tagName: "TITLE" })()).toBe(false)
 })
 
-test("returns true for AREA when descendant of MAP", () => {
+test("[isFlowContent] (guards) returns true for AREA when descendant of MAP", () => {
 	expect(
 		isFlowContent({ tagName: "AREA" })({
 			ancestors: ["ARTICLE", "SECTION", "MAP"],
@@ -30,7 +30,7 @@ test("returns true for AREA when descendant of MAP", () => {
 	).toBe(true)
 })
 
-test("returns false for MAP when not a descendant of AREA", () => {
+test("[isFlowContent] (guards) returns false for MAP when not a descendant of AREA", () => {
 	expect(
 		isFlowContent({ tagName: "AREA" })({
 			ancestors: ["ARTICLE", "SECTION"],
@@ -38,7 +38,7 @@ test("returns false for MAP when not a descendant of AREA", () => {
 	).toBe(false)
 })
 
-test("returns true for LINK and META when itemprop attribute present", () => {
+test("[isFlowContent] (guards) returns true for LINK and META when itemprop attribute present", () => {
 	expect(
 		isFlowContent({ attributes: { itemprop: "prop" }, tagName: "LINK" })(),
 	).toBe(true)
@@ -47,7 +47,7 @@ test("returns true for LINK and META when itemprop attribute present", () => {
 	).toBe(true)
 })
 
-test("returns true for LINK and META when itemprop attribute absent", () => {
+test("[isFlowContent] (guards) returns true for LINK and META when itemprop attribute absent", () => {
 	expect(isFlowContent({ tagName: "LINK" })()).toBe(false)
 	expect(isFlowContent({ tagName: "META" })()).toBe(false)
 })

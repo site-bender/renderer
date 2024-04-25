@@ -1,6 +1,9 @@
 import type { ElementAny, RenderOptions } from "../types/elements"
+import type { TextNode } from "../types/shared"
+
+import compose from "@sitebender/operations/lib/operations/compose"
+
 import { SECTIONING_ELEMENTS } from "../constants"
-import { TextNode } from "../types/shared"
 
 type ValidatableElement = (
 	| HTMLInputElement
@@ -51,15 +54,15 @@ const renderTo: RenderToF =
 		)
 
 		if (validation) {
-			;(elem as ValidatableElement).validate = function () {
-				console.log("validate", this.value)
-			}
+			const e = elem as ValidatableElement
+
+			e.validate = compose(validation)
 		}
 
 		children.forEach(child => {
 			if ((child as TextNode).tagName === "TEXTNODE") {
 				elem.appendChild(
-					document.createTextNode((child as TextNode).children[0] || ""),
+					document.createTextNode((child as TextNode).children[0]),
 				)
 
 				parent.appendChild(elem)
@@ -69,10 +72,10 @@ const renderTo: RenderToF =
 
 			renderTo(elem)(child as ElementAny)({ level })
 
-			parent.appendChild(elem)
-
 			return
 		})
+
+		parent.appendChild(elem)
 
 		return
 	}

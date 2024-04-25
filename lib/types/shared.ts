@@ -6,20 +6,17 @@ export interface ElementRoot {
 	readonly tagName: ElementAny["tagName"]
 }
 
-export interface ElementBase<T> extends ElementRoot {
-	children?: Array<T>
+export interface ElementBase<T, U, V, W> extends ElementRoot {
+	attributes?: GlobalAttributes & T
+	children?: Array<U>
 	dataset?: {
 		[key: string]: string | number
 	}
 	display?: Operation
-	publishes?: {
-		[key in HTMLEvent]: unknown
-	}
+	publishes?: V
 	scripts?: Array<string>
 	stylesheets?: Array<string>
-	subscribesTo?: {
-		[key: string]: unknown
-	}
+	subscribesTo?: W
 	validation?: Operation
 }
 

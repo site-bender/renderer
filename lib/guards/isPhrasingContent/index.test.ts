@@ -2,7 +2,7 @@ import { expect, test } from "vitest"
 
 import isPhrasingContent from "."
 
-test("returns true for phrasing content elements", () => {
+test("[isPhrasingContent] (guards) returns true for phrasing content elements", () => {
 	expect(isPhrasingContent({ tagName: "BUTTON" })()).toBe(true)
 	expect(isPhrasingContent({ tagName: "EMBED" })()).toBe(true)
 	expect(isPhrasingContent({ tagName: "KBD" })()).toBe(true)
@@ -12,7 +12,7 @@ test("returns true for phrasing content elements", () => {
 	expect(isPhrasingContent({ tagName: "SVG" })()).toBe(true)
 })
 
-test("returns false for non-phrasing content elements", () => {
+test("[isPhrasingContent] (guards) returns false for non-phrasing content elements", () => {
 	expect(isPhrasingContent({ tagName: "DETAILS" })()).toBe(false)
 	expect(isPhrasingContent({ tagName: "BASE" })()).toBe(false)
 	expect(isPhrasingContent({ tagName: "LINK" })()).toBe(false)
@@ -21,7 +21,7 @@ test("returns false for non-phrasing content elements", () => {
 	expect(isPhrasingContent({ tagName: "TITLE" })()).toBe(false)
 })
 
-test("returns true for MAP when descendant of AREA", () => {
+test("[isPhrasingContent] (guards) returns true for MAP when descendant of AREA", () => {
 	expect(
 		isPhrasingContent({ tagName: "MAP" })({
 			ancestors: ["ARTICLE", "SECTION", "AREA"],
@@ -29,7 +29,7 @@ test("returns true for MAP when descendant of AREA", () => {
 	).toBe(true)
 })
 
-test("returns false for MAP when not a descendant of AREA", () => {
+test("[isPhrasingContent] (guards) returns false for MAP when not a descendant of AREA", () => {
 	expect(
 		isPhrasingContent({ tagName: "MAP" })({
 			ancestors: ["ARTICLE", "SECTION"],
@@ -37,7 +37,7 @@ test("returns false for MAP when not a descendant of AREA", () => {
 	).toBe(false)
 })
 
-test("returns true for LINK and META when itemprop attribute present", () => {
+test("[isPhrasingContent] (guards) returns true for LINK and META when itemprop attribute present", () => {
 	expect(
 		isPhrasingContent({ attributes: { itemprop: "prop" }, tagName: "LINK" })(),
 	).toBe(true)
@@ -46,12 +46,12 @@ test("returns true for LINK and META when itemprop attribute present", () => {
 	).toBe(true)
 })
 
-test("returns true for LINK and META when itemprop attribute absent", () => {
+test("[isPhrasingContent] (guards) returns true for LINK and META when itemprop attribute absent", () => {
 	expect(isPhrasingContent({ tagName: "LINK" })()).toBe(false)
 	expect(isPhrasingContent({ tagName: "META" })()).toBe(false)
 })
 
-test("returns true for A, DEL, INS, or MAP when contains phrasing element(s)", () => {
+test("[isPhrasingContent] (guards) returns true for A, DEL, INS, or MAP when contains phrasing element(s)", () => {
 	expect(
 		isPhrasingContent({
 			children: [
@@ -98,7 +98,7 @@ test("returns true for A, DEL, INS, or MAP when contains phrasing element(s)", (
 	).toBe(true)
 })
 
-test("returns true for A, DEL, INS, or MAP when does not contain phrasing element(s)", () => {
+test("[isPhrasingContent] (guards) returns true for A, DEL, INS, or MAP when does not contain phrasing element(s)", () => {
 	expect(
 		isPhrasingContent({
 			children: [

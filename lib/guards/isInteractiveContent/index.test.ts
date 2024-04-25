@@ -2,7 +2,7 @@ import { expect, test } from "vitest"
 
 import isInteractiveContent from "."
 
-test("returns true for embedded content elements", () => {
+test("[isInteractiveContent] (guards) returns true for interactive content elements", () => {
 	expect(isInteractiveContent({ tagName: "BUTTON" })()).toBe(true)
 	expect(isInteractiveContent({ tagName: "DETAILS" })()).toBe(true)
 	expect(isInteractiveContent({ tagName: "EMBED" })()).toBe(true)
@@ -12,7 +12,7 @@ test("returns true for embedded content elements", () => {
 	expect(isInteractiveContent({ tagName: "TEXTAREA" })()).toBe(true)
 })
 
-test("returns false for non-embedded content elements", () => {
+test("[isInteractiveContent] (guards) returns false for non-interactive content elements", () => {
 	expect(isInteractiveContent({ tagName: "ABBR" })()).toBe(false)
 	expect(isInteractiveContent({ tagName: "DATALIST" })()).toBe(false)
 	expect(isInteractiveContent({ tagName: "INPUT" })()).toBe(false)
@@ -21,17 +21,17 @@ test("returns false for non-embedded content elements", () => {
 	expect(isInteractiveContent({ tagName: "TEMPLATE" })()).toBe(false)
 })
 
-test("returns true for A elements when href attribute present", () => {
+test("[isInteractiveContent] (guards) returns true for A elements when href attribute present", () => {
 	expect(
 		isInteractiveContent({ attributes: { href: "href" }, tagName: "A" })(),
 	).toBe(true)
 })
 
-test("returns false for A elements when href attribute absent", () => {
+test("[isInteractiveContent] (guards) returns false for A elements when href attribute absent", () => {
 	expect(isInteractiveContent({ tagName: "A" })()).toBe(false)
 })
 
-test("returns true for AUDIO and VIDEO elements when controls attribute present", () => {
+test("[isInteractiveContent] (guards) returns true for AUDIO and VIDEO elements when controls attribute present", () => {
 	expect(
 		isInteractiveContent({
 			attributes: { controls: "controls" },
@@ -46,12 +46,12 @@ test("returns true for AUDIO and VIDEO elements when controls attribute present"
 	).toBe(true)
 })
 
-test("returns false for A elements when controls attribute absent", () => {
+test("[isInteractiveContent] (guards) returns false for A elements when controls attribute absent", () => {
 	expect(isInteractiveContent({ tagName: "AUDIO" })()).toBe(false)
 	expect(isInteractiveContent({ tagName: "VIDEO" })()).toBe(false)
 })
 
-test("returns true for IMG and OBJECT elements when usemap attribute present", () => {
+test("[isInteractiveContent] (guards) returns true for IMG and OBJECT elements when usemap attribute present", () => {
 	expect(
 		isInteractiveContent({
 			attributes: { usemap: "usemap" },
@@ -66,18 +66,18 @@ test("returns true for IMG and OBJECT elements when usemap attribute present", (
 	).toBe(true)
 })
 
-test("returns false for A elements when usemap attribute absent", () => {
+test("[isInteractiveContent] (guards) returns false for A elements when usemap attribute absent", () => {
 	expect(isInteractiveContent({ tagName: "IMG" })()).toBe(false)
 	expect(isInteractiveContent({ tagName: "OBJECT" })()).toBe(false)
 })
 
-test("returns true for INPUT elements when type attribute present but not hidden", () => {
+test("[isInteractiveContent] (guards) returns true for INPUT elements when type attribute present but not hidden", () => {
 	expect(
 		isInteractiveContent({ attributes: { type: "type" }, tagName: "INPUT" })(),
 	).toBe(true)
 })
 
-test("returns false for INPUT elements when type attribute present but hidden", () => {
+test("[isInteractiveContent] (guards) returns false for INPUT elements when type attribute present but hidden", () => {
 	expect(
 		isInteractiveContent({
 			attributes: { hidden: "hidden", type: "type" },
@@ -86,7 +86,7 @@ test("returns false for INPUT elements when type attribute present but hidden", 
 	).toBe(false)
 })
 
-test("returns false for INPUT elements when type attribute absent", () => {
+test("[isInteractiveContent] (guards) returns false for INPUT elements when type attribute absent", () => {
 	expect(
 		isInteractiveContent({
 			attributes: { hidden: "hidden" },

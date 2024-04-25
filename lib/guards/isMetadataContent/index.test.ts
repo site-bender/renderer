@@ -2,7 +2,7 @@ import { expect, test } from "vitest"
 
 import isMetadataContent from "."
 
-test("returns true for metadata content elements", () => {
+test("[isMetadataContent] (guards) returns true for metadata content elements", () => {
 	expect(isMetadataContent({ tagName: "BASE" })()).toBe(true)
 	expect(isMetadataContent({ tagName: "LINK" })()).toBe(true)
 	expect(isMetadataContent({ tagName: "META" })()).toBe(true)
@@ -12,7 +12,7 @@ test("returns true for metadata content elements", () => {
 	expect(isMetadataContent({ tagName: "TITLE" })()).toBe(true)
 })
 
-test("returns false for non-metadata content elements", () => {
+test("[isMetadataContent] (guards) returns false for non-metadata content elements", () => {
 	expect(isMetadataContent({ tagName: "ABBR" })()).toBe(false)
 	expect(isMetadataContent({ tagName: "DATALIST" })()).toBe(false)
 	expect(isMetadataContent({ tagName: "INPUT" })()).toBe(false)

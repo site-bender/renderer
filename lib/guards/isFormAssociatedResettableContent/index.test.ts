@@ -1,19 +1,27 @@
 import { expect, test } from "vitest"
 
-import isFormAssociatedContent from "."
+import isFormAssociatedResettableContent from "."
 
-test("returns true for form-associated content elements", () => {
-	expect(isFormAssociatedContent({ tagName: "INPUT" })()).toBe(true)
-	expect(isFormAssociatedContent({ tagName: "OUTPUT" })()).toBe(true)
-	expect(isFormAssociatedContent({ tagName: "SELECT" })()).toBe(true)
-	expect(isFormAssociatedContent({ tagName: "TEXTAREA" })()).toBe(true)
+test("[isFormAssociatedResettableContent] (guards) returns true for form-associated resettable content elements", () => {
+	expect(isFormAssociatedResettableContent({ tagName: "INPUT" })()).toBe(true)
+	expect(isFormAssociatedResettableContent({ tagName: "OUTPUT" })()).toBe(true)
+	expect(isFormAssociatedResettableContent({ tagName: "SELECT" })()).toBe(true)
+	expect(isFormAssociatedResettableContent({ tagName: "TEXTAREA" })()).toBe(
+		true,
+	)
 })
 
-test("returns false for non-form-associated content elements", () => {
-	expect(isFormAssociatedContent({ tagName: "ABBR" })()).toBe(false)
-	expect(isFormAssociatedContent({ tagName: "DATALIST" })()).toBe(false)
-	expect(isFormAssociatedContent({ tagName: "FIGURE" })()).toBe(false)
-	expect(isFormAssociatedContent({ tagName: "P" })()).toBe(false)
-	expect(isFormAssociatedContent({ tagName: "SECTION" })()).toBe(false)
-	expect(isFormAssociatedContent({ tagName: "TEMPLATE" })()).toBe(false)
+test("[isFormAssociatedResettableContent] (guards) returns false for non-form-associated resettable content elements", () => {
+	expect(isFormAssociatedResettableContent({ tagName: "ABBR" })()).toBe(false)
+	expect(isFormAssociatedResettableContent({ tagName: "DATALIST" })()).toBe(
+		false,
+	)
+	expect(isFormAssociatedResettableContent({ tagName: "FIGURE" })()).toBe(false)
+	expect(isFormAssociatedResettableContent({ tagName: "P" })()).toBe(false)
+	expect(isFormAssociatedResettableContent({ tagName: "SECTION" })()).toBe(
+		false,
+	)
+	expect(isFormAssociatedResettableContent({ tagName: "TEMPLATE" })()).toBe(
+		false,
+	)
 })

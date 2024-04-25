@@ -2,7 +2,7 @@ import { expect, test } from "vitest"
 
 import isFormAssociatedContent from "."
 
-test("returns true for form-associated content elements", () => {
+test("[isFormAssociatedContent] (guards) returns true for form-associated content elements", () => {
 	expect(isFormAssociatedContent({ tagName: "BUTTON" })()).toBe(true)
 	expect(isFormAssociatedContent({ tagName: "FIELDSET" })()).toBe(true)
 	expect(isFormAssociatedContent({ tagName: "INPUT" })()).toBe(true)
@@ -15,7 +15,7 @@ test("returns true for form-associated content elements", () => {
 	expect(isFormAssociatedContent({ tagName: "TEXTAREA" })()).toBe(true)
 })
 
-test("returns false for non-form-associated content elements", () => {
+test("[isFormAssociatedContent] (guards) returns false for non-form-associated content elements", () => {
 	expect(isFormAssociatedContent({ tagName: "ABBR" })()).toBe(false)
 	expect(isFormAssociatedContent({ tagName: "DATALIST" })()).toBe(false)
 	expect(isFormAssociatedContent({ tagName: "FIGURE" })()).toBe(false)

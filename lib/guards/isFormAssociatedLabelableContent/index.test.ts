@@ -1,22 +1,26 @@
 import { expect, test } from "vitest"
 
-import isFormAssociatedContent from "."
+import isFormAssociatedLabelableContent from "."
 
-test("returns true for form-associated content elements", () => {
-	expect(isFormAssociatedContent({ tagName: "BUTTON" })()).toBe(true)
-	expect(isFormAssociatedContent({ tagName: "INPUT" })()).toBe(true)
-	expect(isFormAssociatedContent({ tagName: "METER" })()).toBe(true)
-	expect(isFormAssociatedContent({ tagName: "OUTPUT" })()).toBe(true)
-	expect(isFormAssociatedContent({ tagName: "PROGRESS" })()).toBe(true)
-	expect(isFormAssociatedContent({ tagName: "SELECT" })()).toBe(true)
-	expect(isFormAssociatedContent({ tagName: "TEXTAREA" })()).toBe(true)
+test("[isFormAssociatedLabelableContent] (guards) returns true for form-associated labelable content elements", () => {
+	expect(isFormAssociatedLabelableContent({ tagName: "BUTTON" })()).toBe(true)
+	expect(isFormAssociatedLabelableContent({ tagName: "INPUT" })()).toBe(true)
+	expect(isFormAssociatedLabelableContent({ tagName: "METER" })()).toBe(true)
+	expect(isFormAssociatedLabelableContent({ tagName: "OUTPUT" })()).toBe(true)
+	expect(isFormAssociatedLabelableContent({ tagName: "PROGRESS" })()).toBe(true)
+	expect(isFormAssociatedLabelableContent({ tagName: "SELECT" })()).toBe(true)
+	expect(isFormAssociatedLabelableContent({ tagName: "TEXTAREA" })()).toBe(true)
 })
 
-test("returns false for non-form-associated content elements", () => {
-	expect(isFormAssociatedContent({ tagName: "ABBR" })()).toBe(false)
-	expect(isFormAssociatedContent({ tagName: "DATALIST" })()).toBe(false)
-	expect(isFormAssociatedContent({ tagName: "FIGURE" })()).toBe(false)
-	expect(isFormAssociatedContent({ tagName: "P" })()).toBe(false)
-	expect(isFormAssociatedContent({ tagName: "SECTION" })()).toBe(false)
-	expect(isFormAssociatedContent({ tagName: "TEMPLATE" })()).toBe(false)
+test("[isFormAssociatedLabelableContent] (guards) returns false for non-form-associated labelable content elements", () => {
+	expect(isFormAssociatedLabelableContent({ tagName: "ABBR" })()).toBe(false)
+	expect(isFormAssociatedLabelableContent({ tagName: "DATALIST" })()).toBe(
+		false,
+	)
+	expect(isFormAssociatedLabelableContent({ tagName: "FIGURE" })()).toBe(false)
+	expect(isFormAssociatedLabelableContent({ tagName: "P" })()).toBe(false)
+	expect(isFormAssociatedLabelableContent({ tagName: "SECTION" })()).toBe(false)
+	expect(isFormAssociatedLabelableContent({ tagName: "TEMPLATE" })()).toBe(
+		false,
+	)
 })

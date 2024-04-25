@@ -3,13 +3,13 @@ import { a } from "@sitebender/fp"
 type LinkType = "scripts" | "stylesheets"
 type WithAssets = {
 	children?: Array<WithAssets>
-	scripts?: Array<string>
-	stylesheets?: Array<string>
+	scripts?: Array<string> | string
+	stylesheets?: Array<string> | string
 }
 
 type CollectLinked = (
 	type: LinkType,
-) => (configuration: WithAssets) => Array<string>
+) => (configuration: WithAssets | Array<WithAssets>) => Array<string>
 
 const collectLinked: CollectLinked = type => configuration => {
 	const elements = Array.isArray(configuration)
@@ -18,11 +18,17 @@ const collectLinked: CollectLinked = type => configuration => {
 
 	return a.unique(
 		elements.reduce((acc, element) => {
-			const arr = element[type] || []
-			const children = collectLinked(type)(element.children || [])
+			const arr = element[type]
 
-			return acc.concat(arr).concat(children)
-		}, []),
+			if (arr) {
+				const kids = element.children || []
+				const links = collectLinked(type)(kids)
+
+				return acc.concat(arr).concat(links)
+			}
+
+			return acc
+		}, [] as Array<string>),
 	)
 }
 
