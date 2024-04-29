@@ -16,7 +16,7 @@ test("[renderTo] returns the element and children", () => {
 					{
 						children: [
 							{
-								children: ["This is the title of the article"],
+								content: "This is the title of the article",
 								tagName: "TEXTNODE",
 							},
 						],
@@ -25,7 +25,7 @@ test("[renderTo] returns the element and children", () => {
 					{
 						children: [
 							{
-								children: ["Hi, y'all. Here is the text of the paragraph."],
+								content: "Hi, y'all. Here is the text of the paragraph.",
 								tagName: "TEXTNODE",
 							},
 						],
@@ -36,7 +36,7 @@ test("[renderTo] returns the element and children", () => {
 							{
 								children: [
 									{
-										children: ["This is the subtitle"],
+										content: "This is the subtitle",
 										tagName: "TEXTNODE",
 									},
 								],
@@ -45,7 +45,7 @@ test("[renderTo] returns the element and children", () => {
 							{
 								children: [
 									{
-										children: ["This is the subtext. Shhh."],
+										content: "This is the subtext. Shhh.",
 										tagName: "TEXTNODE",
 									},
 								],
@@ -76,7 +76,7 @@ test("[renderTo] handles fragments", () => {
 			{
 				children: [
 					{
-						children: ["This is the title of the article"],
+						content: "This is the title of the article",
 						tagName: "TEXTNODE",
 					},
 				],
@@ -85,7 +85,7 @@ test("[renderTo] handles fragments", () => {
 			{
 				children: [
 					{
-						children: ["Hi, y'all. Here is the text of the paragraph."],
+						content: "Hi, y'all. Here is the text of the paragraph.",
 						tagName: "TEXTNODE",
 					},
 				],
@@ -96,7 +96,7 @@ test("[renderTo] handles fragments", () => {
 					{
 						children: [
 							{
-								children: ["This is the subtitle"],
+								content: "This is the subtitle",
 								tagName: "TEXTNODE",
 							},
 						],
@@ -105,7 +105,7 @@ test("[renderTo] handles fragments", () => {
 					{
 						children: [
 							{
-								children: ["This is the subtext. Shhh."],
+								content: "This is the subtext. Shhh.",
 								tagName: "TEXTNODE",
 							},
 						],
@@ -132,7 +132,7 @@ test("[renderTo] allows deep nesting and increments headings", () => {
 					{
 						children: [
 							{
-								children: ["h1"],
+								content: "h1",
 								tagName: "TEXTNODE",
 							},
 						],
@@ -143,7 +143,7 @@ test("[renderTo] allows deep nesting and increments headings", () => {
 							{
 								children: [
 									{
-										children: ["h2"],
+										content: "h2",
 										tagName: "TEXTNODE",
 									},
 								],
@@ -154,7 +154,7 @@ test("[renderTo] allows deep nesting and increments headings", () => {
 									{
 										children: [
 											{
-												children: ["h3"],
+												content: "h3",
 												tagName: "TEXTNODE",
 											},
 										],
@@ -165,7 +165,7 @@ test("[renderTo] allows deep nesting and increments headings", () => {
 											{
 												children: [
 													{
-														children: ["h4"],
+														content: "h4",
 														tagName: "TEXTNODE",
 													},
 												],
@@ -176,7 +176,7 @@ test("[renderTo] allows deep nesting and increments headings", () => {
 													{
 														children: [
 															{
-																children: ["h5"],
+																content: "h5",
 																tagName: "TEXTNODE",
 															},
 														],
@@ -187,7 +187,7 @@ test("[renderTo] allows deep nesting and increments headings", () => {
 															{
 																children: [
 																	{
-																		children: ["h6"],
+																		content: "h6",
 																		tagName: "TEXTNODE",
 																	},
 																],
@@ -196,7 +196,7 @@ test("[renderTo] allows deep nesting and increments headings", () => {
 															{
 																children: [
 																	{
-																		children: ["The sub-sub-sub-sub-sub text."],
+																		content: "The sub-sub-sub-sub-sub text.",
 																		tagName: "TEXTNODE",
 																	},
 																],

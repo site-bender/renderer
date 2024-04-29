@@ -212,6 +212,6 @@ export type GlobalAttributes = {
 }
 
 export type TextNode = {
-	children: [string]
+	content: string
 	readonly tagName: "TEXTNODE"
 }

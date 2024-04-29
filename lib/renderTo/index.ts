@@ -62,9 +62,7 @@ const renderTo: RenderToF =
 
 		children.forEach(child => {
 			if ((child as TextNode).tagName === "TEXTNODE") {
-				elem.appendChild(
-					document.createTextNode((child as TextNode).children[0]),
-				)
+				elem.appendChild(document.createTextNode((child as TextNode).content))
 
 				parent.appendChild(elem)
 

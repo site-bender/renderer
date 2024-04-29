@@ -2520,6 +2520,7 @@ export interface SubscriptElement
 }
 
 export type SummaryChildren =
+	| TextNode
 	| [HeadingElement, Array<PhrasingContent>]
 	| Array<PhrasingContent>
 
