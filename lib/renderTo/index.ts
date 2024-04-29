@@ -1,17 +1,15 @@
 import type { ElementAny, RenderOptions } from "../types/elements"
 import type { TextNode } from "../types/shared"
 
-import compose from "@sitebender/operations/lib/operations/compose"
-
 import { SECTIONING_ELEMENTS } from "../constants"
 
-type ValidatableElement = (
-	| HTMLInputElement
-	| HTMLSelectElement
-	| HTMLTextAreaElement
-) & {
-	validate: (value: string) => void
-}
+// type ValidatableElement = (
+// 	| HTMLInputElement
+// 	| HTMLSelectElement
+// 	| HTMLTextAreaElement
+// ) & {
+// 	validate: (value: string) => void
+// }
 
 export type RenderToF = (
 	parent: Node,
@@ -27,7 +25,7 @@ const renderTo: RenderToF =
 			children = [],
 			dataset = {},
 			tagName,
-			validation,
+			// validation,
 		} = component as ElementAny
 
 		const level =
@@ -46,18 +44,21 @@ const renderTo: RenderToF =
 		const elem = document.createElement(tagName === "HN" ? `H${lvl}` : tagName)
 
 		Object.entries(attributes).forEach(([attr, value]) =>
-			elem.setAttribute(attr, value),
+			typeof value === "boolean"
+				? value && elem.setAttribute(attr, "")
+				: elem.setAttribute(attr, String(value)),
 		)
 
 		Object.entries(dataset).forEach(([attr, value]) =>
 			elem.setAttribute(`data-${attr}`, `${value}`),
 		)
 
-		if (validation) {
-			const e = elem as ValidatableElement
+		// TODO: Uncomment when Operations refactor complete
+		// if (validation) {
+		// 	const e = elem as ValidatableElement
 
-			e.validate = compose(validation)
-		}
+		// 	e.validate = compose(validation)
+		// }
 
 		children.forEach(child => {
 			if ((child as TextNode).tagName === "TEXTNODE") {

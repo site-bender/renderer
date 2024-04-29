@@ -563,6 +563,7 @@ export type CheckboxInputAttributes = {
 	list?: string
 	name: string
 	readonly type: "checkbox"
+	required?: boolean
 	value?: string
 }
 
@@ -659,6 +660,7 @@ export type DateInputAttributes = {
 	name: string
 	readonly type: "date"
 	readonly?: boolean
+	required?: boolean
 	step?: string
 	value?: string
 }
@@ -668,7 +670,7 @@ export interface DateInputElement
 	tagName: "INPUT"
 }
 
-export type DateTimeInputAttributes = {
+export type DateTimeLocalInputAttributes = {
 	autocapitalize?: Autocapitalize
 	autocomplete?: Autocomplete
 	autofocus?: boolean
@@ -680,12 +682,13 @@ export type DateTimeInputAttributes = {
 	name: string
 	readonly type: "datetime-local"
 	readonly?: boolean
+	required?: boolean
 	step?: string
 	value?: string
 }
 
 export interface DateTimeLocalInputElement
-	extends ElementBase<DateTimeInputAttributes, never, never, never> {
+	extends ElementBase<DateTimeLocalInputAttributes, never, never, never> {
 	tagName: "INPUT"
 }
 
@@ -941,6 +944,7 @@ export type FileInputAttributes = {
 	multiple?: boolean
 	name: string
 	readonly type: "file"
+	required?: boolean
 	value?: string
 }
 
@@ -2332,6 +2336,7 @@ export type SearchInputAttributes = {
 	pattern?: string
 	placeholder?: string
 	readonly type: "search"
+	required?: boolean
 	size?: number | string
 	value?: string
 }

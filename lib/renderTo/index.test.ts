@@ -205,15 +205,24 @@ test("[renderTo] allows deep nesting and increments headings", () => {
 															{
 																attributes: {
 																	name: "search",
+																	required: true,
 																	type: "search",
 																},
 																tagName: "INPUT",
 																validation: {
 																	operand: 7,
 																	operation: "lessThan",
-																	returns: "number",
+																	returns: "boolean",
 																	test: 9,
 																},
+															},
+															{
+																attributes: {
+																	name: "email",
+																	required: false,
+																	type: "email",
+																},
+																tagName: "INPUT",
 															},
 														],
 														tagName: "SECTION",
@@ -241,6 +250,6 @@ test("[renderTo] allows deep nesting and increments headings", () => {
 	})()
 
 	expect(document.body.innerHTML).toStrictEqual(
-		`<main><article><h1>h1</h1><section><h2>h2</h2><section><h3>h3</h3><section><h4>h4</h4><section><h5>h5</h5><section><h6>h6</h6><p>The sub-sub-sub-sub-sub text.</p><input name="search" type="search"></section></section><hr></section></section></section></article></main>`,
+		`<main><article><h1>h1</h1><section><h2>h2</h2><section><h3>h3</h3><section><h4>h4</h4><section><h5>h5</h5><section><h6>h6</h6><p>The sub-sub-sub-sub-sub text.</p><input name="search" required="" type="search"><input name="email" type="email"></section></section><hr></section></section></section></article></main>`,
 	)
 })
