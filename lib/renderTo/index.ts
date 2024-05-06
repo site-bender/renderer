@@ -1,4 +1,4 @@
-import type { ElementAny, RenderOptions } from "../types/elements"
+import type { ElementAny, RenderOptions } from "../types/old-elements"
 import type { TextNode } from "../types/shared"
 
 import { SECTIONING_ELEMENTS } from "../constants"

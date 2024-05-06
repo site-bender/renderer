@@ -83,6 +83,35 @@ export type Autocapitalize =
 	| "words"
 	| "characters"
 
+export type ContentEditable = "" | boolean
+
+export type Dir = "auto" | "ltr" | "rtl"
+
+export type EnterKeyHint =
+	| "done"
+	| "enter"
+	| "go"
+	| "next"
+	| "previous"
+	| "search"
+	| "send"
+
+export type Hidden = "" | "hidden" | "until-found"
+
+export type InputMode =
+	| "decimal"
+	| "email"
+	| "none"
+	| "numeric"
+	| "search"
+	| "tel"
+	| "text"
+	| "url"
+
+export type Popover = "auto" | "manual"
+
+export type Spellcheck = "" | boolean
+
 export type TagName =
 	| "A"
 	| "ABBR"
@@ -197,12 +226,4 @@ export type TagName =
 	| "VIDEO"
 	| "WBR"
 
-export type ReferrerPolicy =
-	| "no-referrer"
-	| "no-referrer-when-downgrade"
-	| "origin"
-	| "origin-when-cross-origin"
-	| "same-origin"
-	| "strict-origin"
-	| "strict-origin-when-cross-origin"
-	| "unsafe-url"
+export type Translate = "" | "no" | "yes"

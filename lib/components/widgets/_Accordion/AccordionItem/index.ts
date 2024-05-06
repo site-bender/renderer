@@ -2,7 +2,7 @@ import type {
 	DetailsChildren,
 	DetailsElement,
 	SummaryElement,
-} from "../../../../types/elements"
+} from "../../../../types/old-elements"
 
 import { generateShortId } from "@sitebender/fp/lib/utilities"
 

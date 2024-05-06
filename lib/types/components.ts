@@ -1,4 +1,4 @@
-import type { ElementAny } from "./elements"
+import type { ElementAny } from "./old-elements"
 import type { Operation } from "@sitebender/operations/lib/types"
 import type { TextNode } from "./shared"
 
