@@ -1,11 +1,10 @@
-import type { ElementAny } from "./elements"
 import type { Operation } from "@sitebender/operations/lib/types"
-import type { TextNode } from "./shared"
+import type { SbElement } from "./elements"
 
 export interface ComponentBase {
 	attributes?: Record<string, string>
 	readonly component: Component["component"]
-	children?: Array<ElementAny | TextNode>
+	children?: Array<SbElement>
 	dataset?: Record<string, string>
 	id?: string
 	scripts?: Array<string>
@@ -15,12 +14,12 @@ export interface ComponentBase {
 export interface AccordionItem extends ComponentBase {
 	readonly component: "accordionItem"
 	open?: boolean
-	title?: Array<ElementAny | TextNode>
+	title?: Array<SbElement>
 }
 
 export interface Accordion extends ComponentBase {
 	readonly component: "accordion"
-	title?: Array<ElementAny | TextNode>
+	title?: Array<SbElement>
 }
 
 export interface Aside extends ComponentBase {

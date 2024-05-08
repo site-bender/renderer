@@ -1,3 +1,3 @@
-import type { ElementRoot } from "./shared"
-
-export interface MathMLElement extends ElementRoot {}
+export interface MathMLElement {
+	tagName: "MATH"
+}

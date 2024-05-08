@@ -1,7 +1,12 @@
-import type { ElementAny, RenderOptions } from "../types/elements"
-import type { TextNode } from "../types/shared"
+import type {
+	SbDataset,
+	SbGlobalAttributes,
+	SbRenderOptions,
+} from "../types/shared"
 
 import { SECTIONING_ELEMENTS } from "../constants"
+import type { SbElement } from "../types/elements"
+import { SbTextNode } from "../types/elements/text-node"
 
 // type ValidatableElement = (
 // 	| HTMLInputElement
@@ -11,14 +16,20 @@ import { SECTIONING_ELEMENTS } from "../constants"
 // 	validate: (value: string) => void
 // }
 
+type FullElement = SbElement & {
+	attributes?: SbGlobalAttributes
+	children?: Array<SbElement>
+	dataset?: SbDataset
+}
+
 export type RenderToF = (
 	parent: Node,
-) => (component: ElementAny | TextNode) => (options?: RenderOptions) => void
+) => (component: FullElement) => (options?: SbRenderOptions) => void
 
 const renderTo: RenderToF =
 	parent =>
 	component =>
-	(options = {} as RenderOptions) => {
+	(options = {} as SbRenderOptions) => {
 		const { level: lvl = 0 } = options
 		const {
 			attributes = {},
@@ -26,7 +37,7 @@ const renderTo: RenderToF =
 			dataset = {},
 			tagName,
 			// validation,
-		} = component as ElementAny
+		} = component
 
 		const level =
 			SECTIONING_ELEMENTS.includes(tagName) || tagName === "FRAGMENT"
@@ -35,7 +46,7 @@ const renderTo: RenderToF =
 
 		if (tagName === "FRAGMENT") {
 			children.forEach(child =>
-				renderTo(parent)(child as ElementAny | TextNode)({ level }),
+				renderTo(parent)(child as FullElement)({ level }),
 			)
 
 			return
@@ -60,18 +71,16 @@ const renderTo: RenderToF =
 		// 	e.validate = compose(validation)
 		// }
 
-		children.forEach(child => {
-			if ((child as TextNode).tagName === "TEXTNODE") {
-				elem.appendChild(
-					document.createTextNode((child as TextNode).children[0]),
-				)
+		children.forEach((child: SbElement) => {
+			if (child.tagName === "TEXTNODE") {
+				elem.appendChild(document.createTextNode((child as SbTextNode).content))
 
 				parent.appendChild(elem)
 
 				return
 			}
 
-			renderTo(elem)(child as ElementAny)({ level })
+			renderTo(elem)(child as FullElement)({ level })
 
 			return
 		})
