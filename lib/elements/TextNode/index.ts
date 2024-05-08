@@ -1,6 +1,6 @@
-import type { TextNode as TextNodeType } from "../../types/shared"
+import { SbTextNode } from "../../types/elements/text-node"
 
-export type TextNodeF = (content: string) => TextNodeType
+export type TextNodeF = (content: string) => SbTextNode
 
 const TextNode: TextNodeF = content => ({
 	content,

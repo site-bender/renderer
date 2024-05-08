@@ -1,14 +1,19 @@
-import { SbGlobalAttributeOverrides, Override } from "../../shared"
-import { AriaRole } from "../../unions"
-import { SbPhrasingContent } from "../categories/phrasing"
+import type {
+	SbAriaRole,
+	SbDataset,
+	Override,
+	SbGlobalAttributeOverrides,
+} from "../../shared"
+import type { SbPhrasingContent } from "../categories/phrasing"
 
 export interface SbRubyTextElement {
 	attributes?: Override<
 		Partial<HTMLElement>,
 		SbGlobalAttributeOverrides & {
-			role?: AriaRole
+			role?: SbAriaRole
 		}
 	>
 	children?: Array<SbPhrasingContent>
+	dataset?: SbDataset
 	readonly tagName: "RT"
 }

@@ -1,42 +1,42 @@
 import { expect, test } from "vitest"
 
 import pickGlobalAttributes from "."
-import {
-	Autocapitalize,
-	ContentEditable,
-	Dir,
-	EnterKeyHint,
-	Hidden,
-	InputMode,
-	Popover,
-	Spellcheck,
-	Translate,
-} from "../../types/unions"
+import type {
+	SbAutocapitalize,
+	SbContentEditable,
+	SbDirection,
+	SbEnterKeyHint,
+	SbHidden,
+	SbInputMode,
+	SbPopover,
+	SbSpellcheck,
+	SbTranslate,
+} from "../../types/shared"
 
 const globalAttributes = {
 	accesskey: "B",
-	autocapitalize: "sentences" as Autocapitalize,
+	autocapitalize: "sentences" as SbAutocapitalize,
 	class: "no-class",
-	contenteditable: true as ContentEditable,
-	dir: "ltr" as Dir,
+	contenteditable: true as SbContentEditable,
+	dir: "ltr" as SbDirection,
 	draggable: false,
-	enterkeyhint: "done" as EnterKeyHint,
-	hidden: "" as Hidden,
+	enterkeyhint: "done" as SbEnterKeyHint,
+	hidden: "" as SbHidden,
 	id: "id",
 	inert: true,
-	inputmode: "numeric" as InputMode,
+	inputmode: "numeric" as SbInputMode,
 	itemid: "itemid",
 	itemref: "itemref",
 	itemscope: true,
 	itemtype: "itemtype",
 	lang: "en",
 	nonce: "123",
-	popover: "auto" as Popover,
-	spellcheck: "" as Spellcheck,
-	style: "style",
+	popover: "auto" as SbPopover,
+	spellcheck: "" as SbSpellcheck,
+	style: { color: "red" } as CSSStyleDeclaration,
 	tabindex: "-1",
 	title: "title",
-	translate: "no" as Translate,
+	translate: "no" as SbTranslate,
 }
 
 test("[pickGlobalAttributes] (guards) returns all type-checked global attributes", () => {

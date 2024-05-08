@@ -1,20 +1,17 @@
 import type { Override } from "../../../../types/shared"
-import type {
-	DetailsAttributes,
-	DetailsChildren,
-	DetailsElement,
-	SummaryElement,
-} from "../../../../types/old-elements"
 import pickGlobalAttributes from "../../../../guards/pickGlobalAttributes"
 import isBoolean from "../../../../guards/isBoolean"
 import isString from "../../../../guards/isString"
 import Summary from "./Summary"
 import { generateShortId } from "@sitebender/fp/lib/utilities"
+import { SbDetailsElement } from "../../../../types/elements/interactive/details"
+import { SbSummaryElement } from "../../../../types/elements/interactive/summary"
+import { SbFlowContent } from "../../../../types/elements/categories/flow"
 
 export const filterAttributes = (
-	attributes: DetailsAttributes,
-): DetailsAttributes => {
-	const { name, open, ...attrs } = attributes
+	attributes: SbDetailsElement["attributes"],
+) => {
+	const { name, open, ...attrs } = attributes || {}
 	const globals = pickGlobalAttributes(attrs)
 
 	return {
@@ -26,21 +23,23 @@ export const filterAttributes = (
 
 export type DetailsF = (
 	config: Override<
-		DetailsElement,
+		SbDetailsElement,
 		{
-			children: Array<Exclude<DetailsChildren, SummaryElement>>
+			children: Array<
+				Exclude<SbDetailsElement["children"], { tagName: "SUMMARY" }>
+			>
 			id?: string
 			isOpen?: boolean
-			summary: string | SummaryElement
+			summary: string | SbSummaryElement
 		}
 	>,
-) => DetailsElement
+) => SbDetailsElement
 
 const Details: DetailsF = config => {
 	const {
 		attributes: attrs = {},
 		isOpen,
-		children = [],
+		children,
 		summary: s,
 		tagName: _,
 		...props
@@ -56,7 +55,10 @@ const Details: DetailsF = config => {
 			...(isBoolean(isOpen) ? { open: isOpen } : {}),
 			...attributes,
 		},
-		children: [summary, ...children],
+		children: [summary, ...children] as unknown as [
+			SbSummaryElement,
+			...SbFlowContent[],
+		],
 		tagName: "DETAILS",
 	}
 }

@@ -1,5 +1,9 @@
-import { Override, SbGlobalAttributeOverrides } from "../../shared"
-import { SbFlowContent } from "../categories/flow"
+import type {
+	Override,
+	SbDataset,
+	SbGlobalAttributeOverrides,
+} from "../../shared"
+import type { SbFlowContent } from "../categories/flow"
 
 export interface SbBodyElement {
 	attributes?: Override<
@@ -20,5 +24,6 @@ export interface SbBodyElement {
 		SbGlobalAttributeOverrides
 	>
 	children?: Array<SbFlowContent>
+	dataset?: SbDataset
 	readonly tagName: "BODY"
 }

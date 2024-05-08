@@ -1,18 +1,20 @@
-import { SbBaseElement } from "../metadata/base"
-import { SbLinkElement } from "../metadata/link"
-import { SbMetaElement } from "../metadata/meta"
-import { SbStyleElement } from "../metadata/style"
-import { SbTitleElement } from "../metadata/title"
-import { SbNoScriptElement } from "../scripting/noscript"
-import { SbScriptElement } from "../scripting/script"
-import { SbTemplateElement } from "../scripting/template"
+import type { SbBaseElement } from "../metadata/base"
+import type { SbHeadElement } from "../metadata/head"
+import type { SbLinkElement } from "../metadata/link"
+import type { SbMetaElement } from "../metadata/meta"
+import type { SbNoScriptElement } from "../scripting/noscript"
+import type { SbScriptElement } from "../scripting/script"
+import type { SbStyleElement } from "../metadata/style"
+import type { SbTemplateElement } from "../scripting/template"
+import type { SbTitleElement } from "../metadata/title"
 
 export type SbMetadataContent =
 	| SbBaseElement
+	| SbHeadElement
 	| SbLinkElement
 	| SbMetaElement
-	| SbStyleElement
-	| SbTitleElement
 	| SbNoScriptElement
 	| SbScriptElement
+	| SbStyleElement
 	| SbTemplateElement
+	| SbTitleElement

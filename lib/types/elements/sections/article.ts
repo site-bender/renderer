@@ -1,6 +1,10 @@
-import { AriaRole } from "../../unions"
-import { Override, SbGlobalAttributeOverrides } from "../../shared"
-import { SbFlowContent } from "../categories/flow"
+import type {
+	Override,
+	SbAriaRole,
+	SbDataset,
+	SbGlobalAttributeOverrides,
+} from "../../shared"
+import type { SbFlowContent } from "../categories/flow"
 
 export interface SbArticleElement {
 	attributes?: Override<
@@ -10,11 +14,12 @@ export interface SbArticleElement {
 		}
 	>
 	children?: Array<SbFlowContent>
+	dataset?: SbDataset
 	readonly tagName: "ARTICLE"
 }
 
 export type SbArticleRole = Extract<
-	AriaRole,
+	SbAriaRole,
 	| "application"
 	| "document"
 	| "feed"

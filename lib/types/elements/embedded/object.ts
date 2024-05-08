@@ -1,7 +1,11 @@
-import { SbMediaType } from "../../media"
-import { SbGlobalAttributeOverrides, Override } from "../../shared"
-import { AriaRole } from "../../unions"
-import { SbFlowContent } from "../categories/flow"
+import type {
+	Override,
+	SbAriaRole,
+	SbDataset,
+	SbGlobalAttributeOverrides,
+} from "../../shared"
+import type { SbFlowContent } from "../categories/flow"
+import type { SbMediaType } from "../../media"
 
 export interface SbObjectElement {
 	attributes?: Override<
@@ -21,10 +25,11 @@ export interface SbObjectElement {
 		>,
 		SbGlobalAttributeOverrides & {
 			form?: string
-			role?: Extract<AriaRole, "application" | "document" | "img">
+			role?: Extract<SbAriaRole, "application" | "document" | "img">
 			type?: SbMediaType
 		}
 	>
 	children?: Array<SbFlowContent>
+	dataset?: SbDataset
 	readonly tagName: "OBJECT"
 }

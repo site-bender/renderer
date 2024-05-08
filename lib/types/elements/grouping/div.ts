@@ -1,16 +1,20 @@
-import { SbGlobalAttributeOverrides, Override } from "../../shared"
-import { AriaRole } from "../../unions"
-import { SbFlowContent } from "../categories/flow"
-import { SbScriptElement } from "../scripting/script"
-import { SbTemplateElement } from "../scripting/template"
-import { SbDescriptionDetailsElement } from "./dd"
-import { SbDescriptionTermElement } from "./dt"
+import type {
+	Override,
+	SbAriaRole,
+	SbDataset,
+	SbGlobalAttributeOverrides,
+} from "../../shared"
+import type { SbDescriptionDetailsElement } from "./dd"
+import type { SbDescriptionTermElement } from "./dt"
+import type { SbFlowContent } from "../categories/flow"
+import type { SbScriptElement } from "../scripting/script"
+import type { SbTemplateElement } from "../scripting/template"
 
 export interface SbDivisionElement {
 	attributes?: Override<
 		Omit<Partial<HTMLDivElement>, "align">,
 		SbGlobalAttributeOverrides & {
-			role?: AriaRole
+			role?: SbAriaRole
 		}
 	>
 	children?: Array<
@@ -20,5 +24,6 @@ export interface SbDivisionElement {
 		| SbScriptElement
 		| SbTemplateElement
 	>
+	dataset?: SbDataset
 	readonly tagName: "DIV"
 }

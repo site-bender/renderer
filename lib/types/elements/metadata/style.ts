@@ -1,5 +1,10 @@
-import { SbGlobalAttributeOverrides, Override, SbHttpEquiv } from "../../shared"
-import { SbTextNode } from "../text-node"
+import type {
+	Override,
+	SbDataset,
+	SbGlobalAttributeOverrides,
+	SbHttpEquiv,
+} from "../../shared"
+import type { SbTextNode } from "../text-node"
 
 export interface SbStyleElement {
 	attributes?: Override<
@@ -10,5 +15,6 @@ export interface SbStyleElement {
 		}
 	>
 	children?: Array<SbTextNode>
+	dataset?: SbDataset
 	readonly tagName: "STYLE"
 }

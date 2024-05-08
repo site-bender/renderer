@@ -1,11 +1,12 @@
-import {
-	SbGlobalAttributeOverrides,
+import type {
 	Override,
 	SbCrossOrigin,
+	SbDataset,
 	SbFetchPriority,
+	SbGlobalAttributeOverrides,
 	SbReferrerPolicy,
 } from "../../shared"
-import { SbTextNode } from "../text-node"
+import type { SbTextNode } from "../text-node"
 
 export interface SbScriptElement {
 	attributes?: Override<
@@ -17,5 +18,6 @@ export interface SbScriptElement {
 		}
 	>
 	children?: SbTextNode
+	dataset?: SbDataset
 	readonly tagName: "SCRIPT"
 }

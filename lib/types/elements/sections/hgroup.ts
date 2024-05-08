@@ -1,16 +1,21 @@
-import { SbGlobalAttributeOverrides, Override } from "../../shared"
-import { AriaRole } from "../../unions"
-import { SbHeadingContent } from "../categories/heading"
-import { SbParagraphElement } from "../grouping/p"
+import type {
+	Override,
+	SbAriaRole,
+	SbDataset,
+	SbGlobalAttributeOverrides,
+} from "../../shared"
+import type { SbHeadingContent } from "../categories/heading"
+import type { SbParagraphElement } from "../grouping/p"
 
 export interface SbHeadingGroupElement {
 	attributes?: Override<
 		Partial<HTMLElement>,
 		SbGlobalAttributeOverrides & {
-			role?: AriaRole
+			role?: SbAriaRole
 		}
 	>
 	children?: Array<SbHeadingGroupContent>
+	dataset?: SbDataset
 	readonly tagName: "HGROUP"
 }
 

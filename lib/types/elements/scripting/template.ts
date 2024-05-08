@@ -1,5 +1,9 @@
-import { SbElement } from ".."
-import { SbGlobalAttributeOverrides, Override } from "../../shared"
+import type {
+	Override,
+	SbDataset,
+	SbGlobalAttributeOverrides,
+} from "../../shared"
+import type { SbElement } from ".."
 
 export interface SbTemplateElement {
 	attributes?: Override<
@@ -9,5 +13,6 @@ export interface SbTemplateElement {
 		}
 	>
 	children?: Array<SbElement>
+	dataset?: SbDataset
 	readonly tagName: "TEMPLATE"
 }

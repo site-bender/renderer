@@ -1,16 +1,20 @@
-import { SbGlobalAttributeOverrides, Override } from "../../shared"
-import { AriaRole } from "../../unions"
-import { SbScriptElement } from "../scripting/script"
-import { SbTemplateElement } from "../scripting/template"
-import { SbDescriptionDetailsElement } from "./dd"
-import { SbDivisionElement } from "./div"
-import { SbDescriptionTermElement } from "./dt"
+import type {
+	Override,
+	SbAriaRole,
+	SbDataset,
+	SbGlobalAttributeOverrides,
+} from "../../shared"
+import type { SbDescriptionDetailsElement } from "./dd"
+import type { SbDescriptionTermElement } from "./dt"
+import type { SbDivisionElement } from "./div"
+import type { SbScriptElement } from "../scripting/script"
+import type { SbTemplateElement } from "../scripting/template"
 
 export interface SbDescriptionListElement {
 	attributes?: Override<
 		Omit<Partial<HTMLDListElement>, "compact">,
 		SbGlobalAttributeOverrides & {
-			role?: AriaRole
+			role?: SbAriaRole
 		}
 	>
 	children?: Array<
@@ -20,5 +24,6 @@ export interface SbDescriptionListElement {
 		| SbScriptElement
 		| SbTemplateElement
 	>
+	dataset?: SbDataset
 	readonly tagName: "DL"
 }

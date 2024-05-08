@@ -1,12 +1,13 @@
-import {
-	SbGlobalAttributeOverrides,
+import type {
 	Override,
+	SbAriaRole,
+	SbDataset,
 	SbCrossOrigin,
 	SbDecoding,
 	SbFetchPriority,
+	SbGlobalAttributeOverrides,
 	SbReferrerPolicy,
 } from "../../shared"
-import { AriaRole } from "../../unions"
 
 export interface SbImageElement {
 	attributes?: Override<
@@ -24,7 +25,7 @@ export interface SbImageElement {
 				| {
 						alt: string
 						role?: Extract<
-							AriaRole,
+							SbAriaRole,
 							| "button"
 							| "checkbox"
 							| "link"
@@ -43,10 +44,11 @@ export interface SbImageElement {
 				  }
 				| {
 						alt: ""
-						role?: Extract<AriaRole, "none" | "presentation">
+						role?: Extract<SbAriaRole, "none" | "presentation">
 				  }
 			)
 	>
 	children?: never
+	dataset?: SbDataset
 	readonly tagName: "IMG"
 }

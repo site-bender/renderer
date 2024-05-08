@@ -1,8 +1,4 @@
-import type {
-	HeadingAttributes,
-	HeadingElement,
-} from "../../../../types/old-elements"
-import type { GlobalAttributes } from "../../../../types/shared"
+import type { SbHeadingElement } from "../../../../types/elements/sections/hn"
 
 import pickGlobalAttributes from "../../../../guards/pickGlobalAttributes"
 import TextNode from "../../../TextNode"
@@ -11,16 +7,16 @@ import isString from "../../../../guards/isString"
 import generateShortId from "@sitebender/fp/lib/utilities/generateShortId"
 
 export const filterAttributes = (
-	attributes: GlobalAttributes & HeadingAttributes,
-): GlobalAttributes & HeadingAttributes => {
-	const globals = pickGlobalAttributes(attributes as GlobalAttributes)
-	const { role } = attributes
+	attributes: SbHeadingElement["attributes"],
+): SbHeadingElement["attributes"] => {
+	const globals = pickGlobalAttributes(
+		attributes as SbHeadingElement["attributes"],
+	)
+	const { role } = attributes || {}
 
 	return {
-		...{
-			id: generateShortId(),
-			...globals,
-		},
+		id: generateShortId(),
+		...globals,
 		...(isMemberOf(["heading", "tab", "presentation", "none"])(role as string)
 			? { role }
 			: {}),
@@ -28,8 +24,8 @@ export const filterAttributes = (
 }
 
 export type HnF = (
-	config: string | Omit<HeadingElement, "tagName">,
-) => HeadingElement
+	config: string | Omit<SbHeadingElement, "tagName">,
+) => SbHeadingElement
 
 const Hn: HnF = config => {
 	if (isString(config as string)) {
@@ -42,7 +38,11 @@ const Hn: HnF = config => {
 		}
 	}
 
-	const { attributes: attrs = {}, dataset, children } = config as HeadingElement
+	const {
+		attributes: attrs = {},
+		dataset,
+		children,
+	} = config as SbHeadingElement
 
 	const attributes = filterAttributes(attrs)
 

@@ -1,15 +1,20 @@
-import { AriaRole } from "../../unions"
-import { Override, SbGlobalAttributeOverrides } from "../../shared"
-import { SbFlowContent } from "../categories/flow"
+import type {
+	Override,
+	SbAriaRole,
+	SbDataset,
+	SbGlobalAttributeOverrides,
+} from "../../shared"
+import type { SbFlowContent } from "../categories/flow"
 
 export interface SbAddressElement {
 	attributes?: Override<
 		Partial<HTMLElement>,
 		SbGlobalAttributeOverrides & {
-			role?: AriaRole
+			role?: SbAriaRole
 		}
 	>
 	children?: Array<SbAddressContent>
+	dataset?: SbDataset
 	readonly tagName: "ADDRESS"
 }
 

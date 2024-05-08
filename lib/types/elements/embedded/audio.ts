@@ -1,12 +1,13 @@
-import {
-	SbGlobalAttributeOverrides,
+import type {
 	Override,
+	SbAriaRole,
+	SbDataset,
 	SbCrossOrigin,
+	SbGlobalAttributeOverrides,
 } from "../../shared"
-import { AriaRole } from "../../unions"
-import { SbFlowContent } from "../categories/flow"
-import { SbSourceElement } from "./source"
-import { SbTrackElement } from "./track"
+import type { SbFlowContent } from "../categories/flow"
+import type { SbSourceElement } from "./source"
+import type { SbTrackElement } from "./track"
 
 // TODO
 export interface SbAudioElement {
@@ -16,10 +17,11 @@ export interface SbAudioElement {
 			// space-separated string of "nodownload" | "nofullscreen" | "noremoteplayback"
 			controlsList?: string
 			crossOrigin?: SbCrossOrigin
-			role?: Extract<AriaRole, "application">
+			role?: Extract<SbAriaRole, "application">
 		}
 	>
 	children?: Array<SbAudioContent>
+	dataset?: SbDataset
 	readonly tagName: "AUDIO"
 }
 

@@ -1,3 +1,4 @@
-import { SbTemplateElement } from "../scripting/template"
+import type { SbScriptElement } from "../scripting/script"
+import type { SbTemplateElement } from "../scripting/template"
 
-export type SbScriptSupportingContent = SbTemplateElement
+export type SbScriptSupportingContent = SbScriptElement | SbTemplateElement

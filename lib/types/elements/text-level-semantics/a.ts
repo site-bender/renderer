@@ -1,11 +1,12 @@
-import {
-	SbGlobalAttributeOverrides,
+import type {
 	Override,
+	SbAriaRole,
+	SbDataset,
+	SbGlobalAttributeOverrides,
 	SbReferrerPolicy,
 } from "../../shared"
-import { SbElement } from "../"
-import { SbMediaType } from "../../media"
-import { AriaRole } from "../../unions"
+import type { SbElement } from "../"
+import type { SbMediaType } from "../../media"
 
 // Remove deprecated attributes
 // Make all attributes optional
@@ -28,6 +29,7 @@ export interface SbAnchorElement {
 	>
 	// TODO: transparent with no interactive and no tabindex
 	children?: Array<SbElement>
+	dataset?: SbDataset
 	readonly tagName: "A"
 }
 
@@ -51,7 +53,7 @@ export type SbAnchorRel =
 	| "terms-of-service"
 
 export type SbAnchorRole = Extract<
-	AriaRole,
+	SbAriaRole,
 	| "button"
 	| "checkbox"
 	| "menuitem"

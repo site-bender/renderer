@@ -1,10 +1,11 @@
-import { SbMediaType } from "../../media"
-import {
-	SbGlobalAttributeOverrides,
+import type { SbMediaType } from "../../media"
+import type {
 	Override,
-	SbReferrerPolicy,
 	SbCrossOrigin,
+	SbDataset,
 	SbFetchPriority,
+	SbGlobalAttributeOverrides,
+	SbReferrerPolicy,
 } from "../../shared"
 
 // TODO: Make flow and phrasing if itemprop present
@@ -18,6 +19,7 @@ export interface SbLinkElement {
 			type?: SbMediaType
 		}
 	>
+	dataset?: SbDataset
 	readonly tagName: "LINK"
 }
 

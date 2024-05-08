@@ -1,18 +1,23 @@
-import { SbGlobalAttributeOverrides, Override } from "../../shared"
-import { AriaRole } from "../../unions"
-import { SbPhrasingContent } from "../categories/phrasing"
-import { SbRubyFallbackParenthesisElement } from "./rp"
-import { SbRubyTextElement } from "./rt"
+import type {
+	Override,
+	SbAriaRole,
+	SbDataset,
+	SbGlobalAttributeOverrides,
+} from "../../shared"
+import type { SbPhrasingContent } from "../categories/phrasing"
+import type { SbRubyFallbackParenthesisElement } from "./rp"
+import type { SbRubyTextElement } from "./rt"
 
 export interface SbRubyElement {
 	attributes?: Override<
 		Partial<HTMLElement>,
 		SbGlobalAttributeOverrides & {
-			role?: AriaRole
+			role?: SbAriaRole
 		}
 	>
 	children?: Array<
 		SbPhrasingContent | SbRubyFallbackParenthesisElement | SbRubyTextElement
 	>
+	dataset?: SbDataset
 	readonly tagName: "RUBY"
 }

@@ -1,5 +1,5 @@
-import { SbHeadingGroupElement } from "../sections/hgroup"
-import {
+import type { SbHeadingGroupElement } from "../sections/hgroup"
+import type {
 	SbHeading1Element,
 	SbHeading2Element,
 	SbHeading3Element,

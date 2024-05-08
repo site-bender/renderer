@@ -1,18 +1,23 @@
-import { SbMediaType } from "../../media"
-import { SbGlobalAttributeOverrides, Override } from "../../shared"
-import { AriaRole } from "../../unions"
+import type {
+	Override,
+	SbAriaRole,
+	SbDataset,
+	SbGlobalAttributeOverrides,
+} from "../../shared"
+import type { SbMediaType } from "../../media"
 
 export interface SbEmbedElement {
 	attributes?: Override<
 		Omit<Partial<HTMLEmbedElement>, "align" | "name">,
 		SbGlobalAttributeOverrides & {
 			role?: Extract<
-				AriaRole,
+				SbAriaRole,
 				"application" | "document" | "img" | "none" | "presentation"
 			>
 			type?: SbMediaType
 		}
 	>
 	children?: never
+	dataset?: SbDataset
 	readonly tagName: "EMBED"
 }

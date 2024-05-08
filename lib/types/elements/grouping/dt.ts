@@ -1,12 +1,16 @@
-import { SbGlobalAttributeOverrides, Override } from "../../shared"
-import { AriaRole } from "../../unions"
-import { SbFlowContent } from "../categories/flow"
+import type {
+	Override,
+	SbAriaRole,
+	SbDataset,
+	SbGlobalAttributeOverrides,
+} from "../../shared"
+import type { SbFlowContent } from "../categories/flow"
 
 export interface SbDescriptionTermElement {
 	attributes?: Override<
 		Partial<HTMLElement>,
 		SbGlobalAttributeOverrides & {
-			role?: Extract<AriaRole, "listitem">
+			role?: Extract<SbAriaRole, "listitem">
 		}
 	>
 	children?: Array<
@@ -27,5 +31,6 @@ export interface SbDescriptionTermElement {
 			| { tagName: "HN" }
 		>
 	>
+	dataset?: SbDataset
 	readonly tagName: "DT"
 }

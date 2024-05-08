@@ -1,4 +1,8 @@
-import { SbGlobalAttributeOverrides, Override } from "../../shared"
+import type {
+	Override,
+	SbDataset,
+	SbGlobalAttributeOverrides,
+} from "../../shared"
 
 export interface SbBaseElement {
 	attributes?: Override<
@@ -8,6 +12,7 @@ export interface SbBaseElement {
 			target?: SbBaseTarget
 		}
 	>
+	dataset?: SbDataset
 	readonly tagName: "BASE"
 }
 

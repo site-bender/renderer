@@ -1,6 +1,10 @@
-import { AriaRole } from "../../unions"
-import { Override, SbGlobalAttributeOverrides } from "../../shared"
-import { SbFlowContent } from "../categories/flow"
+import type {
+	Override,
+	SbAriaRole,
+	SbDataset,
+	SbGlobalAttributeOverrides,
+} from "../../shared"
+import type { SbFlowContent } from "../categories/flow"
 
 export interface SbFooterElement {
 	attributes?: Override<
@@ -12,10 +16,11 @@ export interface SbFooterElement {
 	children?: Array<
 		Exclude<SbFlowContent, { tagName: "FOOTER" } | { tagName: "HEADER" }>
 	>
+	dataset?: SbDataset
 	readonly tagName: "FOOTER"
 }
 
 export type SbFooterRole = Extract<
-	AriaRole,
+	SbAriaRole,
 	"contentinfo" | "group" | "none" | "presentation"
 >

@@ -1,13 +1,18 @@
-import { AriaRole } from "./../../unions"
-import { SbGlobalAttributeOverrides, Override } from "../../shared"
+import type {
+	Override,
+	SbAriaRole,
+	SbDataset,
+	SbGlobalAttributeOverrides,
+} from "../../shared"
 
 export interface SbBreakElement {
 	attributes?: Override<
 		Partial<HTMLElement>,
 		SbGlobalAttributeOverrides & {
-			role?: Extract<AriaRole, "none" | "presentation">
+			role?: Extract<SbAriaRole, "none" | "presentation">
 		}
 	>
 	children?: never
+	dataset?: SbDataset
 	readonly tagName: "BR"
 }

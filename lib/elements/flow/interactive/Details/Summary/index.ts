@@ -1,14 +1,12 @@
-import type { SummaryElement } from "../../../../../types/old-elements"
-import type { GlobalAttributes } from "../../../../../types/shared"
-
 import isString from "../../../../../guards/isString"
 import TextNode from "../../../../TextNode"
 import generateShortId from "@sitebender/fp/lib/utilities/generateShortId"
 import pickGlobalAttributes from "../../../../../guards/pickGlobalAttributes"
+import { SbSummaryElement } from "../../../../../types/elements/interactive/summary"
 
 export type SummaryF = (
-	config: string | Omit<SummaryElement, "tagName">,
-) => SummaryElement
+	config: string | Omit<SbSummaryElement, "tagName">,
+) => SbSummaryElement
 
 const Summary: SummaryF = config => {
 	if (isString(config)) {
@@ -25,9 +23,9 @@ const Summary: SummaryF = config => {
 		attributes: attrs = {},
 		tagName: _,
 		...props
-	} = config as SummaryElement
+	} = config as SbSummaryElement
 
-	const attributes = pickGlobalAttributes(attrs as GlobalAttributes)
+	const attributes = pickGlobalAttributes(attrs)
 
 	return {
 		...props,

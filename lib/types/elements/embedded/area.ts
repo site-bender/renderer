@@ -1,6 +1,7 @@
-import {
-	SbGlobalAttributeOverrides,
+import type {
 	Override,
+	SbDataset,
+	SbGlobalAttributeOverrides,
 	SbReferrerPolicy,
 } from "../../shared"
 
@@ -23,6 +24,7 @@ export interface SbAreaElement {
 			)
 	>
 	children?: never
+	dataset?: SbDataset
 	readonly tagName: "AREA"
 }
 

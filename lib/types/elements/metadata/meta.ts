@@ -1,4 +1,9 @@
-import { SbGlobalAttributeOverrides, Override, SbHttpEquiv } from "../../shared"
+import type {
+	Override,
+	SbDataset,
+	SbGlobalAttributeOverrides,
+	SbHttpEquiv,
+} from "../../shared"
 
 // TODO: Make flow and phrasing if itemprop present
 export interface SbMetaElement {
@@ -9,5 +14,6 @@ export interface SbMetaElement {
 			httpEquiv?: SbHttpEquiv
 		}
 	>
+	dataset?: SbDataset
 	readonly tagName: "META"
 }

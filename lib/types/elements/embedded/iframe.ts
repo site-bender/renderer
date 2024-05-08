@@ -1,11 +1,12 @@
-import { SbMediaType } from "../../media"
-import {
-	SbGlobalAttributeOverrides,
+import type { SbMediaType } from "../../media"
+import type {
 	Override,
-	SbReferrerPolicy,
+	SbAriaRole,
+	SbDataset,
+	SbGlobalAttributeOverrides,
 	SbLoading,
+	SbReferrerPolicy,
 } from "../../shared"
-import { AriaRole } from "../../unions"
 
 export interface SbIFrameElement {
 	attributes?: Override<
@@ -22,12 +23,13 @@ export interface SbIFrameElement {
 			loading?: SbLoading
 			referrerPolicy?: SbReferrerPolicy
 			role?: Extract<
-				AriaRole,
+				SbAriaRole,
 				"application" | "document" | "img" | "none" | "presentation"
 			>
 			type?: SbMediaType
 		}
 	>
 	children?: never
+	dataset?: SbDataset
 	readonly tagName: "IFRAME"
 }
