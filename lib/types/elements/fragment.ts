@@ -1,6 +1,6 @@
 import { SbElement } from "."
 
 export type SbFragment = {
-	children: Array<SbElement>
+	children?: Array<SbElement>
 	readonly tagName: "FRAGMENT"
 }
