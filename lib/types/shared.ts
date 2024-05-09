@@ -1,3 +1,7 @@
+import { SbElement } from "./elements"
+import { SbLinkElement } from "./elements/metadata/link"
+import { SbScriptElement } from "./elements/scripting/script"
+
 export type Override<T1, T2> = Omit<T1, keyof T2> & T2
 
 // export interface ElementBase<T, U, V, W> extends ElementRoot {
@@ -14,29 +18,44 @@ export type Override<T1, T2> = Omit<T1, keyof T2> & T2
 // 	validation?: Operation
 // }
 
+export type SbWithAssets = {
+	children?: Array<SbWithAssets>
+	scripts?: Array<SbScriptElement> | SbScriptElement
+	stylesheets?: Array<SbLinkElement> | SbLinkElement
+	tagName: string
+}
+
+export type SbFullElement = SbElement & {
+	attributes?: SbGlobalAttributes
+	children?: Array<SbElement>
+	dataset?: SbDataset
+	scripts?: Array<string> | string
+	stylesheets?: Array<string> | string
+}
+
 export interface SbDisplay {}
 export interface SbValidation {}
 
 export interface SbPublishes {}
 export interface SbSubscribes {}
 
-export interface SbElement<
-	A,
-	C,
-	P extends SbPublishes,
-	S extends SbSubscribes,
-> {
-	attributes?: A
-	children?: C
-	dataset?: SbDataset
-	display?: SbDisplay
-	publishes?: P
-	scripts?: Array<string>
-	stylesheets?: Array<string>
-	subscribesTo?: S
-	readonly tagName: string
-	validation?: SbValidation
-}
+// export interface SbElement<
+// 	A,
+// 	C,
+// 	P extends SbPublishes,
+// 	S extends SbSubscribes,
+// > {
+// 	attributes?: A
+// 	children?: C
+// 	dataset?: SbDataset
+// 	display?: SbDisplay
+// 	publishes?: P
+// 	scripts?: Array<string>
+// 	stylesheets?: Array<string>
+// 	subscribesTo?: S
+// 	readonly tagName: string
+// 	validation?: SbValidation
+// }
 
 export type SbGlobalAttributes = {
 	accesskey?: string
