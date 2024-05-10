@@ -18,6 +18,16 @@ export type Override<T1, T2> = Omit<T1, keyof T2> & T2
 // 	validation?: Operation
 // }
 
+export type SbDocumentWithDisplayCache = typeof document & {
+	__sbDisplayCache: Record<string, HTMLElement>
+}
+
+export interface SbConditional {}
+export interface SbValidation {}
+
+export interface SbPublishes {}
+export interface SbSubscribes {}
+
 export type SbWithAssets = {
 	children?: Array<SbWithAssets>
 	scripts?: Array<SbScriptElement> | SbScriptElement
@@ -29,15 +39,11 @@ export type SbFullElement = SbElement & {
 	attributes?: SbGlobalAttributes
 	children?: Array<SbElement>
 	dataset?: SbDataset
+	display?: SbConditional
 	scripts?: Array<string> | string
 	stylesheets?: Array<string> | string
+	validation?: SbValidation
 }
-
-export interface SbDisplay {}
-export interface SbValidation {}
-
-export interface SbPublishes {}
-export interface SbSubscribes {}
 
 // export interface SbElement<
 // 	A,
@@ -48,7 +54,7 @@ export interface SbSubscribes {}
 // 	attributes?: A
 // 	children?: C
 // 	dataset?: SbDataset
-// 	display?: SbDisplay
+// 	display?: SbConditional
 // 	publishes?: P
 // 	scripts?: Array<string>
 // 	stylesheets?: Array<string>

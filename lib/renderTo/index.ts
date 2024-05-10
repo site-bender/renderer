@@ -15,14 +15,22 @@ export type RenderToF = (
 
 const renderTo: RenderToF = parent => component => options => {
 	const head = document && document.head
+	const opts = { level: 0, ...options }
 
-	const scripts = collectScriptElements(component as SbWithAssets)
+	// Collect and dedupe style elements
 	const stylesheets = collectLinkElements(component as SbWithAssets)
 
+	// Append style elements to the head
 	stylesheets.forEach(stylesheet => buildDomTree(head)(stylesheet)())
+
+	// Collect and dedupe script elements
+	const scripts = collectScriptElements(component as SbWithAssets)
+
+	// Append script elements to the head
 	scripts.forEach(script => buildDomTree(head)(script as SbFullElement)())
 
-	buildDomTree(parent)(component)(options)
+	// Build the DOM tree and append to the parent element
+	buildDomTree(parent)(component)(opts)
 }
 
 export default renderTo

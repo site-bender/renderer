@@ -1,8 +1,11 @@
 import type { SbFullElement, SbRenderOptions } from "../../types/shared"
 
-import { SECTIONING_ELEMENTS } from "../../constants"
-import type { SbElement } from "../../types/elements"
-import type { SbTextNode } from "../../types/elements/text-node"
+import addAttributes from "./addAttributes"
+import addDataAttributes from "./addDataAttributes"
+import addValidation from "./addValidation"
+import appendChildren from "./appendChildren"
+import handleFragment from "./handleFragment"
+import setLevel from "./setLevel"
 
 export type BuildDomTreeF = (
 	parent: Node,
@@ -18,49 +21,23 @@ const buildDomTree: BuildDomTreeF =
 			children = [],
 			dataset = {},
 			tagName,
-			// validation,
+			validation,
 		} = component
 
-		const level =
-			SECTIONING_ELEMENTS.includes(tagName) || tagName === "FRAGMENT"
-				? lvl + 1
-				: lvl
-
 		if (tagName === "FRAGMENT") {
-			children.forEach(child =>
-				buildDomTree(parent)(child as SbFullElement)({ level }),
-			)
+			handleFragment(parent)(children)(options)
 
 			return
 		}
 
+		const level = setLevel(tagName)(lvl)
+
 		const elem = document.createElement(tagName === "HN" ? `H${lvl}` : tagName)
 
-		Object.entries(attributes).forEach(([attr, value]) =>
-			typeof value === "boolean"
-				? value && elem.setAttribute(attr, "")
-				: elem.setAttribute(attr, `${value}`),
-		)
-
-		Object.entries(dataset).forEach(([attr, value]) =>
-			typeof value === "boolean"
-				? value && elem.setAttribute(`data-${attr}`, "")
-				: elem.setAttribute(`data-${attr}`, `${value}`),
-		)
-
-		children.forEach((child: SbElement) => {
-			if (child.tagName === "TEXTNODE") {
-				elem.appendChild(document.createTextNode((child as SbTextNode).content))
-
-				parent.appendChild(elem)
-
-				return
-			}
-
-			buildDomTree(elem)(child as SbFullElement)({ level })
-
-			return
-		})
+		addAttributes(elem)(attributes)
+		addDataAttributes(elem)(dataset)
+		addValidation(elem)(validation)
+		appendChildren(elem)(children)({ ...options, level })
 
 		parent.appendChild(elem)
 
