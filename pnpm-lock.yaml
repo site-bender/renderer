@@ -12,16 +12,16 @@ importers:
         version: link:../fp
       "@sitebender/operations":
         specifier: ^0.0.28
-        version: 0.0.28
+        version: link:../operations
       "@types/jsdom":
         specifier: ^21.1.6
         version: 21.1.6
       "@types/node":
-        specifier: ^20.12.11
-        version: 20.12.11
+        specifier: ^20.12.12
+        version: 20.12.12
       "@vitest/coverage-v8":
         specifier: ^1.6.0
-        version: 1.6.0(vitest@1.6.0(@types/node@20.12.11)(jsdom@24.0.0))
+        version: 1.6.0(vitest@1.6.0(@types/node@20.12.12)(jsdom@24.0.0))
       fast-check:
         specifier: ^3.18.0
         version: 3.18.0
@@ -36,16 +36,16 @@ importers:
         version: 5.4.5
       vite:
         specifier: ^5.2.11
-        version: 5.2.11(@types/node@20.12.11)
+        version: 5.2.11(@types/node@20.12.12)
       vite-plugin-dts:
         specifier: ^3.9.1
-        version: 3.9.1(@types/node@20.12.11)(rollup@4.14.2)(typescript@5.4.5)(vite@5.2.11(@types/node@20.12.11))
+        version: 3.9.1(@types/node@20.12.12)(rollup@4.14.2)(typescript@5.4.5)(vite@5.2.11(@types/node@20.12.12))
       vitest:
         specifier: ^1.6.0
-        version: 1.6.0(@types/node@20.12.11)(jsdom@24.0.0)
+        version: 1.6.0(@types/node@20.12.12)(jsdom@24.0.0)
       vitest-localstorage-mock:
         specifier: ^0.1.2
-        version: 0.1.2(vitest@1.6.0(@types/node@20.12.11)(jsdom@24.0.0))
+        version: 0.1.2(vitest@1.6.0(@types/node@20.12.12)(jsdom@24.0.0))
 
 packages:
   "@ampproject/remapping@2.3.0":
@@ -541,12 +541,6 @@ packages:
         integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==,
       }
 
-  "@sitebender/operations@0.0.28":
-    resolution:
-      {
-        integrity: sha512-xGvhHKHE7UNFTwZAxWMLNQ0XmBukpNre1mNaaU6gL6hq0lbuijbWJWu04MsSVa5usrDm1UcS2tU2F6tVa4sQAQ==,
-      }
-
   "@types/argparse@1.0.38":
     resolution:
       {
@@ -565,10 +559,10 @@ packages:
         integrity: sha512-/7kkMsC+/kMs7gAYmmBR9P0vGTnOoLhQhyhQJSlXGI5bzTHp6xdo0TtKWQAsz6pmSAeVqKSbqeyP6hytqr9FDw==,
       }
 
-  "@types/node@20.12.11":
+  "@types/node@20.12.12":
     resolution:
       {
-        integrity: sha512-vDg9PZ/zi+Nqp6boSOT7plNuthRugEKixDv5sFTIpkE89MmNtEArAShI4mxuX2+UrLEe9pxC1vm2cjm9YlWbJw==,
+        integrity: sha512-eWLDGF/FOSPtAvEqeRAQ4C8LSA7M1I7i0ky1I8U7kD1J5ITyW3AsRhQrKVoWf5pFKZ2kILsEGJhsI9r93PYnOw==,
       }
 
   "@types/tough-cookie@4.0.5":
@@ -2039,23 +2033,23 @@ snapshots:
       "@jridgewell/resolve-uri": 3.1.2
       "@jridgewell/sourcemap-codec": 1.4.15
 
-  "@microsoft/api-extractor-model@7.28.13(@types/node@20.12.11)":
+  "@microsoft/api-extractor-model@7.28.13(@types/node@20.12.12)":
     dependencies:
       "@microsoft/tsdoc": 0.14.2
       "@microsoft/tsdoc-config": 0.16.2
-      "@rushstack/node-core-library": 4.0.2(@types/node@20.12.11)
+      "@rushstack/node-core-library": 4.0.2(@types/node@20.12.12)
     transitivePeerDependencies:
       - "@types/node"
 
-  "@microsoft/api-extractor@7.43.0(@types/node@20.12.11)":
+  "@microsoft/api-extractor@7.43.0(@types/node@20.12.12)":
     dependencies:
-      "@microsoft/api-extractor-model": 7.28.13(@types/node@20.12.11)
+      "@microsoft/api-extractor-model": 7.28.13(@types/node@20.12.12)
       "@microsoft/tsdoc": 0.14.2
       "@microsoft/tsdoc-config": 0.16.2
-      "@rushstack/node-core-library": 4.0.2(@types/node@20.12.11)
+      "@rushstack/node-core-library": 4.0.2(@types/node@20.12.12)
       "@rushstack/rig-package": 0.5.2
-      "@rushstack/terminal": 0.10.0(@types/node@20.12.11)
-      "@rushstack/ts-command-line": 4.19.1(@types/node@20.12.11)
+      "@rushstack/terminal": 0.10.0(@types/node@20.12.12)
+      "@rushstack/ts-command-line": 4.19.1(@types/node@20.12.12)
       lodash: 4.17.21
       minimatch: 3.0.8
       resolve: 1.22.8
@@ -2127,7 +2121,7 @@ snapshots:
   "@rollup/rollup-win32-x64-msvc@4.14.2":
     optional: true
 
-  "@rushstack/node-core-library@4.0.2(@types/node@20.12.11)":
+  "@rushstack/node-core-library@4.0.2(@types/node@20.12.12)":
     dependencies:
       fs-extra: 7.0.1
       import-lazy: 4.0.0
@@ -2136,23 +2130,23 @@ snapshots:
       semver: 7.5.4
       z-schema: 5.0.5
     optionalDependencies:
-      "@types/node": 20.12.11
+      "@types/node": 20.12.12
 
   "@rushstack/rig-package@0.5.2":
     dependencies:
       resolve: 1.22.8
       strip-json-comments: 3.1.1
 
-  "@rushstack/terminal@0.10.0(@types/node@20.12.11)":
+  "@rushstack/terminal@0.10.0(@types/node@20.12.12)":
     dependencies:
-      "@rushstack/node-core-library": 4.0.2(@types/node@20.12.11)
+      "@rushstack/node-core-library": 4.0.2(@types/node@20.12.12)
       supports-color: 8.1.1
     optionalDependencies:
-      "@types/node": 20.12.11
+      "@types/node": 20.12.12
 
-  "@rushstack/ts-command-line@4.19.1(@types/node@20.12.11)":
+  "@rushstack/ts-command-line@4.19.1(@types/node@20.12.12)":
     dependencies:
-      "@rushstack/terminal": 0.10.0(@types/node@20.12.11)
+      "@rushstack/terminal": 0.10.0(@types/node@20.12.12)
       "@types/argparse": 1.0.38
       argparse: 1.0.10
       string-argv: 0.3.2
@@ -2161,25 +2155,23 @@ snapshots:
 
   "@sinclair/typebox@0.27.8": {}
 
-  "@sitebender/operations@0.0.28": {}
-
   "@types/argparse@1.0.38": {}
 
   "@types/estree@1.0.5": {}
 
   "@types/jsdom@21.1.6":
     dependencies:
-      "@types/node": 20.12.11
+      "@types/node": 20.12.12
       "@types/tough-cookie": 4.0.5
       parse5: 7.1.2
 
-  "@types/node@20.12.11":
+  "@types/node@20.12.12":
     dependencies:
       undici-types: 5.26.5
 
   "@types/tough-cookie@4.0.5": {}
 
-  "@vitest/coverage-v8@1.6.0(vitest@1.6.0(@types/node@20.12.11)(jsdom@24.0.0))":
+  "@vitest/coverage-v8@1.6.0(vitest@1.6.0(@types/node@20.12.12)(jsdom@24.0.0))":
     dependencies:
       "@ampproject/remapping": 2.3.0
       "@bcoe/v8-coverage": 0.2.3
@@ -2194,7 +2186,7 @@ snapshots:
       std-env: 3.7.0
       strip-literal: 2.1.0
       test-exclude: 6.0.0
-      vitest: 1.6.0(@types/node@20.12.11)(jsdom@24.0.0)
+      vitest: 1.6.0(@types/node@20.12.12)(jsdom@24.0.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -2849,13 +2841,13 @@ snapshots:
 
   validator@13.11.0: {}
 
-  vite-node@1.6.0(@types/node@20.12.11):
+  vite-node@1.6.0(@types/node@20.12.12):
     dependencies:
       cac: 6.7.14
       debug: 4.3.4
       pathe: 1.1.2
       picocolors: 1.0.0
-      vite: 5.2.11(@types/node@20.12.11)
+      vite: 5.2.11(@types/node@20.12.12)
     transitivePeerDependencies:
       - "@types/node"
       - less
@@ -2866,9 +2858,9 @@ snapshots:
       - supports-color
       - terser
 
-  vite-plugin-dts@3.9.1(@types/node@20.12.11)(rollup@4.14.2)(typescript@5.4.5)(vite@5.2.11(@types/node@20.12.11)):
+  vite-plugin-dts@3.9.1(@types/node@20.12.12)(rollup@4.14.2)(typescript@5.4.5)(vite@5.2.11(@types/node@20.12.12)):
     dependencies:
-      "@microsoft/api-extractor": 7.43.0(@types/node@20.12.11)
+      "@microsoft/api-extractor": 7.43.0(@types/node@20.12.12)
       "@rollup/pluginutils": 5.1.0(rollup@4.14.2)
       "@vue/language-core": 1.8.27(typescript@5.4.5)
       debug: 4.3.4
@@ -2877,26 +2869,26 @@ snapshots:
       typescript: 5.4.5
       vue-tsc: 1.8.27(typescript@5.4.5)
     optionalDependencies:
-      vite: 5.2.11(@types/node@20.12.11)
+      vite: 5.2.11(@types/node@20.12.12)
     transitivePeerDependencies:
       - "@types/node"
       - rollup
       - supports-color
 
-  vite@5.2.11(@types/node@20.12.11):
+  vite@5.2.11(@types/node@20.12.12):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
       rollup: 4.14.2
     optionalDependencies:
-      "@types/node": 20.12.11
+      "@types/node": 20.12.12
       fsevents: 2.3.3
 
-  vitest-localstorage-mock@0.1.2(vitest@1.6.0(@types/node@20.12.11)(jsdom@24.0.0)):
+  vitest-localstorage-mock@0.1.2(vitest@1.6.0(@types/node@20.12.12)(jsdom@24.0.0)):
     dependencies:
-      vitest: 1.6.0(@types/node@20.12.11)(jsdom@24.0.0)
+      vitest: 1.6.0(@types/node@20.12.12)(jsdom@24.0.0)
 
-  vitest@1.6.0(@types/node@20.12.11)(jsdom@24.0.0):
+  vitest@1.6.0(@types/node@20.12.12)(jsdom@24.0.0):
     dependencies:
       "@vitest/expect": 1.6.0
       "@vitest/runner": 1.6.0
@@ -2915,11 +2907,11 @@ snapshots:
       strip-literal: 2.1.0
       tinybench: 2.6.0
       tinypool: 0.8.3
-      vite: 5.2.11(@types/node@20.12.11)
-      vite-node: 1.6.0(@types/node@20.12.11)
+      vite: 5.2.11(@types/node@20.12.12)
+      vite-node: 1.6.0(@types/node@20.12.12)
       why-is-node-running: 2.2.2
     optionalDependencies:
-      "@types/node": 20.12.11
+      "@types/node": 20.12.12
       jsdom: 24.0.0
     transitivePeerDependencies:
       - less

@@ -1,9 +1,9 @@
 import { SbLinkElement } from "../../types/elements/metadata/link"
-import { SbWithAssets } from "../../types/shared"
+import { SbFullElement } from "../../types/shared"
 import deduplicate from "../deduplicate"
 
 export type CollectLinkElementsF = (
-	config: SbWithAssets | Array<SbWithAssets>,
+	config: SbFullElement | Array<SbFullElement>,
 ) => Array<SbLinkElement>
 
 const collectLinkElements: CollectLinkElementsF = config => {

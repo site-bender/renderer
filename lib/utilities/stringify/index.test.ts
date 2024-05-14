@@ -1,11 +1,11 @@
 import { expect, test } from "vitest"
 
 import type { SbElement } from "../../types/elements"
-import type { SbWithAssets } from "../../types/shared"
+import type { SbFullElement } from "../../types/shared"
 
 import stringify from "."
 
-const elem: SbWithAssets = {
+const elem: SbFullElement = {
 	children: [
 		{
 			children: [
@@ -100,7 +100,7 @@ const elem: SbWithAssets = {
 	tagName: "BODY",
 }
 
-// const elemReordered: SbWithAssets = {
+// const elemReordered: SbFullElement = {
 // 	children: [
 // 		{
 // 			children: [

@@ -259,3 +259,5 @@ export const SECTIONING_ELEMENTS = ["ARTICLE", "ASIDE", "NAV", "SECTION"]
 export const ALL_ELEMENTS = a.unique(
 	BASE_ELEMENTS.concat(FLOW_ELEMENTS).concat(METADATA_ELEMENTS),
 )
+
+export const UPDATABLE_OPERATIONS = ["injectFromFormInput"]

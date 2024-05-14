@@ -1,11 +1,8 @@
-import type {
-	SbFullElement,
-	SbRenderOptions,
-	SbWithAssets,
-} from "./../types/shared"
+import type { SbFullElement, SbRenderOptions } from "./../types/shared"
 
-import collectScriptElements from "../utilities/collectScriptElements"
-import collectLinkElements from "../utilities/collectLinkElements"
+import addConditionals from "./addConditionals"
+import addScripts from "./addScripts"
+import addStylesheets from "./addStylesheets"
 
 import buildDomTree from "./buildDomTree"
 
@@ -14,15 +11,21 @@ export type RenderToF = (
 ) => (component: SbFullElement) => (options?: SbRenderOptions) => void
 
 const renderTo: RenderToF = parent => component => options => {
-	const head = document && document.head
+	const opts = { level: 0, ...options }
 
-	const scripts = collectScriptElements(component as SbWithAssets)
-	const stylesheets = collectLinkElements(component as SbWithAssets)
+	addStylesheets(component)
+	addScripts(component)
 
-	stylesheets.forEach(stylesheet => buildDomTree(head)(stylesheet)())
-	scripts.forEach(script => buildDomTree(head)(script as SbFullElement)())
+	const temp = document.createElement("TEMPLATE")
 
-	buildDomTree(parent)(component)(options)
+	buildDomTree(temp)(component)(opts)
+	addConditionals(temp)(component)
+
+	for (let child of temp.children) {
+		parent.appendChild(child)
+	}
+
+	temp.remove()
 }
 
 export default renderTo
