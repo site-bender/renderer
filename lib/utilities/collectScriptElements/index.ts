@@ -1,9 +1,9 @@
 import { SbScriptElement } from "../../types/elements/scripting/script"
-import { SbWithAssets } from "../../types/shared"
+import { SbFullElement } from "../../types/shared"
 import deduplicate from "../deduplicate"
 
 export type CollectScriptElementsF = (
-	config: SbWithAssets | Array<SbWithAssets>,
+	config: SbFullElement | Array<SbFullElement>,
 ) => Array<SbScriptElement>
 
 const collectScriptElements: CollectScriptElementsF = config => {

@@ -1,10 +1,10 @@
 import { expect, test } from "vitest"
 
-import type { SbWithAssets } from "../../types/shared"
+import type { SbFullElement } from "../../types/shared"
 
 import collectScriptElements from "."
 
-const elem: SbWithAssets = {
+const elem: SbFullElement = {
 	children: [
 		{
 			children: [

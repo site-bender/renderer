@@ -1,9 +1,11 @@
 import { SbConditional } from "../../types/shared"
 
-export type MakeConditionalF = (conditional: SbConditional) => () => boolean
+export type MakeConditionalF = (
+	conditional: SbConditional,
+) => (value: string) => boolean
 
-const makeConditional: MakeConditionalF = _conditional => () => {
-	return (Math.random() * 10) % 2 === 0
+const makeConditional: MakeConditionalF = _conditional => _value => {
+	return Math.random() < 0.7
 }
 
 export default makeConditional

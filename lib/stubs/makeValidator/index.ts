@@ -10,12 +10,13 @@ export type MakeValidatorF = (
 	validation: SbValidation,
 ) => (value: unknown) => Either<Array<string>, Option<unknown>>
 
-const makeValidator: MakeValidatorF = _validation => value => {
-	if (Math.ceil(Math.random() * 1000) % 2 === 0) {
-		return right(some(value))
-	}
+const makeValidator: MakeValidatorF = _validation =>
+	function (this: HTMLInputElement) {
+		if (Math.ceil(Math.random() * 1000) % 2 === 0) {
+			return right(some(this.value))
+		}
 
-	return left(["Oh, noes!"])
-}
+		return left(["Oh, noes!"])
+	}
 
 export default makeValidator

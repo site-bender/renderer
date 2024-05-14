@@ -1,11 +1,8 @@
-import type {
-	SbFullElement,
-	SbRenderOptions,
-	SbWithAssets,
-} from "./../types/shared"
+import type { SbFullElement, SbRenderOptions } from "./../types/shared"
 
-import collectScriptElements from "../utilities/collectScriptElements"
-import collectLinkElements from "../utilities/collectLinkElements"
+import addConditionals from "./addConditionals"
+import addScripts from "./addScripts"
+import addStylesheets from "./addStylesheets"
 
 import buildDomTree from "./buildDomTree"
 
@@ -14,23 +11,21 @@ export type RenderToF = (
 ) => (component: SbFullElement) => (options?: SbRenderOptions) => void
 
 const renderTo: RenderToF = parent => component => options => {
-	const head = document && document.head
 	const opts = { level: 0, ...options }
 
-	// Collect and dedupe style elements
-	const stylesheets = collectLinkElements(component as SbWithAssets)
+	addStylesheets(component)
+	addScripts(component)
 
-	// Append style elements to the head
-	stylesheets.forEach(stylesheet => buildDomTree(head)(stylesheet)())
+	const temp = document.createElement("TEMPLATE")
 
-	// Collect and dedupe script elements
-	const scripts = collectScriptElements(component as SbWithAssets)
+	buildDomTree(temp)(component)(opts)
+	addConditionals(temp)(component)
 
-	// Append script elements to the head
-	scripts.forEach(script => buildDomTree(head)(script as SbFullElement)())
+	for (let child of temp.children) {
+		parent.appendChild(child)
+	}
 
-	// Build the DOM tree and append to the parent element
-	buildDomTree(parent)(component)(opts)
+	temp.remove()
 }
 
 export default renderTo

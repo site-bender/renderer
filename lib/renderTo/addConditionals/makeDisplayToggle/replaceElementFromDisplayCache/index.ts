@@ -1,4 +1,4 @@
-import type { SbDocumentWithDisplayCache } from "../../types/shared"
+import type { SbDocumentWithDisplayCache } from "../../../../types/shared"
 
 export type ReplaceElementFromDisplayCacheF = (id: string) => void
 
