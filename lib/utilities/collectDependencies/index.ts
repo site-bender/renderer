@@ -1,12 +1,13 @@
 import type {
 	SbConditionalOperation,
 	SbFormInjectorData,
+	SbNumericOperation,
 } from "@sitebender/operations/lib/types"
 
 import getSelector from "../getSelector"
 
 export type CollectDependenciesF = (
-	condition: SbConditionalOperation,
+	condition: SbConditionalOperation | SbNumericOperation,
 ) => Array<string>
 
 const collectDependencies: CollectDependenciesF = (

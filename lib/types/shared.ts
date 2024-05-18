@@ -1,6 +1,9 @@
-import { SbElement } from "./elements"
-import { SbLinkElement } from "./elements/metadata/link"
-import { SbScriptElement } from "./elements/scripting/script"
+import type { Either } from "@sitebender/fp/lib/either"
+import type { Option } from "@sitebender/fp/lib/option"
+import type { SbElement } from "./elements"
+import type { SbLinkElement } from "./elements/metadata/link"
+import type { SbScriptElement } from "./elements/scripting/script"
+import type { SbNumericOperation } from "@sitebender/operations/lib/types"
 
 export type Override<T1, T2> = Omit<T1, keyof T2> & T2
 
@@ -8,6 +11,18 @@ export type SbDocumentWithDisplayCache = typeof document & {
 	__sbDisplayCache: Record<string, HTMLElement>
 	__sbDisplayCallbacks: Record<string, (id: string) => void>
 }
+
+export type WithCalculatorCallbacks = typeof document & {
+	__sbCalculations: Record<string, Array<string>>
+}
+
+export type CalculateF = (this: HTMLElement) => void
+
+export type WithCalculate = HTMLElement & {
+	__sbCalculate: CalculateF
+}
+
+export type SbResult<T> = Either<Array<string>, Option<T>>
 
 export interface SbConditional {}
 export interface SbValidation {}
@@ -17,6 +32,7 @@ export interface SbSubscribes {}
 
 export type SbFullElement = SbElement & {
 	attributes?: SbGlobalAttributes
+	calculation?: SbNumericOperation
 	children?: Array<SbFullElement>
 	dataset?: SbDataset
 	display?: SbConditional

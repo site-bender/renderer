@@ -1,3 +1,4 @@
+import isLeft from "@sitebender/fp/lib/either/isLeft"
 import moveElementToDisplayCache from "./moveElementToDisplayCache"
 import replaceElementFromDisplayCache from "./replaceElementFromDisplayCache"
 
@@ -9,9 +10,9 @@ const makeDisplayToggle: MakeDisplayToggleF = id => testCondition => () => {
 	if (id) {
 		const test = testCondition()
 
-		console.log("test", test)
-
-		test ? replaceElementFromDisplayCache(id) : moveElementToDisplayCache(id)
+		isLeft(test)
+			? moveElementToDisplayCache(id)
+			: replaceElementFromDisplayCache(id)
 	}
 }
 

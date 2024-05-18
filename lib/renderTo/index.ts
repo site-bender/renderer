@@ -3,6 +3,7 @@ import type { SbFullElement, SbRenderOptions } from "./../types/shared"
 import addConditionals from "./addConditionals"
 import addScripts from "./addScripts"
 import addStylesheets from "./addStylesheets"
+import runCalculations from "./runCalculations"
 
 import buildDomTree from "./buildDomTree"
 
@@ -26,6 +27,7 @@ const renderTo: RenderToF = parent => component => options => {
 	}
 
 	temp.remove()
+	runCalculations()
 }
 
 export default renderTo
