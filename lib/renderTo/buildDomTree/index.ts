@@ -1,6 +1,7 @@
 import type { SbFullElement, SbRenderOptions } from "../../types/shared"
 
 import addAttributes from "./addAttributes"
+import addCalculation from "./addCalculation"
 import addDataAttributes from "./addDataAttributes"
 import addValidation from "./addValidation"
 import appendChildren from "./appendChildren"
@@ -18,6 +19,7 @@ const buildDomTree: BuildDomTreeF =
 		const { level: lvl = 0 } = options
 		const {
 			attributes = {},
+			calculation,
 			children = [],
 			dataset = {},
 			tagName,
@@ -35,6 +37,7 @@ const buildDomTree: BuildDomTreeF =
 		const elem = document.createElement(tagName === "HN" ? `H${lvl}` : tagName)
 
 		addAttributes(elem)(attributes)
+		calculation && addCalculation(elem)(calculation)
 		addDataAttributes(elem)(dataset)
 		addValidation(elem)(validation)
 		appendChildren(elem)(children)({ ...options, level })
