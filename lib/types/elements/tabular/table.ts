@@ -3,7 +3,6 @@ import type {
 	SbDataset,
 	SbGlobalAttributeOverrides,
 } from "../../shared"
-
 import type { SbTableCaptionElement } from "./caption"
 import type { SbTableColumnGroupElement } from "./colgroup"
 import type { SbTableBodyElement } from "./tbody"

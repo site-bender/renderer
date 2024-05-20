@@ -5,7 +5,6 @@ import type {
 	SbGlobalAttributeOverrides,
 } from "../../shared"
 import type { SbHorizontalRuleElement } from "../grouping/hr"
-
 import type { SbOptionGroupElement } from "./optgroup"
 import type { SbOptionElement } from "./option"
 

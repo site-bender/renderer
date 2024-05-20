@@ -5,7 +5,6 @@ import type {
 	SbGlobalAttributeOverrides,
 } from "../../shared"
 import type { SbFlowContent } from "../categories/flow"
-
 import type { SbFigcaptionElement } from "./figcaption"
 
 export interface SbFigureElementWithCaption {

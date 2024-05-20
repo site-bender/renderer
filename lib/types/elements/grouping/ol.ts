@@ -7,7 +7,6 @@ import type {
 } from "../../shared"
 import type { SbScriptElement } from "../scripting/script"
 import type { SbTemplateElement } from "../scripting/template"
-
 import type { SbListItemElement } from "./li"
 
 export interface SbOrderedListElement {

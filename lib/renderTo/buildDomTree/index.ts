@@ -1,5 +1,4 @@
 import type { SbFullElement, SbRenderOptions } from "../../types/shared"
-
 import addAttributes from "./addAttributes"
 import addCalculation from "./addCalculation"
 import addDataAttributes from "./addDataAttributes"

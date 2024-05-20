@@ -1,5 +1,4 @@
 import type { SbLabelElement } from "../../forms/label"
-
 import type { SbLabelableFormAssociatedContent } from "./labelable"
 import type { SbListedFormAssociatedContent } from "./listed"
 import type { SbResettableFormAssociatedContent } from "./resettable"

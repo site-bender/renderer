@@ -4,7 +4,6 @@ import makeConditional from "../../stubs/makeConditional"
 import type { SbFullElement } from "../../types/shared"
 import collectConditionals from "../../utilities/collectConditionals"
 import collectDependencies from "../../utilities/collectDependencies"
-
 import makeDisplayToggle from "./makeDisplayToggle"
 
 type WithDisplayCallbacks = typeof document & {

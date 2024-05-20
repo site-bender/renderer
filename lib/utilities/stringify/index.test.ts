@@ -1,9 +1,8 @@
 import { expect, test } from "vitest"
 
+import stringify from "."
 import type { SbElement } from "../../types/elements"
 import type { SbFullElement } from "../../types/shared"
-
-import stringify from "."
 
 const elem: SbFullElement = {
 	children: [

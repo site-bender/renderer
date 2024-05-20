@@ -1,8 +1,7 @@
 import { expect, test } from "vitest"
 
-import type { SbElement } from "../../types/elements"
-
 import deduplicate from "."
+import type { SbElement } from "../../types/elements"
 
 const objects: Array<SbElement> = [
 	{

@@ -1,8 +1,7 @@
 import { expect, test } from "vitest"
 
-import type { SbFullElement } from "../../types/shared"
-
 import collectLinkElements from "."
+import type { SbFullElement } from "../../types/shared"
 
 const elem: SbFullElement = {
 	children: [

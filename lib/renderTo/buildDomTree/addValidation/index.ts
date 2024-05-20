@@ -3,7 +3,6 @@ import type { Option } from "@sitebender/fp/lib/option"
 
 import makeValidator from "../../../stubs/makeValidator"
 import type { SbValidation } from "../../../types/shared"
-
 import type { SbCastableValue } from "./../../../stubs/types"
 
 export type SbValidateF = (

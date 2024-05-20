@@ -6,7 +6,6 @@ import type {
 } from "../../shared"
 import type { SbScriptElement } from "../scripting/script"
 import type { SbTemplateElement } from "../scripting/template"
-
 import type { SbDescriptionDetailsElement } from "./dd"
 import type { SbDivisionElement } from "./div"
 import type { SbDescriptionTermElement } from "./dt"

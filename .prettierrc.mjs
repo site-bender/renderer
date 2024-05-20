@@ -11,4 +11,8 @@ export default {
 	tabWidth: 2,
 	trailingComma: "all",
 	useTabs: true,
+	importOrder: ["^@(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
+	importOrderSeparation: true,
+	importOrderSortSpecifiers: true,
+	plugins: ["@trivago/prettier-plugin-sort-imports"],
 }

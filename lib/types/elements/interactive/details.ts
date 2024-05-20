@@ -4,7 +4,6 @@ import type {
 	SbGlobalAttributeOverrides,
 } from "../../shared"
 import type { SbFlowContent } from "../categories/flow"
-
 import type { SbSummaryElement } from "./summary"
 
 export interface SbDetailsElement {

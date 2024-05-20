@@ -1,5 +1,5 @@
-import { isLeft } from "@sitebender/fp/lib/either"
-import { getOrElse } from "@sitebender/fp/lib/option"
+import isLeft from "@sitebender/fp/lib/either/isLeft"
+import getOrElse from "@sitebender/fp/lib/option/getOrElse"
 import makeCalculator from "@sitebender/operations/lib/makeCalculator"
 import type { SbNumericOperation } from "@sitebender/operations/lib/types"
 

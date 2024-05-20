@@ -4,7 +4,6 @@ import type {
 	SbDataset,
 	SbGlobalAttributeOverrides,
 } from "../../shared"
-
 import type { SbTableRowElement } from "./tr"
 
 export interface SbTableFooterElement {

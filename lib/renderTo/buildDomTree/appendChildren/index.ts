@@ -1,8 +1,7 @@
+import buildDomTree from ".."
 import type { SbElement } from "../../../types/elements"
 import type { SbTextNode } from "../../../types/elements/text-node"
 import type { SbFullElement, SbRenderOptions } from "../../../types/shared"
-
-import buildDomTree from ".."
 
 export type AppendChildrenF = (
 	elem: HTMLElement,

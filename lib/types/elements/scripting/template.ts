@@ -1,10 +1,9 @@
+import type { SbElement } from ".."
 import type {
 	Override,
 	SbDataset,
 	SbGlobalAttributeOverrides,
 } from "../../shared"
-
-import type { SbElement } from ".."
 
 export interface SbTemplateElement {
 	attributes?: Override<

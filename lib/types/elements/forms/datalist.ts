@@ -4,7 +4,6 @@ import type {
 	SbGlobalAttributeOverrides,
 } from "../../shared"
 import type { SbPhrasingContent } from "../categories/phrasing"
-
 import type { SbOptionElement } from "./option"
 
 export interface SbDataListElement {

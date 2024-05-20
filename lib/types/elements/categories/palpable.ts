@@ -21,7 +21,6 @@ import type { SbSmallElement } from "../text-level-semantics/small"
 import type { SbSpanElement } from "../text-level-semantics/span"
 import type { SbWordBreakOpportunityElement } from "../text-level-semantics/wbr"
 import type { SbTextNode } from "../text-node"
-
 import type { SbPhrasingContent } from "./phrasing"
 import type { SbSectioningContent } from "./sectioning"
 
