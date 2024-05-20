@@ -3,8 +3,9 @@ import type {
 	SbDataset,
 	SbGlobalAttributeOverrides,
 } from "../../shared"
-import type { SbOptionElement } from "./option"
 import type { SbPhrasingContent } from "../categories/phrasing"
+
+import type { SbOptionElement } from "./option"
 
 export interface SbDataListElement {
 	attributes?: Override<

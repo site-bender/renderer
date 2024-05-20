@@ -1,4 +1,5 @@
 import type { SbConditionalOperation } from "@sitebender/operations/lib/types"
+
 import type { SbFullElement } from "../../types/shared"
 
 const collectConditionals = (component: SbFullElement) => {

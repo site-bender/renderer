@@ -5,8 +5,9 @@ import type {
 	SbGlobalAttributeOverrides,
 } from "../../shared"
 import type { SbHorizontalRuleElement } from "../grouping/hr"
-import type { SbOptionElement } from "./option"
+
 import type { SbOptionGroupElement } from "./optgroup"
+import type { SbOptionElement } from "./option"
 
 export interface SbSelectElementMultiple {
 	attributes?: Override<

@@ -1,10 +1,10 @@
-import type { SbBodyElement } from "../sections/body"
 import type {
 	Override,
 	SbDataset,
 	SbGlobalAttributeOverrides,
 } from "../../shared"
 import type { SbHeadElement } from "../metadata/head"
+import type { SbBodyElement } from "../sections/body"
 
 export interface SbHtmlElement {
 	attributes?: Override<

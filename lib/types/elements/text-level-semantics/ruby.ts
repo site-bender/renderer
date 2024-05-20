@@ -5,6 +5,7 @@ import type {
 	SbGlobalAttributeOverrides,
 } from "../../shared"
 import type { SbPhrasingContent } from "../categories/phrasing"
+
 import type { SbRubyFallbackParenthesisElement } from "./rp"
 import type { SbRubyTextElement } from "./rt"
 

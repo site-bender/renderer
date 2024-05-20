@@ -5,9 +5,10 @@ import type {
 	SbGlobalAttributeOverrides,
 } from "../../shared"
 import type { SbScriptElement } from "../scripting/script"
+import type { SbTemplateElement } from "../scripting/template"
+
 import type { SbTableDataCellElement } from "./td"
 import type { SbTableHeaderCellElement } from "./th"
-import type { SbTemplateElement } from "../scripting/template"
 
 export interface SbTableRowElement {
 	attributes?: Override<

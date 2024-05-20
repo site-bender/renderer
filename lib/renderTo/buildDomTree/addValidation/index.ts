@@ -1,9 +1,10 @@
 import type { Either } from "@sitebender/fp/lib/either"
 import type { Option } from "@sitebender/fp/lib/option"
-import type { SbCastableValue } from "./../../../stubs/types"
-import type { SbValidation } from "../../../types/shared"
 
 import makeValidator from "../../../stubs/makeValidator"
+import type { SbValidation } from "../../../types/shared"
+
+import type { SbCastableValue } from "./../../../stubs/types"
 
 export type SbValidateF = (
 	value: SbCastableValue,

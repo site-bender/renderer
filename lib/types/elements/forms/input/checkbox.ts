@@ -1,8 +1,8 @@
 import type {
 	Override,
 	SbAriaRole,
-	SbDataset,
 	SbAutocapitalize,
+	SbDataset,
 	SbGlobalAttributeOverrides,
 } from "../../../shared"
 

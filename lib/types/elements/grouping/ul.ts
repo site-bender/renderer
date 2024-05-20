@@ -4,9 +4,10 @@ import type {
 	SbDataset,
 	SbGlobalAttributeOverrides,
 } from "../../shared"
-import type { SbListItemElement } from "./li"
 import type { SbScriptElement } from "../scripting/script"
 import type { SbTemplateElement } from "../scripting/template"
+
+import type { SbListItemElement } from "./li"
 
 export interface SbUnorderedListElement {
 	attributes?: Override<

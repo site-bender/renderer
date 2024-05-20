@@ -3,9 +3,10 @@ import type {
 	SbDataset,
 	SbGlobalAttributeOverrides,
 } from "../../shared"
-import type { SbTableBodyElement } from "./tbody"
+
 import type { SbTableCaptionElement } from "./caption"
 import type { SbTableColumnGroupElement } from "./colgroup"
+import type { SbTableBodyElement } from "./tbody"
 import type { SbTableFooterElement } from "./tfoot"
 import type { SbTableHeaderElement } from "./thead"
 import type { SbTableRowElement } from "./tr"

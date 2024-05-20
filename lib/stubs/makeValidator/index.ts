@@ -1,8 +1,8 @@
-import type { SbResult, SbValidation } from "../../types/shared"
-
 import left from "@sitebender/fp/lib/either/left"
 import right from "@sitebender/fp/lib/either/right"
 import some from "@sitebender/fp/lib/option/some"
+
+import type { SbResult, SbValidation } from "../../types/shared"
 
 export type MakeValidatorF<T> = (
 	validation: SbValidation,

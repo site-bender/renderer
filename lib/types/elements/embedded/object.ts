@@ -1,3 +1,4 @@
+import type { SbMediaType } from "../../media"
 import type {
 	Override,
 	SbAriaRole,
@@ -5,7 +6,6 @@ import type {
 	SbGlobalAttributeOverrides,
 } from "../../shared"
 import type { SbFlowContent } from "../categories/flow"
-import type { SbMediaType } from "../../media"
 
 export interface SbObjectElement {
 	attributes?: Override<

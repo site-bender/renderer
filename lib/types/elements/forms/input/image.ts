@@ -1,5 +1,6 @@
 import type {
 	Override,
+	SbAriaRole,
 	SbAutocapitalize,
 	SbDataset,
 	SbFormEnctype,
@@ -7,7 +8,6 @@ import type {
 	SbFormTarget,
 	SbGlobalAttributeOverrides,
 } from "../../../shared"
-import type { SbAriaRole } from "../../../shared"
 
 export interface SbImageInputElement {
 	attributes?: Override<

@@ -1,6 +1,6 @@
 import type { SbButtonElement } from "../../forms/button"
-import type { SbHiddenInputElement } from "../../forms/input/hidden"
 import type { SbInputElement } from "../../forms/input"
+import type { SbHiddenInputElement } from "../../forms/input/hidden"
 import type { SbMeterElement } from "../../forms/meter"
 import type { SbOutputElement } from "../../forms/output"
 import type { SbProgressElement } from "../../forms/progress"

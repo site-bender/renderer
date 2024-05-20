@@ -1,5 +1,4 @@
 import type { SbFullElement } from "../../types/shared"
-
 import collectScriptElements from "../../utilities/collectScriptElements"
 import buildDomTree from "../buildDomTree"
 

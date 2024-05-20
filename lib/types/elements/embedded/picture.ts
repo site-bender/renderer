@@ -3,6 +3,7 @@ import type {
 	SbDataset,
 	SbGlobalAttributeOverrides,
 } from "../../shared"
+
 import type { SbImageElement } from "./img"
 import type { SbSourceElement } from "./source"
 

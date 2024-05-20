@@ -1,8 +1,8 @@
 import type {
 	Override,
 	SbAriaRole,
-	SbDataset,
 	SbAutocapitalize,
+	SbDataset,
 	SbFormPopoverTarget,
 	SbGlobalAttributeOverrides,
 } from "../../../shared"

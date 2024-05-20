@@ -4,8 +4,9 @@ import type {
 	SbDataset,
 	SbGlobalAttributeOverrides,
 } from "../../shared"
-import type { SbFigcaptionElement } from "./figcaption"
 import type { SbFlowContent } from "../categories/flow"
+
+import type { SbFigcaptionElement } from "./figcaption"
 
 export interface SbFigureElementWithCaption {
 	attributes?: Override<

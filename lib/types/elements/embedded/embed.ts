@@ -1,10 +1,10 @@
+import type { SbMediaType } from "../../media"
 import type {
 	Override,
 	SbAriaRole,
 	SbDataset,
 	SbGlobalAttributeOverrides,
 } from "../../shared"
-import type { SbMediaType } from "../../media"
 
 export interface SbEmbedElement {
 	attributes?: Override<

@@ -1,11 +1,11 @@
-import type { WithCalculate, WithCalculatorCallbacks } from "../../types/shared"
-
 import concat from "@sitebender/fp/lib/array/concat"
 import unique from "@sitebender/fp/lib/array/unique"
 
+import type { WithCalculate, WithCalculatorCallbacks } from "../../types/shared"
+
 const runCalculations = () => {
 	const doc = document as WithCalculatorCallbacks
-	const calculations = Object.entries(doc.__sbCalculations)
+	const calculations = Object.entries(doc.__sbCalculations || {})
 	let elems: Array<string> = []
 
 	doc.__sbCalculations = Object.fromEntries(

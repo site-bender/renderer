@@ -1,6 +1,5 @@
-import type { SbElement } from "../../../types/elements"
-
 import { SECTIONING_ELEMENTS } from "../../../constants"
+import type { SbElement } from "../../../types/elements"
 
 export type SetLevelF = (
 	tagName: SbElement["tagName"],

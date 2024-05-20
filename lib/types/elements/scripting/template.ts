@@ -3,6 +3,7 @@ import type {
 	SbDataset,
 	SbGlobalAttributeOverrides,
 } from "../../shared"
+
 import type { SbElement } from ".."
 
 export interface SbTemplateElement {

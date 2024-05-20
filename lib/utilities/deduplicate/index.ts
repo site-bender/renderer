@@ -1,5 +1,5 @@
-import stringify from "../stringify"
 import { SbElement } from "../../types/elements"
+import stringify from "../stringify"
 
 const deduplicate = <T extends SbElement>(arr: Array<T>): Array<T> => {
 	const filtered = arr.reduce((acc, obj) => {

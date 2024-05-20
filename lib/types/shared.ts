@@ -1,9 +1,10 @@
 import type { Either } from "@sitebender/fp/lib/either"
 import type { Option } from "@sitebender/fp/lib/option"
+import type { SbNumericOperation } from "@sitebender/operations/lib/types"
+
 import type { SbElement } from "./elements"
 import type { SbLinkElement } from "./elements/metadata/link"
 import type { SbScriptElement } from "./elements/scripting/script"
-import type { SbNumericOperation } from "@sitebender/operations/lib/types"
 
 export type Override<T1, T2> = Omit<T1, keyof T2> & T2
 

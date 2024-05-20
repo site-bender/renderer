@@ -1,8 +1,8 @@
 import type {
 	Override,
 	SbAriaRole,
-	SbDataset,
 	SbCrossOrigin,
+	SbDataset,
 	SbDecoding,
 	SbFetchPriority,
 	SbGlobalAttributeOverrides,

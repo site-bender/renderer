@@ -1,7 +1,7 @@
 import type {
+	Override,
 	SbAriaRole,
 	SbDataset,
-	Override,
 	SbGlobalAttributeOverrides,
 } from "../../shared"
 import type { SbPhrasingContent } from "../categories/phrasing"

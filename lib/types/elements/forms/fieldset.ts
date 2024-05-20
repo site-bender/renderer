@@ -5,6 +5,7 @@ import type {
 	SbGlobalAttributeOverrides,
 } from "../../shared"
 import type { SbFlowContent } from "../categories/flow"
+
 import type { SbLegendElement } from "./legend"
 
 export interface SbFieldSetElement {

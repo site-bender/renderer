@@ -1,8 +1,8 @@
-import type { SbConditional, SbResult } from "../../types/shared"
-
 import left from "@sitebender/fp/lib/either/left"
 import right from "@sitebender/fp/lib/either/right"
 import some from "@sitebender/fp/lib/option/some"
+
+import type { SbConditional, SbResult } from "../../types/shared"
 
 export type MakeConditionalF = (
 	conditional: SbConditional,

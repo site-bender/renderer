@@ -24,6 +24,7 @@ import type { SbHeaderElement } from "../sections/header"
 import type { SbNavigationElement } from "../sections/nav"
 import type { SbSectionElement } from "../sections/section"
 import type { SbTableElement } from "../tabular/table"
+
 import type { SbHeadingContent } from "./heading"
 import type { SbPhrasingContent } from "./phrasing"
 

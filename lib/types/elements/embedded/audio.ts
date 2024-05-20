@@ -1,11 +1,12 @@
 import type {
 	Override,
 	SbAriaRole,
-	SbDataset,
 	SbCrossOrigin,
+	SbDataset,
 	SbGlobalAttributeOverrides,
 } from "../../shared"
 import type { SbFlowContent } from "../categories/flow"
+
 import type { SbSourceElement } from "./source"
 import type { SbTrackElement } from "./track"
 

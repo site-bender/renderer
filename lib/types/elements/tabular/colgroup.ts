@@ -3,6 +3,7 @@ import type {
 	SbDataset,
 	SbGlobalAttributeOverrides,
 } from "../../shared"
+
 import type { SbTableColumnElement } from "./col"
 
 export interface SbTableColumnGroupElementWithSpan {

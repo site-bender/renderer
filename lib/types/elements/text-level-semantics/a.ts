@@ -1,3 +1,5 @@
+import type { SbElement } from "../"
+import type { SbMediaType } from "../../media"
 import type {
 	Override,
 	SbAriaRole,
@@ -5,8 +7,6 @@ import type {
 	SbGlobalAttributeOverrides,
 	SbReferrerPolicy,
 } from "../../shared"
-import type { SbElement } from "../"
-import type { SbMediaType } from "../../media"
 
 // Remove deprecated attributes
 // Make all attributes optional

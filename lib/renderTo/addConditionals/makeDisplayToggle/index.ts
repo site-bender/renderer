@@ -1,4 +1,5 @@
 import isLeft from "@sitebender/fp/lib/either/isLeft"
+
 import moveElementToDisplayCache from "./moveElementToDisplayCache"
 import replaceElementFromDisplayCache from "./replaceElementFromDisplayCache"
 

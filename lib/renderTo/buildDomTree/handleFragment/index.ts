@@ -1,6 +1,7 @@
-import buildDomTree from ".."
 import { SbElement } from "../../../types/elements"
 import { SbFullElement, SbRenderOptions } from "../../../types/shared"
+
+import buildDomTree from ".."
 
 export type HandleFragmentF = (
 	parent: Node,
